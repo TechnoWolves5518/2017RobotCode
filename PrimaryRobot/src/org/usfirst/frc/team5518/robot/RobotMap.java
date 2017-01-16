@@ -16,11 +16,12 @@ public class RobotMap
 	
 	//Joystick Buttons Assignments
 	public static int JOYSTICK_TRIGGERBUTTON = 1;
-	public static int JOYSTICK_BUTTON_02 = 2;
-	public static int JOYSTICK_BUTTON_03 = 3;
-	public static int JOYSTICK_BUTTON_04 = 4;
-	public static int JOYSTICK_BUTTON_05 = 5;
-	public static int JOYSTICK_BUTTON_06 = 6;
+	public static int JOYSTICK_BTN_02 = 2;
+	public static int JOYSTICK_BTN_03 = 3;
+	public static int JOYSTICK_BTN_04 = 4;
+	public static int JOYSTICK_BTN_05 = 5;
+	public static int JOYSTICK_BTN_06 = 6;
+	
 	
 	// Xbox 360/One controller mapping
 	// controller axis
@@ -32,10 +33,10 @@ public class RobotMap
 	public static int XBOX_RTRIGGER = 3;
 	
 	// controller buttons
-	public static int XBOX_YBUTTON = 4;
-	public static int XBOX_XBUTTON = 3;
-	public static int XBOX_ABUTTON = 1;
-	public static int XBOX_BBUTTON = 2; 
+	public static int XBOX_YBTN = 4;
+	public static int XBOX_XBTN = 3;
+	public static int XBOX_ABTN = 1;
+	public static int XBOX_BBTN = 2; 
 	public static int XBOX_RBUMBER = 6;
 	public static int XBOX_LBUMBER = 5;
 	public static int XBOX_LSTICK = 9;
