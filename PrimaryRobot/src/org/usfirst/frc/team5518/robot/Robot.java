@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 
 import org.usfirst.frc.team5518.robot.commands.ExampleCommand;
 import org.usfirst.frc.team5518.robot.subsystems.ExampleSubsystem;
@@ -22,6 +24,10 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	
+	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final FuelShooter shooter = new FuelShooter();
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
