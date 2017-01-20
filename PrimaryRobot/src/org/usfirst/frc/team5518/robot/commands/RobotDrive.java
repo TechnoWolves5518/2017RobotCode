@@ -9,7 +9,7 @@ public class RobotDrive extends Command {
 
     public RobotDrive() {
     	
-    	requires(Robot.d)
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
