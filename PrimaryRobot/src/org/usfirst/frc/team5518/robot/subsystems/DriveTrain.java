@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 package org.usfirst.frc.team5518.robot.subsystems;
-
-
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
@@ -27,60 +24,8 @@ public class DriveTrain extends Subsystem  {
     	
     	driveTrain = new RobotDrive(leftMotor, rightMotor);
 	}
-	
-	
-	public void robotInit() {
-		
-	}
-	
-	private void arcadeDrive(Joystick driveStick0) {
-		
-	}
-	public void autonomousPeriodic() {
-		
-	}
-	
-	private boolean isOperatorControl() {
-		return true;
-	}
-
-	private boolean isEnabled() {
-		return true;
-	}
-	
-	public void operatorControl(){
-		
-		while(isOperatorControl() && isEnabled()) {
-			driveTrain.arcadeDrive(driveStick);
-		}
-	}
 
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
     }
 }
-
-=======
-package org.usfirst.frc.team5518.robot.subsystems;
-
-import org.usfirst.frc.team5518.robot.commands.RobotDrive;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-/**
- *
- */
-public class DriveTrain extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
-
-    public void initDefaultCommand() {
-    	
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new RobotDrive());
-    }
-}
-
->>>>>>> origin/master
