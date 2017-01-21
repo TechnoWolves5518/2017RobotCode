@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final FuelShooter shooter = new FuelShooter();
-	public static int n;
+	
 	
 
 	Command autonomousCommand;

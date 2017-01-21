@@ -1,13 +1,18 @@
 package org.usfirst.frc.team5518.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RobotDrive extends Command {
+public class RobotDriveCommand extends Command {
 
-    public RobotDrive() {
+	
+	
+    public RobotDriveCommand() {
+    	
     	
     	
         // Use requires() here to declare subsystem dependencies
@@ -16,6 +21,9 @@ public class RobotDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
+    	
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
