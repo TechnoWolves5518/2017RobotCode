@@ -20,42 +20,30 @@ public class DriveTrain extends Subsystem  {
 	Victor leftMotor, rightMotor;
 	Joystick driveStick;
 	
-	
 	public DriveTrain() {
-		
-
 		leftMotor = new Victor(RobotMap.LEFT_PORT_NUMBER);
     	rightMotor = new Victor(RobotMap.RIGHT_PORT_NUMBER);
     	
-    	
     	driveTrain = new RobotDrive(leftMotor, rightMotor);
-    	
 	}
 	
 	
-	public void robotInit(){
+	public void robotInit() {
 		
-		
-    	
-    	
 	}
 	
 	private void arcadeDrive(Joystick driveStick0) {
 		
-		
 	}
-	public void autonomousPeriodic(){
+	public void autonomousPeriodic() {
 		
 	}
 	
 	private boolean isOperatorControl() {
-		
 		return true;
 	}
 
-
 	private boolean isEnabled() {
-		
 		return true;
 	}
 	
@@ -63,23 +51,11 @@ public class DriveTrain extends Subsystem  {
 		
 		while(isOperatorControl() && isEnabled()) {
 			driveTrain.arcadeDrive(driveStick);
-			
 		}
-		
-		
-		
 	}
 
-    
-
-
-	
-
-
 	public void initDefaultCommand() {
-    	
         // Set the default command for a subsystem here.
-        
     }
 }
 
