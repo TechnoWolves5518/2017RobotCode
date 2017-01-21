@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5518.robot.subsystems;
 
-import org.usfirst.frc.team5518.robot.commands.RobotDriveCommand;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem  {
 	public void initDefaultCommand() {
     	
         // Set the default command for a subsystem here.
-        setDefaultCommand(new RobotDriveCommand());
+        
     }
 }
 
