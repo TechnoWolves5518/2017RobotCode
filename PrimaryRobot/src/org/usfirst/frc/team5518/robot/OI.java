@@ -23,21 +23,29 @@ public class OI {
 	
 	// Button button = new JoystickButton(stick, buttonNumber);
 	Button[] driverButtons = new JoystickButton[] {
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_ABUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BBUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_XBUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_YBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_YBTN),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_XBTN),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_ABTN),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BBTN),
 			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_LBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RBUMPER)
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RBUMPER),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_LSTICK),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RSTICK),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_START),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BACK)
 	};
 	
 	Button[] specialFunctionButtons = new JoystickButton[] {
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_ABUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BBUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_XBUTTON),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_YBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_YBTN),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_XBTN),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_ABTN),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BBTN),
 			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_LBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RBUMPER)
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RBUMPER),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_LSTICK),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RSTICK),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_START),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BACK)
 	};
 
 	// There are a few additional built in buttons you can use. Additionally,
