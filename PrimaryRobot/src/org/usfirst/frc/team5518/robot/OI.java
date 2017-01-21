@@ -14,8 +14,31 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
+	
 	// Joystick stick = new Joystick(port);
+	Joystick[] controller = new Joystick[]{
+			new Joystick(RobotMap.XBOX_DRIVER),
+			new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION)
+	};
+	
 	// Button button = new JoystickButton(stick, buttonNumber);
+	Button[] driverButtons = new JoystickButton[] {
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_ABUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_XBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_YBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_LBUMPER),
+			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RBUMPER)
+	};
+	
+	Button[] specialFunctionButtons = new JoystickButton[] {
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_ABUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_XBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_YBUTTON),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_LBUMPER),
+			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RBUMPER)
+	};
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -36,4 +59,49 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	/**
+	 * 	returns axis double value from specified controller
+	 * 
+	 * 	controllerIndex 0 is DRIVER controller
+	 *  controllerIndex 1 is SPECIAL FUNCTION controller
+	 */
+	public double getAxis(int controllerIndex, int axis) {
+		double rawAxis = 0;
+		rawAxis = controller[controllerIndex].getRawAxis(axis);
+		
+		return rawAxis;
+	}
+	
+	/**
+	 * 	returns button boolean value from specified controller
+	 * 
+	 * 	controllerIndex 0 is DRIVER controller
+	 *  controllerIndex 1 is SPECIAL FUNCTION controller
+	 */
+	public boolean getButton(int controllerIndex, int button) {
+		boolean rawButton = controller[controllerIndex].getRawButton(button);
+		
+		return rawButton;
+	}
+	
+	/**
+	 * activate rumble motors on Xbox controller
+	 * 
+	 * controllerIndex 0 is DRIVER controller
+	 * controllerIndex 1 is SPECIAL FUNCTION controller
+	 * 
+	 * @param type left or right rumble motor
+	 * @param value rumble motor strength (0 to 1)
+	 */
+	public void setRumble(int controllerIndex, Joystick.RumbleType type, float value) {
+		controller[controllerIndex].setRumble(type, value);
+	}
+	
+	/**
+	 * checks if a controller is an Xbox controller
+	 */
+	public boolean isXboxController(int controllerIndex){
+		return controller[controllerIndex].getIsXbox();
+	}
 }

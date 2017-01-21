@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team5518.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -7,11 +6,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+import org.usfirst.frc.team5518.robot.subsystems.ExampleSubsystem;
 
 import org.usfirst.frc.team5518.robot.commands.ExampleCommand;
-import org.usfirst.frc.team5518.robot.subsystems.ExampleSubsystem;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
