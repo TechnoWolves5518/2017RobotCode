@@ -28,6 +28,9 @@ public class RobotMap
 	                                      
 	final int JOYSTICK_PORT_NUMBER = 0;   
 	
+	// Joysticks USB port numbers for driver and special function operators
+	public static int XBOX_DRIVER = 0;
+	public static int XBOX_SPECIAL_FUNCTION = 1;
 	
 	// Xbox 360/One controller mapping
 	// controller axis
@@ -43,8 +46,8 @@ public class RobotMap
 	public static int XBOX_XBTN = 3;
 	public static int XBOX_ABTN = 1;
 	public static int XBOX_BBTN = 2; 
-	public static int XBOX_RBUMBER = 6;
-	public static int XBOX_LBUMBER = 5;
+	public static int XBOX_RBUMPER = 6;
+	public static int XBOX_LBUMPER = 5;
 	public static int XBOX_LSTICK = 9;
 	public static int XBOX_RSTICK = 10;
 	public static int XBOX_START = 8;
