@@ -22,6 +22,12 @@ public class RobotMap
 	public static int JOYSTICK_BTN_05 = 5;
 	public static int JOYSTICK_BTN_06 = 6;
 	
+	public static int LEFT_PORT_NUMBER = 0; 
+	public static int RIGHT_PORT_NUMBER = 1;
+
+	                                      
+	final int JOYSTICK_PORT_NUMBER = 0;   
+	
 	
 	// Xbox 360/One controller mapping
 	// controller axis

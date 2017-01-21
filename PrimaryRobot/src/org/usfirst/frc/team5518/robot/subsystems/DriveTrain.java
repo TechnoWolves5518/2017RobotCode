@@ -4,6 +4,9 @@ package org.usfirst.frc.team5518.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
+
+import org.usfirst.frc.team5518.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -14,26 +17,19 @@ import edu.wpi.first.wpilibj.RobotDrive;
 public class DriveTrain extends Subsystem  {
 	
 	RobotDrive driveTrain;
-	Victor frontLeft, frontRight, rearLeft, rearRight;
+	Victor leftMotor, rightMotor;
 	Joystick driveStick;
 	
 	
 	public DriveTrain() {
-		final int FRONT_LEFT_PORT_NUMBER = 0;
-    	final int FRONT_RIGHT_PORT_NUMBER = 1;
-    	final int BACK_LEFT_PORT_NUMBER = 2;
-    	final int BACK_RIGHT_PORT_NUMBER = 3;
-    	
-    	final int JOYSTICK_PORT_NUMBER = 0;
+		
+
+		leftMotor = new Victor(RobotMap.LEFT_PORT_NUMBER);
+    	rightMotor = new Victor(RobotMap.RIGHT_PORT_NUMBER);
     	
     	
-		frontLeft = new Victor(FRONT_LEFT_PORT_NUMBER);
-    	frontRight = new Victor(FRONT_RIGHT_PORT_NUMBER);
-    	rearLeft = new Victor(BACK_LEFT_PORT_NUMBER);
-    	rearRight = new Victor(BACK_RIGHT_PORT_NUMBER);
+    	driveTrain = new RobotDrive(leftMotor, rightMotor);
     	
-    	driveTrain = new RobotDrive(frontLeft, frontRight, rearLeft, rearRight);
-    	driveStick = new Joystick(JOYSTICK_PORT_NUMBER);
 	}
 	
 	
