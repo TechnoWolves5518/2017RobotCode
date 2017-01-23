@@ -51,5 +51,14 @@ public class DriveTrain extends Subsystem  {
 		robotDrive.arcadeDrive(axis, fineControl);
 	}
 	
+	public void invert() {
+		isInverted = !isInverted;
+		
+		frontLeftMotor.setInverted(isInverted);
+		frontRightMotor.setInverted(isInverted);
+		backLeftMotor.setInverted(isInverted);
+		backRightMotor.setInverted(isInverted);
+	}
+	
 	}
 }
