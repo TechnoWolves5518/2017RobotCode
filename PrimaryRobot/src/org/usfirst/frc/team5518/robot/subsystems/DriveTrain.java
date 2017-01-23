@@ -52,7 +52,7 @@ public class DriveTrain extends Subsystem  {
 	}
 	
 	public void invert() {
-		isInverted = !isInverted;
+		isInverted = !isInverted; //Swap the inverted bool and then apply to all motor controllers
 		
 		frontLeftMotor.setInverted(isInverted);
 		frontRightMotor.setInverted(isInverted);
