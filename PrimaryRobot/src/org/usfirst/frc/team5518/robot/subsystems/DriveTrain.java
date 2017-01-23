@@ -25,6 +25,7 @@ public class DriveTrain extends Subsystem  {
 		frontRightMotor = new VictorSP(RobotMap.FRONT_RIGHT_PORT_NUMBER);
 		backLeftMotor = new VictorSP(RobotMap.BACK_LEFT_PORT_NUMBER);
 		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);
+		
     	//Enable the deadband elimination (the dead zone on the controller)
 		frontLeftMotor.enableDeadbandElimination(true);
 		frontRightMotor.enableDeadbandElimination(true);
@@ -33,6 +34,7 @@ public class DriveTrain extends Subsystem  {
 		
 		//Initialize driveTrain
     	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
+    	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
 		robotDrive.setSafetyEnabled(true);
 		robotDrive.setExpiration(0.5);
@@ -44,4 +46,10 @@ public class DriveTrain extends Subsystem  {
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
     }
+	
+	public void drive(double axis, boolean fineControl) {
+		robotDrive.arcadeDrive(axis, fineControl);
+	}
+	
+	}
 }
