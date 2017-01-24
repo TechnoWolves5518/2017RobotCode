@@ -3,7 +3,9 @@ package org.usfirst.frc.team5518.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.VictorSP;
 
+import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
+import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,10 +18,13 @@ public class DriveTrain extends Subsystem  {
 	
 	RobotDrive driveTrain;
 	VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-	Joystick driveStick;
+	Joystick driveController, sfController;
 	public boolean isInverted;
 	
 	public DriveTrain() {
+		driveController = OI.controller[0];
+		sfController = OI.controller[1];
+		
 		//Initialize motors to port numbers from RobotMap
 		frontLeftMotor = new VictorSP(RobotMap.FRONT_LEFT_PORT_NUMBER);
 		frontRightMotor = new VictorSP(RobotMap.FRONT_RIGHT_PORT_NUMBER);
@@ -36,8 +41,8 @@ public class DriveTrain extends Subsystem  {
     	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
-		robotDrive.setSafetyEnabled(true);
-		robotDrive.setExpiration(0.5);
+    	driveTrain.setSafetyEnabled(true);
+    	driveTrain.setExpiration(0.5);
     	
 		//Init inverted boolean
     	isInverted = false;
@@ -47,8 +52,8 @@ public class DriveTrain extends Subsystem  {
         // Set the default command for a subsystem here.
     }
 	
-	public void drive(double axis, boolean fineControl) {
-		robotDrive.arcadeDrive(axis, fineControl);
+	public void drive(double moveValue, double rotValue, boolean fineControl) {
+		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 	}
 	
 	public void invert() {
@@ -60,5 +65,4 @@ public class DriveTrain extends Subsystem  {
 		backRightMotor.setInverted(isInverted);
 	}
 	
-	}
 }

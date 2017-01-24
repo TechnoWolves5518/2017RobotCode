@@ -24,8 +24,8 @@ public class RobotMap
 	
 	public static int FRONT_LEFT_PORT_NUMBER = 0; 
 	public static int FRONT_RIGHT_PORT_NUMBER = 1;
-	public static int BACK_LEFT_PORT_NUMBER = 1;
-	public static int BACK_RIGHT_PORT_NUMBER = 1;
+	public static int BACK_LEFT_PORT_NUMBER = 2;
+	public static int BACK_RIGHT_PORT_NUMBER = 3;
 
 	                                      
 	final int JOYSTICK_PORT_NUMBER = 0;   
