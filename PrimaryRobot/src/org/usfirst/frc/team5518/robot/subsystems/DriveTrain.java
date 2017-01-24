@@ -58,7 +58,6 @@ public class DriveTrain extends Subsystem  {
 		frontRightMotor.setInverted(isInverted);
 		backLeftMotor.setInverted(isInverted);
 		backRightMotor.setInverted(isInverted);
-		//test
 	}
 	
 	}
