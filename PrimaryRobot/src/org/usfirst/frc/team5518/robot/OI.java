@@ -78,12 +78,12 @@ public class OI {
 	 * 	controllerIndex 0 is DRIVER controller
 	 *  controllerIndex 1 is SPECIAL FUNCTION controller
 	 */
-	static public double getAxis(Joystick passedController, int axis) {
-		double rawAxis = 0;
-		rawAxis = passedController.getRawAxis(axis);
-		
-		return rawAxis;
-	}
+//	static public double getAxis(Joystick passedController, int axis) {
+//		double rawAxis = 0;
+//		rawAxis = passedController.getRawAxis(axis);
+//		
+//		return rawAxis;
+//	}
 	
 	/**
 	 * 	returns button boolean value from specified controller
