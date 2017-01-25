@@ -22,8 +22,12 @@ public class RobotMap
 	public static int JOYSTICK_BTN_05 = 5;
 	public static int JOYSTICK_BTN_06 = 6;
 	
+	//Motor port numbers
 	public static int LEFT_PORT_NUMBER = 0; 
 	public static int RIGHT_PORT_NUMBER = 1;
+	
+	//Limit switch port
+	public static int LIMIT_SWITCH_PORT = 0;
 
 	                                      
 	final int JOYSTICK_PORT_NUMBER = 0;   
@@ -52,4 +56,7 @@ public class RobotMap
 	public static int XBOX_RSTICK = 10;
 	public static int XBOX_START = 8;
 	public static int XBOX_BACK = 7;
+	
+	
+	
 }

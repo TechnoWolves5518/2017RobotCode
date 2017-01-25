@@ -3,6 +3,7 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final FuelShooter shooter = new FuelShooter();
+	public static final GearTransfer gearTransfer = new GearTransfer();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();

@@ -9,6 +9,10 @@ public class FuelShooter extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	
+	public void log(){
+		
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

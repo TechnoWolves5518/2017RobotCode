@@ -24,6 +24,10 @@ public class DriveTrain extends Subsystem  {
     	
     	driveTrain = new RobotDrive(leftMotor, rightMotor);
 	}
+	
+	public void log(){
+		
+	}
 
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
