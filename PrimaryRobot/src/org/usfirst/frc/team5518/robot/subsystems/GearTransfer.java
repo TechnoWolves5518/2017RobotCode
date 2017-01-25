@@ -18,28 +18,24 @@ public class GearTransfer extends Subsystem {
 	
 	DigitalInput limitSwitch;
 	
-	public GearTransfer(){
+	public GearTransfer() {
 		
 		limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH_PORT);
-		
 	}
 	
-	public void log(){
+	public void log() {
 		
-	SmartDashboard.putBoolean("check_gear", isGearIn());
-		
+		SmartDashboard.putBoolean("check_gear", isGearIn());
 	}
 	
-	
-	public boolean isGearIn(){
-	
+	public boolean isGearIn() {
+		
 		return limitSwitch.get();
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new CheckSensor());
-        
     }
 }
 
