@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5518.robot;
 
-import org.usfirst.frc.team5518.robot.commands.InvertMotors;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -27,7 +26,7 @@ public class OI {
 	
 	public OI()
 	{
-		driverButtons[4].whenPressed(new InvertMotors());
+		//driverButtons[4].whenPressed(new InvertMotors());
 	}
 	
 	public static Joystick driveController = new Joystick(RobotMap.XBOX_DRIVER);

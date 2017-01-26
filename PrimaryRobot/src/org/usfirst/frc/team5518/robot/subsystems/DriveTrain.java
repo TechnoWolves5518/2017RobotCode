@@ -19,10 +19,12 @@ public class DriveTrain extends Subsystem  {
 	RobotDrive driveTrain;
 	public VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 	Joystick driveController, sfController;
+	public static boolean isInverted;
 	
 	public DriveTrain() {
 		driveController = OI.driveController;
 		sfController = OI.sfController;
+		isInverted = false;
 		
 		//Initialize motors to port numbers from RobotMap
 		frontLeftMotor = new VictorSP(RobotMap.FRONT_LEFT_PORT_NUMBER);
@@ -52,11 +54,23 @@ public class DriveTrain extends Subsystem  {
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 	}
 	
-	/*public void invert(boolean buttonPressed) {
-		if (buttonPressed)
-		{
-			
-		}
-	}*/
+	public void invert(boolean buttonActuallyPressed) {
+		if (buttonActuallyPressed)
+        {
+        	if (!isInverted)
+        	{	
+        		Robot.driveTrain.frontLeftMotor.setInverted(isInverted);
+        		Robot.driveTrain.frontRightMotor.setInverted(isInverted);
+        		Robot.driveTrain.backLeftMotor.setInverted(isInverted);
+        		Robot.driveTrain.backRightMotor.setInverted(isInverted);
+        	}
+        	
+        	isInverted = true;
+        }
+    	else
+    	{
+    		isInverted = false;
+    	}
+	}
 	
 }
