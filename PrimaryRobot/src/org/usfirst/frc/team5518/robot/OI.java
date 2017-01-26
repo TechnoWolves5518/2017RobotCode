@@ -1,8 +1,11 @@
 package org.usfirst.frc.team5518.robot;
 
+import org.usfirst.frc.team5518.robot.commands.InvertMotors;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,6 +24,11 @@ public class OI {
 //			new Joystick(RobotMap.XBOX_DRIVER),
 //			new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION)
 //	};
+	
+	public OI()
+	{
+		driverButtons[4].whenPressed(new InvertMotors());
+	}
 	
 	public static Joystick driveController = new Joystick(RobotMap.XBOX_DRIVER);
 	public static Joystick sfController = new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION);
@@ -91,7 +99,7 @@ public class OI {
 	 * 	controllerIndex 0 is DRIVER controller
 	 *  controllerIndex 1 is SPECIAL FUNCTION controller
 	 */
-	public boolean getButton(Joystick passedController, int button) {
+	public static boolean getButton(Joystick passedController, int button) {
 		boolean rawButton = passedController.getRawButton(button);
 		
 		return rawButton;

@@ -17,13 +17,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
 public class DriveTrain extends Subsystem  {
 	
 	RobotDrive driveTrain;
-	VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+	public VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 	Joystick driveController, sfController;
-	public boolean isInverted;
 	
 	public DriveTrain() {
-		driveController = OI.controller[0];
-		sfController = OI.controller[1];
+		driveController = OI.driveController;
+		sfController = OI.sfController;
 		
 		//Initialize motors to port numbers from RobotMap
 		frontLeftMotor = new VictorSP(RobotMap.FRONT_LEFT_PORT_NUMBER);
@@ -43,9 +42,6 @@ public class DriveTrain extends Subsystem  {
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
     	driveTrain.setExpiration(0.5);
-    	
-		//Init inverted boolean
-    	isInverted = false;
 	}
 
 	public void initDefaultCommand() {
@@ -56,13 +52,11 @@ public class DriveTrain extends Subsystem  {
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 	}
 	
-	public void invert() {
-		isInverted = !isInverted; //Swap the inverted bool and then apply to all motor controllers
-		
-		frontLeftMotor.setInverted(isInverted);
-		frontRightMotor.setInverted(isInverted);
-		backLeftMotor.setInverted(isInverted);
-		backRightMotor.setInverted(isInverted);
-	}
+	/*public void invert(boolean buttonPressed) {
+		if (buttonPressed)
+		{
+			
+		}
+	}*/
 	
 }
