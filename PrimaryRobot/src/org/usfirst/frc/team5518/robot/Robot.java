@@ -23,8 +23,8 @@ public class Robot extends IterativeRobot {
 
 	//public static OI oi;
 	
-	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final FuelShooter shooter = new FuelShooter();
+	public static DriveTrain driveTrain;
+	public static FuelShooter shooter;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -38,7 +38,12 @@ public class Robot extends IterativeRobot {
 		//oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		System.out.println("robotInit()");
 		SmartDashboard.putData("Auto mode", chooser);
+		driveTrain = new DriveTrain();
+		shooter = new FuelShooter();
+
+		
 	}
 
 	/**
@@ -48,11 +53,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		System.out.println("disableInit()");
 	}
 
 	@Override
 	public void disabledPeriodic() {
+		//System.out.println("disablePeriodic()");
 		Scheduler.getInstance().run();
 	}
 
@@ -77,7 +83,7 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-
+		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -88,6 +94,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		System.out.println("autoPeriodic()");
 		Scheduler.getInstance().run();
 	}
 
@@ -97,6 +104,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		System.out.println("teleopInit()");
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
@@ -106,6 +114,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		try{
+		Thread.sleep(500);
+		}catch(Exception ex){}
+		System.out.println("teleopPeriodic()");
+		
+		// If you don't call this the commands won't run. The commands are registered
+		// when the subsystems are created.
 		Scheduler.getInstance().run();
 	}
 
@@ -114,6 +129,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		try{
+		Thread.sleep(500);
+		}catch(Exception ex){}
+		System.out.println("testInit()");
 		LiveWindow.run();
 	}
 }

@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.VictorSP;
 
 import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
+import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.OI;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
+//import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.RobotDrive;
 
@@ -22,6 +23,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean isInverted;
 	
 	public DriveTrain() {
+		System.out.println("DriveTrain()");
 		driveController = OI.driveController;
 		sfController = OI.sfController;
 		isInverted = false;
@@ -47,14 +49,18 @@ public class DriveTrain extends Subsystem  {
 	}
 
 	public void initDefaultCommand() {
+		System.out.println("DriveTrain.setDefaultCommand()");
         // Set the default command for a subsystem here.
+		setDefaultCommand(new BasicDrive());
     }
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl) {
+		System.out.println("DriveTrain.drive()");
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 	}
 	
 	public void invert(boolean buttonActuallyPressed) {
+		System.out.println("DriveTrain.invert()");
 		if (buttonActuallyPressed)
         {
         	if (!isInverted)

@@ -31,12 +31,13 @@ public class BasicDrive extends Command {
 
     // This method runs repeatedly while the robot
     protected void execute() {
+    	System.out.println("BasicDrive Command execute()");
     	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
-    	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKX);
+    	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKY);
     	
     	invertButton = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	Robot.driveTrain.invert(invertButton);
-    	
+    	System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
 		Robot.driveTrain.drive(moveValue, turnValue, fineControl);
     }
 
