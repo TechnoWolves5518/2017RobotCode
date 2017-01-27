@@ -33,11 +33,10 @@ public class BasicDrive extends Command {
     protected void execute() {
     	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
     	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKX);
+    	Robot.driveTrain.drive(moveValue, turnValue, fineControl);
     	
     	invertButton = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	Robot.driveTrain.invert(invertButton);
-    	
-		Robot.driveTrain.drive(moveValue, turnValue, fineControl);
     }
 
     // Make this return true when this Command no longer needs to run execute()
