@@ -58,17 +58,17 @@ public class DriveTrain extends Subsystem  {
 		setDefaultCommand(new BasicDrive());
     }
 	
-	/*public void drive(double moveValue, double rotValue, boolean fineControl) {
+	public void drive(double moveValue, double rotValue, boolean fineControl) {
+		System.out.println("DriveTrain.drive()");
+		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+		//driveTrain.arcadeDrive(wingmanJoystick, true);
+	}
+	
+	/*public void drive() {
 		System.out.println("DriveTrain.drive()");
 		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 		driveTrain.arcadeDrive(wingmanJoystick, true);
 	}*/
-	
-	public void drive() {
-		System.out.println("DriveTrain.drive()");
-		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
-		driveTrain.arcadeDrive(wingmanJoystick, true);
-	}
 	
 	public void invert(boolean isInverted) {
 		System.out.println("DriveTrain.invert()");

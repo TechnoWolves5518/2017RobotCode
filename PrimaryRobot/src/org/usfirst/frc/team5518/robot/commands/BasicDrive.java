@@ -37,8 +37,8 @@ public class BasicDrive extends Command {
     	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
     	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
     	
-    	//isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
-    	isInverted = OI.getButton(OI.wingmanController, RobotMap.JOYSTICK_BTN_04);
+    	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
+    	//isInverted = OI.getButton(OI.wingmanController, RobotMap.JOYSTICK_BTN_04);
     	if (isInverted != wasInverted)
     	{
     		Robot.driveTrain.invert(isInverted);
@@ -46,8 +46,8 @@ public class BasicDrive extends Command {
     	wasInverted = isInverted;
     	
     	System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
-		//Robot.driveTrain.drive(moveValue, turnValue, fineControl);
-    	Robot.driveTrain.drive();
+		Robot.driveTrain.drive(moveValue, turnValue, fineControl);
+    	//Robot.driveTrain.drive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -57,7 +57,7 @@ public class BasicDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.driveTrain.drive(0, 0, true); comment
+    	Robot.driveTrain.drive(0, 0, true);
     }
 
     // Called when another command which requires one or more of the same
