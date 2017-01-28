@@ -31,6 +31,7 @@ public class OI {
 	
 	public static Joystick driveController = new Joystick(RobotMap.XBOX_DRIVER);
 	public static Joystick sfController = new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION);
+	public static Joystick wingmanController = new Joystick(RobotMap.WINGMAN_JOYSTICK);
 	
 	// Button button = new JoystickButton(stick, buttonNumber);
 	public static Button[] driverButtons = new JoystickButton[] {

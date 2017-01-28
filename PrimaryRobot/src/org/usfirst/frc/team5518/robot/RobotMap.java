@@ -8,7 +8,10 @@ package org.usfirst.frc.team5518.robot;
  */
 public class RobotMap
 {
-	//WingMan Attack 2 Joystick 
+	//WingMan Attack 2 Joystick
+	//USB port number
+	public static int WINGMAN_JOYSTICK = 0;
+	
 	//Joystick Axes Assignments
 	public static int JOYSTICK_XAXIS = 0;
 	public static int JOYSTICK_YAXIS = 1;
@@ -31,8 +34,8 @@ public class RobotMap
 	final int JOYSTICK_PORT_NUMBER = 0;   
 	
 	// Joysticks USB port numbers for driver and special function operators
-	public static int XBOX_DRIVER = 0;
-	public static int XBOX_SPECIAL_FUNCTION = 1;
+	public static int XBOX_DRIVER = 1;
+	public static int XBOX_SPECIAL_FUNCTION = 2;
 	
 	// Xbox 360/One controller mapping
 	// controller axis

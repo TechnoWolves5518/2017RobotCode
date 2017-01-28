@@ -20,6 +20,7 @@ public class DriveTrain extends Subsystem  {
 	RobotDrive driveTrain;
 	public VictorSP frontLeftMotor, frontRightMotor/*, backLeftMotor, backRightMotor*/;
 	Joystick driveController, sfController;
+	Joystick wingmanJoystick;
 	public static boolean isInverted;
 	public static boolean toggle;
 	
@@ -27,6 +28,7 @@ public class DriveTrain extends Subsystem  {
 		System.out.println("DriveTrain()");
 		driveController = OI.driveController;
 		sfController = OI.sfController;
+		wingmanJoystick = OI.wingmanController;
 		isInverted = false;
 		toggle = false;
 		
@@ -56,9 +58,16 @@ public class DriveTrain extends Subsystem  {
 		setDefaultCommand(new BasicDrive());
     }
 	
-	public void drive(double moveValue, double rotValue, boolean fineControl) {
+	/*public void drive(double moveValue, double rotValue, boolean fineControl) {
 		System.out.println("DriveTrain.drive()");
-		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+		driveTrain.arcadeDrive(wingmanJoystick, true);
+	}*/
+	
+	public void drive() {
+		System.out.println("DriveTrain.drive()");
+		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+		driveTrain.arcadeDrive(wingmanJoystick, true);
 	}
 	
 	public void invert(boolean isInverted) {
