@@ -69,6 +69,7 @@ public class DriveTrain extends Subsystem  {
         		Robot.driveTrain.frontRightMotor.setInverted(isInverted);
         		Robot.driveTrain.backLeftMotor.setInverted(isInverted);
         		Robot.driveTrain.backRightMotor.setInverted(isInverted);
+        		System.out.println("Motors inverted");
         	}
         	
         	isInverted = true;
