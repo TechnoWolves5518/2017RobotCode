@@ -14,7 +14,8 @@ public class BasicDrive extends Command {
 	
 	public double moveValue, turnValue;
 	public boolean fineControl;
-	public boolean invertButton;
+	public boolean isInverted;
+	public boolean wasInverted;
 	
     public BasicDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -22,7 +23,8 @@ public class BasicDrive extends Command {
     	moveValue = 0;
     	turnValue = 0;
     	fineControl = true;
-    	invertButton = false;
+    	isInverted = false;
+    	wasInverted = false;
     }
 
     // Called just before this Command runs the first time
@@ -35,8 +37,13 @@ public class BasicDrive extends Command {
     	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
     	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
     	
-    	invertButton = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
-    	Robot.driveTrain.invert(invertButton);
+    	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
+    	if (isInverted != wasInverted)
+    	{
+    		Robot.driveTrain.invert(invertButton);
+    	}
+    	wasInverted = isInverted;
+    	
     	System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
 		Robot.driveTrain.drive(moveValue, turnValue, fineControl);
     }

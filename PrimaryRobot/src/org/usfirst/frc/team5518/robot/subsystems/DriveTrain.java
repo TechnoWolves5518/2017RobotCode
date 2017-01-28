@@ -63,21 +63,13 @@ public class DriveTrain extends Subsystem  {
 		System.out.println("DriveTrain.invert()");
 		if (buttonActuallyPressed)
         {
-        	if (!isInverted)
-        	{	
-        		Robot.driveTrain.frontLeftMotor.setInverted(isInverted);
-        		Robot.driveTrain.frontRightMotor.setInverted(isInverted);
-        		Robot.driveTrain.backLeftMotor.setInverted(isInverted);
-        		Robot.driveTrain.backRightMotor.setInverted(isInverted);
-        		System.out.println("Motors inverted");
-        	}
-        	
-        	isInverted = true;
+        	Robot.driveTrain.frontLeftMotor.setInverted(buttonActuallyPressed);
+        	Robot.driveTrain.frontRightMotor.setInverted(buttonActuallyPressed);
+        	Robot.driveTrain.backLeftMotor.setInverted(buttonActuallyPressed);
+        	Robot.driveTrain.backRightMotor.setInverted(buttonActuallyPressed);
+        	System.out.println("Motors inverted");
         }
-    	else
-    	{
-    		isInverted = false;
-    	}
+
 	}
 	
 }
