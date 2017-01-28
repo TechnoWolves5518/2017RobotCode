@@ -33,7 +33,7 @@ public class BasicDrive extends Command {
     protected void execute() {
     	System.out.println("BasicDrive Command execute()");
     	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
-    	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKY);
+    	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKX);
     	
     	invertButton = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	Robot.driveTrain.invert(invertButton);

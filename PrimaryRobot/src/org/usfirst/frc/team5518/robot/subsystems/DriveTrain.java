@@ -35,10 +35,10 @@ public class DriveTrain extends Subsystem  {
 		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);
 		
     	//Enable the deadband elimination (the dead zone on the controller)
-		frontLeftMotor.enableDeadbandElimination(true);
-		frontRightMotor.enableDeadbandElimination(true);
-		backLeftMotor.enableDeadbandElimination(true);
-		backRightMotor.enableDeadbandElimination(true);
+		frontLeftMotor.enableDeadbandElimination(false);
+		frontRightMotor.enableDeadbandElimination(false);
+		backLeftMotor.enableDeadbandElimination(false);
+		backRightMotor.enableDeadbandElimination(false);
 		
 		//Initialize driveTrain
     	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
