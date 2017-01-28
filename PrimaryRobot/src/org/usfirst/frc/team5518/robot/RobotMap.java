@@ -13,8 +13,8 @@ public class RobotMap
 	public static int WINGMAN_JOYSTICK = 0;
 	
 	//Joystick Axes Assignments
-	public static int JOYSTICK_XAXIS = 0;
-	public static int JOYSTICK_YAXIS = 1;
+	public static int JOYSTICK_XAXIS = 1;
+	public static int JOYSTICK_YAXIS = 0;
 	public static int JOYSTICK_ZAXIS = 2;
 	
 	//Joystick Buttons Assignments
