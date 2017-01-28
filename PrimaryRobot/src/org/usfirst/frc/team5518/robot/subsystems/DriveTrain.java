@@ -70,18 +70,19 @@ public class DriveTrain extends Subsystem  {
 		driveTrain.arcadeDrive(wingmanJoystick, true);
 	}*/
 	
-	public void invert(boolean isInverted) {
+	public double invert(boolean isInverted, double moveValue) {
 		System.out.println("DriveTrain.invert()");
 		if (isInverted)
         {
-        	toggle = !toggle;
+        	/*toggle = !toggle;
 			Robot.driveTrain.frontLeftMotor.setInverted(toggle);
         	Robot.driveTrain.frontRightMotor.setInverted(toggle);
-        	/*Robot.driveTrain.backLeftMotor.setInverted(toggle);
-        	Robot.driveTrain.backRightMotor.setInverted(toggle);*/
-        	System.out.println("Motors inverted");
+        	Robot.driveTrain.backLeftMotor.setInverted(toggle);
+        	Robot.driveTrain.backRightMotor.setInverted(toggle);
+        	System.out.println("Motors inverted");*/
+			moveValue = -moveValue;
         }
-
+		return moveValue;
 	}
 	
 }
