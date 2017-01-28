@@ -50,6 +50,8 @@ public class DriveTrain extends Subsystem  {
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
     	driveTrain.setExpiration(0.5);
+    	
+    	Robot.driveTrain.frontLeftMotor.setInverted(true); //Initially invert the left motor so that we don't get backwards input
 	}
 
 	public void initDefaultCommand() {
@@ -75,7 +77,7 @@ public class DriveTrain extends Subsystem  {
 		if (isInverted)
         {
         	toggle = !toggle;
-			Robot.driveTrain.frontLeftMotor.setInverted(toggle);
+			Robot.driveTrain.frontLeftMotor.setInverted(!toggle);
         	Robot.driveTrain.frontRightMotor.setInverted(toggle);
         	/*Robot.driveTrain.backLeftMotor.setInverted(toggle);
         	Robot.driveTrain.backRightMotor.setInverted(toggle);*/
