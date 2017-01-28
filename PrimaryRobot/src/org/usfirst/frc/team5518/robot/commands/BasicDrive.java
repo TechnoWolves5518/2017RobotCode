@@ -40,7 +40,7 @@ public class BasicDrive extends Command {
     	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	if (isInverted != wasInverted)
     	{
-    		Robot.driveTrain.invert(invertButton);
+    		Robot.driveTrain.invert(isInverted);
     	}
     	wasInverted = isInverted;
     	
