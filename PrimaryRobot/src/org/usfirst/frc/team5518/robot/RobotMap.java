@@ -8,7 +8,9 @@ package org.usfirst.frc.team5518.robot;
  */
 public class RobotMap
 {
-	//WingMan Attack 2 Joystick 
+	//WingMan Attack 2 Joystick
+	public static int WINGMAN_JOYSTICK = 0;
+	
 	//Joystick Axes Assignments
 	public static int JOYSTICK_XAXIS = 1;
 	public static int JOYSTICK_YAXIS = 0;
