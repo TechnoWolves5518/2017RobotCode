@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogGyro;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,7 +43,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
 
-		Gyro gyro = new AnalogGyro(1); // new analog gyro on port 1
+		
 	}
 
 	/**
@@ -119,7 +118,6 @@ public class Robot extends IterativeRobot {
 		Thread.sleep(500);
 		}catch(Exception ex){}
 		System.out.println("teleopPeriodic()");
-		System.out.println(gyro.getAngle());
 		
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
