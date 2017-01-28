@@ -63,7 +63,7 @@ public class DriveTrain extends Subsystem  {
 	
 	public void invert(boolean isInverted) {
 		System.out.println("DriveTrain.invert()");
-		if (buttonActuallyPressed)
+		if (isInverted)
         {
         	toggle = !toggle;
 			Robot.driveTrain.frontLeftMotor.setInverted(toggle);
