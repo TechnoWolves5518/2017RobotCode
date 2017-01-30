@@ -70,7 +70,7 @@ public class DriveTrain extends Subsystem  {
 		driveTrain.arcadeDrive(wingmanJoystick, true);
 	}*/
 	
-	public double invert(boolean isInverted, double moveValue) {
+	public void invert(boolean isInverted, double moveValue) {
 		System.out.println("DriveTrain.invert()");
 		if (isInverted)
         {
@@ -80,9 +80,8 @@ public class DriveTrain extends Subsystem  {
         	Robot.driveTrain.backLeftMotor.setInverted(toggle);
         	Robot.driveTrain.backRightMotor.setInverted(toggle);
         	System.out.println("Motors inverted");*/
-			moveValue = -moveValue;
         }
-		return moveValue;
+		moveValue = -moveValue;
 	}
 	
 }
