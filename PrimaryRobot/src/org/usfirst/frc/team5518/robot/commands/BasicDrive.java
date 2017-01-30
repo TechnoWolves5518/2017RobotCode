@@ -29,6 +29,7 @@ public class BasicDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	moveValue = -moveValue;
     }
 
     // This method runs repeatedly while the robot
