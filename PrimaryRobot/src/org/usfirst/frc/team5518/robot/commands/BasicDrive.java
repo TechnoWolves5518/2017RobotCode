@@ -38,9 +38,10 @@ public class BasicDrive extends Command {
     	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
     	
     	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
-    	if (isInverted != wasInverted)
+    	if (isInverted != wasInverted && isInverted == true)
     	{
-    		Robot.driveTrain.invert(isInverted);
+    		//Robot.driveTrain.invert(isInverted, moveValue);
+    		moveValue = -moveValue;
     	}
     	wasInverted = isInverted;
     	
