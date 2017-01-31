@@ -129,10 +129,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		try{
+		/*try{
 		Thread.sleep(500);
 		}catch(Exception ex){}
 		System.out.println("testInit()");
-		LiveWindow.run();
+		LiveWindow.run();*/
 	}
 }
