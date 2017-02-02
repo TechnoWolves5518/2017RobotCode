@@ -1,4 +1,10 @@
 package org.usfirst.team5518.robot.commands;
+//package org.usfirst.team5518.robot.subsystems.MotorController;
+
+import org.usfirst.frc.team5518.robot.Robot;
+import org.usfirst.frc.team5518.robot.RobotMap;
+//import org.usfirst.frc.team5518.robot.subsystems.MotorController;
+import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -7,11 +13,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunMotor extends Command {
 	
-	
+	public double LTval;
+	public double RTval;
 	
     public RunMotor() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        //requires(Robot.MotorController);
+    	
+    	LTval = 0;
+    	RTval = 0;
     }
 
     // Called just before this Command runs the first time
@@ -20,6 +29,16 @@ public class RunMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	LTval = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+    	RTval = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
+    	
+    	if (LTval > 0.15) {
+    		Robot.motorController.runIntakeMotor();
+    	}
+    	
+    	if (RTval > 0.15) {
+    		MotorController.runShooterMotor();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
