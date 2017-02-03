@@ -2,7 +2,7 @@
 package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+//import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final FuelShooter shooter = new FuelShooter();
+	//public static final FuelShooter shooter = new FuelShooter();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
