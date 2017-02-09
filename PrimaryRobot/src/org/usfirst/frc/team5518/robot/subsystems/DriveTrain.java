@@ -72,15 +72,6 @@ public class DriveTrain extends Subsystem  {
 	
 	public void invert(boolean isInverted, double moveValue) {
 		System.out.println("DriveTrain.invert()");
-		if (isInverted)
-        {
-        	/*toggle = !toggle;
-			Robot.driveTrain.frontLeftMotor.setInverted(toggle);
-        	Robot.driveTrain.frontRightMotor.setInverted(toggle);
-        	Robot.driveTrain.backLeftMotor.setInverted(toggle);
-        	Robot.driveTrain.backRightMotor.setInverted(toggle);
-        	System.out.println("Motors inverted");*/
-        }
 		moveValue = -moveValue;
 	}
 	
