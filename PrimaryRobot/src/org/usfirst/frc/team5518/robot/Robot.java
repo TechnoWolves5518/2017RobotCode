@@ -3,6 +3,7 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
+	//public static OI oi;
 	
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final FuelShooter shooter = new FuelShooter();
@@ -34,7 +35,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		//oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
