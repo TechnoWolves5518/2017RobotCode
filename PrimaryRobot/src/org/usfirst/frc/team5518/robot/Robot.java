@@ -2,7 +2,7 @@
 package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+//import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 import org.usfirst.frc.team5518.robot.OI;
 
@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	//public static OI oi;
 	
 	public static DriveTrain driveTrain;
-	public static FuelShooter shooter;
+	//public static FuelShooter shooter;
 	public static MotorController motorController;
 
 	Command autonomousCommand;
@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("robotInit()");
 		SmartDashboard.putData("Auto mode", chooser);
 		driveTrain = new DriveTrain();
-		shooter = new FuelShooter();
+		//shooter = new FuelShooter();
 
 		
 	}
