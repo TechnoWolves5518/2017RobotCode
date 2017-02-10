@@ -60,6 +60,13 @@ public class DriveTrain extends Subsystem  {
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl) {
 		System.out.println("DriveTrain.drive()");
+		if (moveValue < 0) {
+			moveValue *= moveValue;
+			moveValue = -moveValue;
+		}
+		else if (moveValue > 0) {
+			moveValue *= moveValue;
+		}
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
 	}
