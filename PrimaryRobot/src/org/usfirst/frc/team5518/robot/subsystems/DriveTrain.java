@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem  {
     }
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl, boolean fineTurn) {
-		System.out.println("DriveTrain.drive()");
+		//System.out.println("DriveTrain.drive()");
 		if (moveValue < 0) { //fourth power curve
 			moveValue *= moveValue;
 			moveValue = -moveValue;
@@ -71,8 +71,12 @@ public class DriveTrain extends Subsystem  {
 		if (!fineTurn) {
 			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
 		}
+		else if (fineTurn) {
+			driveTrain.arcadeDrive(moveValue / 6, rotValue / 10, !fineControl); //slow drive
+		}
 		else {
-			driveTrain.arcadeDrive(moveValue / 6, rotValue / 10, fineControl); //slow drive
+			System.out.println("A function that should not be called is being called. ERROR");
+			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
 		}
 		
 		
