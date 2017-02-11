@@ -14,8 +14,7 @@ public class BasicDrive extends Command {
 	
 	public double moveValue, turnValue;
 	public boolean fineControl;
-	public boolean isInverted;
-	public boolean wasInverted;
+	public boolean isInverted, wasInverted, toggle;
 	
     public BasicDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -25,27 +24,38 @@ public class BasicDrive extends Command {
     	fineControl = true;
     	isInverted = false;
     	wasInverted = false;
+    	toggle = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // This method runs repeatedly while the robot
     protected void execute() {
     	System.out.println("BasicDrive Command execute()");
-    	moveValue = OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
-    	turnValue = OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
+    	moveValue = -OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
+    	turnValue = -OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
     	
     	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
-    	if (isInverted != wasInverted)
+    	if (isInverted != wasInverted && isInverted == true)
     	{
-    		moveValue = Robot.driveTrain.invert(isInverted, moveValue);
+    		toggle = !toggle;
     	}
     	wasInverted = isInverted;
     	
-    	System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
-		Robot.driveTrain.drive(moveValue, turnValue, fineControl);
+    	if (!toggle) //If the invert is off
+    	{
+    		System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
+    		Robot.driveTrain.drive(moveValue, turnValue, fineControl); //Drive the robot with base move values
+    	}
+    	else if (toggle) //If the invert is on
+    	{
+    		System.out.println("BasicDrive [inverted] moveValue="+moveValue+" turnValue="+turnValue);
+    		Robot.driveTrain.drive(-moveValue, turnValue, fineControl); //Drive the robot with negative move values
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

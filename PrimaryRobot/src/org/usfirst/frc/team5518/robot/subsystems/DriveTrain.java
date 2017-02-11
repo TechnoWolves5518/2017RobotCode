@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 public class DriveTrain extends Subsystem  {
 	
 	RobotDrive driveTrain;
-	public VictorSP frontLeftMotor, frontRightMotor/*, backLeftMotor, backRightMotor*/;
+	public VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 	Joystick driveController, sfController;
 	Joystick wingmanJoystick;
 	public static boolean isInverted;
@@ -35,17 +35,17 @@ public class DriveTrain extends Subsystem  {
 		//Initialize motors to port numbers from RobotMap
 		frontLeftMotor = new VictorSP(RobotMap.FRONT_LEFT_PORT_NUMBER);
 		frontRightMotor = new VictorSP(RobotMap.FRONT_RIGHT_PORT_NUMBER);
-		/*backLeftMotor = new VictorSP(RobotMap.BACK_LEFT_PORT_NUMBER);
-		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);*/
+		backLeftMotor = new VictorSP(RobotMap.BACK_LEFT_PORT_NUMBER);
+		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);
 		
     	//Enable the deadband elimination (the dead zone on the controller)
 		frontLeftMotor.enableDeadbandElimination(false);
 		frontRightMotor.enableDeadbandElimination(false);
-		/*backLeftMotor.enableDeadbandElimination(false);
-		backRightMotor.enableDeadbandElimination(false);*/
+		backLeftMotor.enableDeadbandElimination(false);
+		backRightMotor.enableDeadbandElimination(false);
 		
 		//Initialize driveTrain
-    	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor/*, backLeftMotor, backRightMotor*/);
+    	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
@@ -60,6 +60,13 @@ public class DriveTrain extends Subsystem  {
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl) {
 		System.out.println("DriveTrain.drive()");
+		if (moveValue < 0) {
+			moveValue *= moveValue;
+			moveValue = -moveValue;
+		}
+		else if (moveValue > 0) {
+			moveValue *= moveValue;
+		}
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
 	}
@@ -70,8 +77,9 @@ public class DriveTrain extends Subsystem  {
 		driveTrain.arcadeDrive(wingmanJoystick, true);
 	}*/
 	
-	public double invert(boolean isInverted, double moveValue) {
+	public void invert(boolean isInverted, double moveValue) {
 		System.out.println("DriveTrain.invert()");
+<<<<<<< HEAD
 		if (isInverted)
         {
         	toggle = !toggle;
@@ -84,6 +92,9 @@ public class DriveTrain extends Subsystem  {
 				moveValue = -moveValue;
         }
 		return moveValue;
+=======
+		moveValue = -moveValue;
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode
 	}
 	
 }
