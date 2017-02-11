@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BasicDrive extends Command {
 	
 	public double moveValue, turnValue;
-	public boolean fineControl;
+	public boolean fineControl, fineTurn;
 	public boolean isInverted, wasInverted, toggle;
 	
     public BasicDrive() {
@@ -22,6 +22,7 @@ public class BasicDrive extends Command {
     	moveValue = 0;
     	turnValue = 0;
     	fineControl = true;
+    	fineTurn = false;
     	isInverted = false;
     	wasInverted = false;
     	toggle = false;
@@ -37,6 +38,7 @@ public class BasicDrive extends Command {
     	System.out.println("BasicDrive Command execute()");
     	moveValue = -OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
     	turnValue = -OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
+    	fineTurn = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
     	
     	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	if (isInverted != wasInverted && isInverted == true)
@@ -48,12 +50,12 @@ public class BasicDrive extends Command {
     	if (!toggle) //If the invert is off
     	{
     		System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
-    		Robot.driveTrain.drive(moveValue, turnValue, fineControl); //Drive the robot with base move values
+    		Robot.driveTrain.drive(moveValue, turnValue, fineControl, fineTurn); //Drive the robot with base move values
     	}
     	else if (toggle) //If the invert is on
     	{
     		System.out.println("BasicDrive [inverted] moveValue="+moveValue+" turnValue="+turnValue);
-    		Robot.driveTrain.drive(-moveValue, turnValue, fineControl); //Drive the robot with negative move values
+    		Robot.driveTrain.drive(-moveValue, turnValue, fineControl, fineTurn); //Drive the robot with negative move values
     	}
     	
     }
@@ -65,7 +67,7 @@ public class BasicDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.drive(0, 0, true);
+    	Robot.driveTrain.drive(0, 0, true, false);
     }
 
     // Called when another command which requires one or more of the same

@@ -58,7 +58,7 @@ public class DriveTrain extends Subsystem  {
 		setDefaultCommand(new BasicDrive());
     }
 	
-	public void drive(double moveValue, double rotValue, boolean fineControl) {
+	public void drive(double moveValue, double rotValue, boolean fineControl, boolean fineTurn) {
 		System.out.println("DriveTrain.drive()");
 		if (moveValue < 0) {
 			moveValue *= moveValue;
@@ -67,34 +67,13 @@ public class DriveTrain extends Subsystem  {
 		else if (moveValue > 0) {
 			moveValue *= moveValue;
 		}
+		
+		if (fineTurn) {
+			rotValue *= 0.25;
+		}
+		
 		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
-	}
-	
-	/*public void drive() {
-		System.out.println("DriveTrain.drive()");
-		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
-		driveTrain.arcadeDrive(wingmanJoystick, true);
-	}*/
-	
-	public void invert(boolean isInverted, double moveValue) {
-		System.out.println("DriveTrain.invert()");
-<<<<<<< HEAD
-		if (isInverted)
-        {
-        	toggle = !toggle;
-			/*Robot.driveTrain.frontLeftMotor.setInverted(toggle);
-        	Robot.driveTrain.frontRightMotor.setInverted(toggle);
-        	Robot.driveTrain.backLeftMotor.setInverted(toggle);
-        	Robot.driveTrain.backRightMotor.setInverted(toggle);
-        	System.out.println("Motors inverted");*/
-			if(toggle)
-				moveValue = -moveValue;
-        }
-		return moveValue;
-=======
-		moveValue = -moveValue;
->>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode
 	}
 	
 }
