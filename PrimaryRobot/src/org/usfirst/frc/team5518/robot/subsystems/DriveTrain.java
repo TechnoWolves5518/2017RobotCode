@@ -68,11 +68,14 @@ public class DriveTrain extends Subsystem  {
 			moveValue *= moveValue;
 		}
 		
-		if (fineTurn) {
-			rotValue *= 0.25;
+		if (!fineTurn) {
+			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
+		}
+		else {
+			driveTrain.arcadeDrive(moveValue / 6, rotValue / 10, fineControl); //slow drive
 		}
 		
-		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+		
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
 	}
 	
