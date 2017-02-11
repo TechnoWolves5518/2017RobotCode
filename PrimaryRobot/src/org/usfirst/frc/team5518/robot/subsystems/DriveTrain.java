@@ -60,7 +60,7 @@ public class DriveTrain extends Subsystem  {
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl, boolean fineTurn) {
 		System.out.println("DriveTrain.drive()");
-		if (moveValue < 0) {
+		if (moveValue < 0) { //fourth power curve
 			moveValue *= moveValue;
 			moveValue = -moveValue;
 		}
