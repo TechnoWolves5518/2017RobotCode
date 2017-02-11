@@ -58,7 +58,7 @@ public class DriveTrain extends Subsystem  {
 		setDefaultCommand(new BasicDrive());
     }
 	
-	public void drive(double moveValue, double rotValue, boolean fineControl, boolean fineTurn) {
+	public void drive(double moveValue, double rotValue, boolean fineControl, boolean slowMove) {
 		//System.out.println("DriveTrain.drive()");
 		if (moveValue < 0) { //fourth power curve
 			moveValue *= moveValue;
@@ -68,10 +68,10 @@ public class DriveTrain extends Subsystem  {
 			moveValue *= moveValue;
 		}
 		
-		if (!fineTurn) {
+		if (!slowMove) {
 			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
 		}
-		else if (fineTurn) {
+		else if (slowMove) {
 			driveTrain.arcadeDrive(moveValue / 6, rotValue / 10, !fineControl); //slow drive
 		}
 		else {
