@@ -75,7 +75,7 @@ public class DriveTrain extends Subsystem  {
 			driveTrain.arcadeDrive(moveValue / 6, rotValue / 10, !fineControl); //slow drive
 		}
 		else {
-			System.out.println("A function that should not be called is being called. ERROR");
+			System.out.println("FINE TURN ERROR");
 			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
 		}
 		
