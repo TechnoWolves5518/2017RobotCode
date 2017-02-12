@@ -50,9 +50,9 @@ public class MotorController extends Subsystem {
     		shooterMotor.set(0);
     	}
     }
-    public void runWinchMotor(boolean run) {
+    public void runWinchMotor(boolean run, int dir) {
     	if (run) {
-    		winchMotor.set(winchMotorSpeed);
+    		winchMotor.set(winchMotorSpeed * dir);
     	}
     	else if (!run) {
     		winchMotor.set(0);

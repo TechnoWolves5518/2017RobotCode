@@ -16,7 +16,7 @@ public class RunMotor extends Command {
 
 	public double LTval;
 	public double RTval;
-	public boolean runWinch;
+	public boolean runWinch, runWinchBack;
 	
     public RunMotor() {
         requires(Robot.motorController);
@@ -24,6 +24,7 @@ public class RunMotor extends Command {
     	LTval = 0;
     	RTval = 0;
     	runWinch = false;
+    	runWinchBack = false;
     }
 
     // Called just before this Command runs the first time
@@ -35,6 +36,7 @@ public class RunMotor extends Command {
     	LTval = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
     	RTval = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
     	runWinch = OI.getButton(OI.driveController, RobotMap.XBOX_XBTN);
+    	runWinchBack = OI.getButton(OI.driveController, RobotMap.XBOX_ABTN);
     	
     	if (LTval > 0.15) {
     		Robot.motorController.runIntakeMotor(true);
@@ -51,10 +53,13 @@ public class RunMotor extends Command {
     	}
     	
     	if (runWinch) {
-    		Robot.motorController.runWinchMotor(true);
+    		Robot.motorController.runWinchMotor(true, 1);
     	}
-    	else if (!runWinch) {
-    		Robot.motorController.runWinchMotor(false);
+    	else if (runWinchBack) {
+    		Robot.motorController.runWinchMotor(true, -1);
+    	}
+    	if (!runWinch && !runWinchBack) {
+    		Robot.motorController.runWinchMotor(false, 0);
     	}
     }
 
