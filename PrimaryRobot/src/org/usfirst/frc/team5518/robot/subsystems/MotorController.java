@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5518.robot.subsystems;
 
 import org.usfirst.frc.team5518.robot.RobotMap;
+import org.usfirst.frc.team5518.robot.commands.RunMotor;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,7 +31,7 @@ public class MotorController extends Subsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new RunMotor());
     }
     
     public void runIntakeMotor(boolean run) {
