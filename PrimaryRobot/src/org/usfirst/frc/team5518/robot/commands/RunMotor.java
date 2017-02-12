@@ -19,7 +19,7 @@ public class RunMotor extends Command {
 	public boolean runWinch;
 	
     public RunMotor() {
-        //requires(Robot.MotorController);
+        requires(Robot.motorController);
     	
     	LTval = 0;
     	RTval = 0;
