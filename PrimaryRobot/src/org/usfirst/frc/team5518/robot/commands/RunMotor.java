@@ -34,7 +34,7 @@ public class RunMotor extends Command {
     protected void execute() {
     	LTval = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
     	RTval = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
-    	runWinch = OI.getButton(OI.sfController, RobotMap.XBOX_XBTN);
+    	runWinch = OI.getButton(OI.driveController, RobotMap.XBOX_XBTN);
     	
     	if (LTval > 0.15) {
     		Robot.motorController.runIntakeMotor(true);
