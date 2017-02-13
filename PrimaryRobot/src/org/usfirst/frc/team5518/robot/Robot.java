@@ -116,10 +116,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		try{
+		/*try{
 		Thread.sleep(500);
 		}catch(Exception ex){}
-		System.out.println("teleopPeriodic()");
+		System.out.println("teleopPeriodic()");*/
 		
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
@@ -131,10 +131,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		try{
+		/*try{
 		Thread.sleep(500);
 		}catch(Exception ex){}
-		System.out.println("testInit()");
+		System.out.println("testInit()");*/
 		LiveWindow.run();
 	}
 }
