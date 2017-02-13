@@ -29,8 +29,8 @@ public class RunMotor extends Command {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		LTval = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
-		RTval = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
+		LTval = -OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+		RTval = -OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		runWinch = OI.getButton(OI.driveController, RobotMap.XBOX_XBTN);
 		runWinchBack = OI.getButton(OI.driveController, RobotMap.XBOX_ABTN);
 		
