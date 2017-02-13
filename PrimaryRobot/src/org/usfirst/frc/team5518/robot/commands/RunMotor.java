@@ -31,31 +31,22 @@ public class RunMotor extends Command {
 	protected void execute() {
 		LTval = -OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		RTval = -OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
-		runWinch = OI.getButton(OI.driveController, RobotMap.XBOX_XBTN);
-		runWinchBack = OI.getButton(OI.driveController, RobotMap.XBOX_ABTN);
+		runWinch = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
+		runWinchBack = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
 		
 		if (LTval > 0.15) {
-			Robot.motorController.runIntakeMotor(true);
-		}
-		else if (LTval < 0.15) {
-			Robot.motorController.runIntakeMotor(false);
+			Robot.motorController.runIntakeMotor();
 		}
 		
 		if (RTval > 0.15) {
-			Robot.motorController.runShooterMotor(true);
-		}
-		else if (RTval < 0.15) {
-			Robot.motorController.runShooterMotor(false);
+			Robot.motorController.runShooterMotor();
 		}
 		
 		if (runWinch) {
-			Robot.motorController.runWinchMotor(true, 1);
+			Robot.motorController.runWinchMotor(1);
 		}
 		else if (runWinchBack) {
-			Robot.motorController.runWinchMotor(true, -1);
-		}
-		if (!runWinch && !runWinchBack) {
-			Robot.motorController.runWinchMotor(false, 0);
+			Robot.motorController.runWinchMotor(-1);
 		}
 	}
 
