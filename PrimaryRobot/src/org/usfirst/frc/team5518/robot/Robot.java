@@ -4,7 +4,7 @@ package org.usfirst.frc.team5518.robot;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
-import org.usfirst.frc.team5518.robot.OI;
+//import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
