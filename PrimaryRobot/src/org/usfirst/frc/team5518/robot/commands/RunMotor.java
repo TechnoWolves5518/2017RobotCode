@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RunMotor extends Command {
 	public double LTval;
 	public double RTval;
-	public boolean runWinch, runWinchBack;
+	public boolean shooter, intake;
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
 		
 		LTval = 0;
 		RTval = 0;
-		runWinch = false;
-		runWinchBack = false;
+		shooter = false;
+		intake = false;
 	}
 	
 	// Called just before this Command runs the first time
@@ -31,22 +31,21 @@ public class RunMotor extends Command {
 	protected void execute() {
 		LTval = -OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		RTval = -OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
-		runWinch = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
-		runWinchBack = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
+		shooter = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
+		intake = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
 		
-		if (LTval > 0.15) {
+		if (RTval > 0) {
+			Robot.motorController.runWinchMotor(RTval, 1);
+		}
+		else if (LTval > 0) {
+			Robot.motorController.runWinchMotor(LTval, -1);
+		}
+		
+		if (intake) {
 			Robot.motorController.runIntakeMotor();
 		}
-		
-		if (RTval > 0.15) {
+		if (shooter) {
 			Robot.motorController.runShooterMotor();
-		}
-		
-		if (runWinch) {
-			Robot.motorController.runWinchMotor(1);
-		}
-		else if (runWinchBack) {
-			Robot.motorController.runWinchMotor(-1);
 		}
 	}
 
