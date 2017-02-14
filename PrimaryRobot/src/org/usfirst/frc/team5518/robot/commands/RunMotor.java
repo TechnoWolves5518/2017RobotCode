@@ -29,6 +29,7 @@ public class RunMotor extends Command {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		System.out.println("RunMotor execute");
 		LTval = -OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		RTval = -OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		shooter = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);

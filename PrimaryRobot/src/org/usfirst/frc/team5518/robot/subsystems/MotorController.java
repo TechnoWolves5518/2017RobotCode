@@ -34,12 +34,15 @@ public class MotorController extends Subsystem {
 	}
 	
 	public void runIntakeMotor() {
+		System.out.println("runIntakeMotor");
 		intakeMotor.set(intakeMotorSpeed);
 	}
 	public void runShooterMotor() {
+		System.out.println("runShooterMotor");
 		shooterMotor.set(shooterMotorSpeed);
 	}
 	public void runWinchMotor(double speed, int dir) {
+		System.out.println("runWinchMotor");
 		winchMotor.set(speed * dir);
 	}
 }
