@@ -4,7 +4,9 @@ import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 import org.usfirst.frc.team5518.robot.OI;
 
-//import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -44,6 +46,11 @@ public class BasicDrive extends Command {
     	if (isInverted != wasInverted && isInverted == true)
     	{
     		toggle = !toggle;
+    		//OI.driveController.setRumble(kLeftRumble, value);
+    		OI.driveController.setRumble(RumbleType.kLeftRumble, 1);
+    	}
+    	else if (isInverted != wasInverted && isInverted == false) {
+    		OI.driveController.setRumble(RumbleType.kLeftRumble, 0);
     	}
     	wasInverted = isInverted;
     	
