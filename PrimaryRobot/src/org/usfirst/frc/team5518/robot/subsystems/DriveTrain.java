@@ -44,11 +44,11 @@ public class DriveTrain extends Subsystem  {
 		backLeftMotor.enableDeadbandElimination(false);
 		backRightMotor.enableDeadbandElimination(false);
 		
-		backLeftMotor.setInverted(true);
-		frontRightMotor.setInverted(true);
+		/*backLeftMotor.setInverted(true);
+		frontRightMotor.setInverted(true);*/
 		
 		//Initialize driveTrain
-    	driveTrain = new RobotDrive(backLeftMotor, frontLeftMotor, backRightMotor, frontRightMotor);
+    	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
