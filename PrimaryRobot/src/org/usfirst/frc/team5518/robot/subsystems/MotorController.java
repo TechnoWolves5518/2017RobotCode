@@ -41,6 +41,7 @@ public class MotorController extends Subsystem {
 			intakeMotor.set(0);
 		}
 	}
+
 	public void runShooterMotor(boolean go) {
 		if (go) {
 			shooterMotor.set(shooterMotorSpeed);
@@ -49,6 +50,7 @@ public class MotorController extends Subsystem {
 			shooterMotor.set(0);
 		}
 	}
+		
 	public void runWinchMotor(double speed, int dir, boolean slow) {
 		System.out.println("Run winch motor");
 		if (!slow) {
