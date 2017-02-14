@@ -33,15 +33,30 @@ public class MotorController extends Subsystem {
 	    setDefaultCommand(new RunMotor());
 	}
 	
-	public void runIntakeMotor() {
-		intakeMotor.set(intakeMotorSpeed);
+	public void runIntakeMotor(boolean go) {
+		if (go) {
+			intakeMotor.set(intakeMotorSpeed);
+		}
+		else {
+			intakeMotor.set(0);
+		}
 	}
-	public void runShooterMotor() {
-		shooterMotor.set(shooterMotorSpeed);
+	public void runShooterMotor(boolean go) {
+		if (go) {
+			shooterMotor.set(shooterMotorSpeed);
+		}
+		else {
+			shooterMotor.set(0);
+		}
 	}
-	public void runWinchMotor(double speed, int dir) {
+	public void runWinchMotor(double speed, int dir, boolean slow) {
 		System.out.println("Run winch motor");
-		winchMotor.set(speed * dir);
+		if (!slow) {
+			winchMotor.set(speed * dir);
+		}
+		else if (slow) {
+			winchMotor.set(speed / 5 * dir);
+		}
 	}
 }
 

@@ -13,6 +13,7 @@ public class RunMotor extends Command {
 	public double LTval;
 	public double RTval;
 	public boolean shooter, intake;
+	public boolean slow;
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
@@ -21,6 +22,7 @@ public class RunMotor extends Command {
 		RTval = 0;
 		shooter = false;
 		intake = false;
+		slow = false;
 	}
 	
 	// Called just before this Command runs the first time
@@ -29,24 +31,26 @@ public class RunMotor extends Command {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		LTval = -OI.driveController.getRawAxis(RobotMap.XBOX_LTRIGGER);
-		RTval = -OI.driveController.getRawAxis(RobotMap.XBOX_RTRIGGER);
+		System.out.println("Run Motor Execute");
+		
+		LTval = OI.driveController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+		RTval = OI.driveController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		shooter = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
 		intake = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
+		slow = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
 		
-		if (RTval > 0) {
-			Robot.motorController.runWinchMotor(RTval, 1);
+		if (RTval > 0.1) {
+			Robot.motorController.runWinchMotor(RTval, 1, slow);
 		}
-		else if (LTval > 0) {
-			Robot.motorController.runWinchMotor(LTval, -1);
+		else if (LTval > 0.1) {
+			Robot.motorController.runWinchMotor(LTval, -1, slow);
 		}
-		
-		if (intake) {
-			Robot.motorController.runIntakeMotor();
+		else if (RTval == 0 && LTval == 0) {
+			Robot.motorController.runWinchMotor(0, 0, slow);
 		}
-		if (shooter) {
-			Robot.motorController.runShooterMotor();
-		}
+
+		Robot.motorController.runIntakeMotor(intake);
+		Robot.motorController.runShooterMotor(shooter);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

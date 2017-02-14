@@ -44,8 +44,10 @@ public class DriveTrain extends Subsystem  {
 		backLeftMotor.enableDeadbandElimination(false);
 		backRightMotor.enableDeadbandElimination(false);
 		
-		/*backLeftMotor.setInverted(true);
-		frontRightMotor.setInverted(true);*/
+		backLeftMotor.setInverted(false);
+		frontRightMotor.setInverted(false);
+		frontLeftMotor.setInverted(false);
+		backRightMotor.setInverted(false);
 		
 		//Initialize driveTrain
     	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
