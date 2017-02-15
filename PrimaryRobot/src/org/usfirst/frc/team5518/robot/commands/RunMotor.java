@@ -10,18 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunMotor extends Command {
-	public double LTval;
-	public double RTval;
-	public boolean shooter, intake;
+	public double winchSpeed, shooter, intake;
 	public boolean slow;
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
-		
-		LTval = 0;
-		RTval = 0;
-		shooter = false;
-		intake = false;
+	    winchSpeed = 0;
+		shooter = 0;
+		intake = 0;
 		slow = false;
 	}
 	
@@ -33,24 +29,26 @@ public class RunMotor extends Command {
 	protected void execute() {
 		System.out.println("Run Motor Execute");
 		//Get all inputs
-		LTval = OI.driveController.getRawAxis(RobotMap.XBOX_LTRIGGER);
-		RTval = OI.driveController.getRawAxis(RobotMap.XBOX_RTRIGGER);
-		shooter = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
-		intake = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
-		slow = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
-		
-		if (RTval > 0.1) {
-			Robot.motorController.runWinchMotor(RTval, 1, slow);
-		}
-		else if (LTval > 0.1) {
-			Robot.motorController.runWinchMotor(LTval, -1, slow);
-		}
-		else if (RTval == 0 && LTval == 0) {
-			Robot.motorController.runWinchMotor(0, 0, slow);
-		}
 
-		Robot.motorController.runIntakeMotor(intake);
-		Robot.motorController.runShooterMotor(shooter);
+		winchSpeed = -OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
+		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
+		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+		
+		if (winchSpeed > 0.1) {
+			Robot.motorController.runWinchMotor(winchSpeed, slow);
+		}
+		if (shooter > 0.1) {
+			Robot.motorController.runShooterMotor(1);
+		}
+		else {
+			Robot.motorController.runShooterMotor(0);
+		}
+		if (intake > 0.1) {
+			Robot.motorController.runIntakeMotor(1);
+		}
+		else {
+			Robot.motorController.runIntakeMotor(0);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
