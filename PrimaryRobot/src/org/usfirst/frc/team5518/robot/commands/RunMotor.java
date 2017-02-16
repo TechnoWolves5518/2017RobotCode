@@ -35,6 +35,10 @@ public class RunMotor extends Command {
 		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
+		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
+		
+		Robot.motorController.getData();
+		
 		//WINCH
 		if (winchSpeed > 0.1) {
 			Robot.motorController.runWinchMotor(winchSpeed, slow);
@@ -64,8 +68,6 @@ public class RunMotor extends Command {
 			Robot.motorController.runLoadingMotor(0);
 		}
 		
-		
-		Robot.motorController.getData();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
