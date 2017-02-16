@@ -69,7 +69,7 @@ public class DriveTrain extends Subsystem  {
 			moveValue *= moveValue;
 			moveValue = -moveValue;
 		}
-		else if (moveValue > 0) {
+		else if (moveValue > 0) { //hi
 			moveValue *= moveValue;
 		}
 		
