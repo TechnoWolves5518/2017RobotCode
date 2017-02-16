@@ -37,6 +37,9 @@ public class RunMotor extends Command {
 		if (winchSpeed > 0.1) {
 			Robot.motorController.runWinchMotor(winchSpeed, slow);
 		}
+		else {
+			Robot.motorController.runWinchMotor(0, slow);
+		}
 		if (shooter > 0.1) {
 			Robot.motorController.runShooterMotor(1);
 		}
