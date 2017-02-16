@@ -40,26 +40,30 @@ public class RunMotor extends Command {
 		Robot.motorController.getData();
 		
 		//WINCH
-		if (winchSpeed > 0.1) {
+		if (winchSpeed != 0) {
 			Robot.motorController.runWinchMotor(winchSpeed, slow);
 		}
 		else {
 			Robot.motorController.runWinchMotor(0, slow);
 		}
 		//SHOOTER
-		if (shooter > 0.1) {
-			Robot.motorController.runShooterMotor(1);
-		}
-		else {
-			Robot.motorController.runShooterMotor(0);
-		}
-		//INTAKE
-		if (intake > 0.1) {
-			Robot.motorController.runIntakeMotor(1);
-		}
-		else {
-			Robot.motorController.runIntakeMotor(0);
-		}
+//		if (shooter > 0.1) {
+//			Robot.motorController.runShooterMotor(1);
+//		}
+//		else {
+//			Robot.motorController.runShooterMotor(0);
+//		}
+//		//INTAKE
+//		if (intake > 0.1) {
+//			Robot.motorController.runIntakeMotor(1);
+//		}
+//		else {
+//			Robot.motorController.runIntakeMotor(0);
+//		}
+		
+		Robot.motorController.runShooterMotor(1, shooter);
+		Robot.motorController.runIntakeMotor(1, intake);
+		
 		//LOADING
 		if (load) {
 			Robot.motorController.runLoadingMotor(1);
