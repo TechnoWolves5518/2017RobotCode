@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunMotor extends Command {
 	public double winchSpeed, shooter, intake;
+	public boolean load;
 	public boolean slow;
 	
 	public RunMotor() {
@@ -33,24 +34,34 @@ public class RunMotor extends Command {
 		winchSpeed = -OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
 		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
-		
+		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
+		//WINCH
 		if (winchSpeed > 0.1) {
 			Robot.motorController.runWinchMotor(winchSpeed, slow);
 		}
 		else {
 			Robot.motorController.runWinchMotor(0, slow);
 		}
+		//SHOOTER
 		if (shooter > 0.1) {
 			Robot.motorController.runShooterMotor(1);
 		}
 		else {
 			Robot.motorController.runShooterMotor(0);
 		}
+		//INTAKE
 		if (intake > 0.1) {
 			Robot.motorController.runIntakeMotor(1);
 		}
 		else {
 			Robot.motorController.runIntakeMotor(0);
+		}
+		//LOADING
+		if (load) {
+			Robot.motorController.runLoadingMotor(1);
+		}
+		else {
+			Robot.motorController.runLoadingMotor(0);
 		}
 	}
 

@@ -13,18 +13,21 @@ public class MotorController extends Subsystem {
 	public VictorSP intakeMotor;
 	public VictorSP shooterMotor;
 	public VictorSP winchMotor;
+	public VictorSP loadMotor;
 	
 	public double intakeMotorSpeed;
 	public double shooterMotorSpeed;
-	//public double winchMotorSpeed;
+	public double loadMotorSpeed;
 	
 	public MotorController() {
 		intakeMotor = new VictorSP(RobotMap.INTAKE_PORT_NUMBER);
 		shooterMotor = new VictorSP(RobotMap.SHOOTER_PORT_NUMBER);
 		winchMotor = new VictorSP(RobotMap.WINCH_PORT_NUMBER);
+		loadMotor = new VictorSP(RobotMap.LOAD_PORT_NUMBER);
 		
 		intakeMotorSpeed = 2/3;
 		shooterMotorSpeed = 2/3;
+		loadMotorSpeed = 1;
 	}
 	
 	public void initDefaultCommand() {
@@ -32,7 +35,7 @@ public class MotorController extends Subsystem {
 	    setDefaultCommand(new RunMotor());
 	}
 	
-	public void runWinchMotor(double speed, boolean slow) {
+	public void runWinchMotor(double speed, boolean slow) { //WINCH
 		System.out.println("Run winch motor");
 		if (!slow) {
 			winchMotor.set(speed);
@@ -42,12 +45,16 @@ public class MotorController extends Subsystem {
 		}
 	}
 	
-	public void runIntakeMotor(int go) {
+	public void runIntakeMotor(int go) { //INTAKE
 		intakeMotor.set(intakeMotorSpeed * go);
 	}
 
-	public void runShooterMotor(int go) {
+	public void runShooterMotor(int go) { //SHOOTER
 		shooterMotor.set(shooterMotorSpeed * go);
+	}
+	
+	public void runLoadingMotor(int go) { //LOAD
+		loadMotor.set(loadMotorSpeed * go);
 	}
 	
 }
