@@ -63,6 +63,9 @@ public class RunMotor extends Command {
 		else {
 			Robot.motorController.runLoadingMotor(0);
 		}
+		
+		
+		Robot.motorController.getData();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

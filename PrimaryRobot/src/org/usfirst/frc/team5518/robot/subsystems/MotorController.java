@@ -5,7 +5,7 @@ import org.usfirst.frc.team5518.robot.commands.RunMotor;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -57,5 +57,11 @@ public class MotorController extends Subsystem {
 		loadMotor.set(loadMotorSpeed * go);
 	}
 	
+	public void getData() {
+		SmartDashboard.putNumber("Intake motor speed", intakeMotor.get());
+		SmartDashboard.putNumber("Shooter motor speed", shooterMotor.get());
+		SmartDashboard.putNumber("Load motor speed", loadMotor.get());
+		SmartDashboard.putNumber("Winch motor speed", winchMotor.get());
+	}
 }
 
