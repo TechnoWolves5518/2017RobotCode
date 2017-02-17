@@ -31,7 +31,7 @@ public class RunMotor extends Command {
 		System.out.println("Run Motor Execute");
 		//Get all inputs
 
-		winchSpeed = -OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
+		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
 		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
