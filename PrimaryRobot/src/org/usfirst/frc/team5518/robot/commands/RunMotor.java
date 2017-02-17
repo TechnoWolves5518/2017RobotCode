@@ -31,31 +31,39 @@ public class RunMotor extends Command {
 		System.out.println("Run Motor Execute");
 		//Get all inputs
 
-		winchSpeed = -OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
+		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
 		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
 		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
+		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
+		
+		Robot.motorController.getData();
+		
 		//WINCH
-		if (winchSpeed > 0.1) {
+		if (winchSpeed != 0) {
 			Robot.motorController.runWinchMotor(winchSpeed, slow);
 		}
 		else {
 			Robot.motorController.runWinchMotor(0, slow);
 		}
 		//SHOOTER
-		if (shooter > 0.1) {
-			Robot.motorController.runShooterMotor(1);
-		}
-		else {
-			Robot.motorController.runShooterMotor(0);
-		}
-		//INTAKE
-		if (intake > 0.1) {
-			Robot.motorController.runIntakeMotor(1);
-		}
-		else {
-			Robot.motorController.runIntakeMotor(0);
-		}
+//		if (shooter > 0.1) {
+//			Robot.motorController.runShooterMotor(1);
+//		}
+//		else {
+//			Robot.motorController.runShooterMotor(0);
+//		}
+//		//INTAKE
+//		if (intake > 0.1) {
+//			Robot.motorController.runIntakeMotor(1);
+//		}
+//		else {
+//			Robot.motorController.runIntakeMotor(0);
+//		}
+		
+		Robot.motorController.runShooterMotor(1, shooter);
+		Robot.motorController.runIntakeMotor(1, intake);
+		
 		//LOADING
 		if (load) {
 			Robot.motorController.runLoadingMotor(1);
@@ -64,8 +72,6 @@ public class RunMotor extends Command {
 			Robot.motorController.runLoadingMotor(0);
 		}
 		
-		
-		Robot.motorController.getData();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
