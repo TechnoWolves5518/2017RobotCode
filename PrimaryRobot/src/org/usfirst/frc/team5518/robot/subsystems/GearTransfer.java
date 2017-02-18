@@ -36,7 +36,7 @@ public class GearTransfer extends Subsystem {
         setDefaultCommand(new CheckSensor());
     }
     
-    public void checkUltrasonic() {
+    public void checkUltrasonic() { //Checks value of digital us and returns in feet
     	range = ultra.getRangeInches();
     	range *= 1/12;
     	SmartDashboard.putNumber("Ultrasonic range (ft): ", range);
