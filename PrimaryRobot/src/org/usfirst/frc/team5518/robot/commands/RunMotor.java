@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunMotor extends Command {
 	public double winchSpeed, shooter, intake;
+	public boolean reverse;
 	public boolean load;
 	public boolean slow;
 	
@@ -20,6 +21,7 @@ public class RunMotor extends Command {
 		shooter = 0;
 		intake = 0;
 		slow = false;
+		reverse = false;
 	}
 	
 	// Called just before this Command runs the first time
@@ -36,6 +38,7 @@ public class RunMotor extends Command {
 		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
 		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
+		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
 		
 		Robot.motorController.getData();
 		
@@ -61,8 +64,8 @@ public class RunMotor extends Command {
 //			Robot.motorController.runIntakeMotor(0);
 //		}
 		
-		Robot.motorController.runShooterMotor(1, shooter);
-		Robot.motorController.runIntakeMotor(1, intake);
+		Robot.motorController.runShooterMotor(shooter);
+		Robot.motorController.runIntakeMotor(intake, reverse);
 		
 		//LOADING
 		if (load) {

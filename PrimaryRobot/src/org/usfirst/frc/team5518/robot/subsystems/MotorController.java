@@ -45,12 +45,17 @@ public class MotorController extends Subsystem {
 		}
 	}
 	
-	public void runIntakeMotor(int go, double speed) { //INTAKE
-		intakeMotor.set(speed * go);
+	public void runIntakeMotor(double speed, boolean reverse) { //INTAKE
+		if (!reverse) {
+			intakeMotor.set(speed);
+		}
+		else if (reverse) {
+			intakeMotor.set(speed * -1);
+		}
 	}
 
-	public void runShooterMotor(int go, double speed) { //SHOOTER
-		shooterMotor.set(speed * go);
+	public void runShooterMotor(double speed) { //SHOOTER
+		shooterMotor.set(speed);
 	}
 	
 	public void runLoadingMotor(int go) { //LOAD
