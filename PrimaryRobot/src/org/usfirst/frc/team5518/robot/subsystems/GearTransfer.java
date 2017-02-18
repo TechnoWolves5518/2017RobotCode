@@ -22,6 +22,12 @@ public class GearTransfer extends Subsystem {
 	Ultrasonic ultra;
 	AnalogInput ai;
 	double range;
+	int bits;
+	
+	int raw;
+	double volts;
+	int averageRaw;
+	double averageVolts;
 	
 	public GearTransfer() {
 		
@@ -29,6 +35,13 @@ public class GearTransfer extends Subsystem {
 		ultra = new Ultrasonic(1, 1);
 		ultra.setAutomaticMode(true);
 		ai = new AnalogInput(0);
+		
+		AnalogInput.setGlobalSampleRate(62500);
+		
+		ai.setOversampleBits(4);
+		bits = ai.getOversampleBits();
+		ai.setAverageBits(2);
+		bits = ai.getAverageBits();
 	}
 
     public void initDefaultCommand() {
@@ -39,11 +52,14 @@ public class GearTransfer extends Subsystem {
     public void checkUltrasonic() { //Checks value of digital us and returns in feet
     	range = ultra.getRangeInches();
     	range *= 1/12;
-    	SmartDashboard.putNumber("Ultrasonic range (ft): ", range);
+    	SmartDashboard.putNumber("Digital Ultrasonic range (ft): ", range);
     }
     
     public void checkAnalogUltrasonic() {
-    	
+    	raw = ai.getValue();
+    	volts = ai.getVoltage();
+    	averageRaw = ai.getAverageValue();
+    	averageVolts = ai.getAverageVoltage();
     }
 }
 
