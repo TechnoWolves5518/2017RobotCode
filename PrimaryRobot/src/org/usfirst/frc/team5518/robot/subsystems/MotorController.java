@@ -55,7 +55,7 @@ public class MotorController extends Subsystem {
 	}
 
 	public void runShooterMotor(double speed) { //SHOOTER
-		shooterMotor.set(0.8f);
+		shooterMotor.set(speed * 0.8);
 	}
 	
 	public void runLoadingMotor(int go) { //LOAD
@@ -67,7 +67,7 @@ public class MotorController extends Subsystem {
 		SmartDashboard.putNumber("Shooter motor speed", shooterMotor.get());
 		SmartDashboard.putNumber("Load motor speed", loadMotor.get());
 		SmartDashboard.putNumber("Winch motor speed", winchMotor.get());
-		SmartDashboard.getData("Shooter motor speed");
+		//SmartDashboard.getData("Shooter motor speed");
 	}
 }
 

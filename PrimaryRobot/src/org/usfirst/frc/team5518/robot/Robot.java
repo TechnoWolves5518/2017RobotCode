@@ -6,6 +6,7 @@ import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 //import org.usfirst.frc.team5518.robot.OI;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static FuelShooter shooter;
 	public static MotorController motorController;
+	public static AnalogInput ultraPort0;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -45,6 +47,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
 		motorController = new MotorController();
+		ultraPort0 = new AnalogInput(2);
 		
 	}
 
@@ -62,6 +65,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		//System.out.println("disablePeriodic()");
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**
@@ -124,6 +128,9 @@ public class Robot extends IterativeRobot {
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
+		double avgVoltage = ultraPort0.getAverageVoltage();
+		SmartDashboard.putNumber("ultra", avgVoltage);
+				System.out.println("avgv= " + avgVoltage);
 	}
 
 	/**
