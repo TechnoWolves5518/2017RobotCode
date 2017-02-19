@@ -1,8 +1,10 @@
 package org.usfirst.frc.team5518.robot;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,37 +17,46 @@ public class OI {
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
 	
-	// Joystick stick = new Joystick(port);
-	Joystick[] controller = new Joystick[]{
-			new Joystick(RobotMap.XBOX_DRIVER),
-			new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION)
-	};
+	// Joystick stick = new Joystick(port); 0 is assigned to Driver Controller, 1 is to Special Functions
+	
+//	public static Joystick[] controller = new Joystick[]{
+//			new Joystick(RobotMap.XBOX_DRIVER),
+//			new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION)
+//	};
+	
+	public OI()
+	{
+		//driverButtons[4].whenPressed(new InvertMotors());
+	}
+	
+	public static Joystick driveController = new Joystick(RobotMap.XBOX_DRIVER);
+	public static Joystick sfController = new Joystick(RobotMap.XBOX_SPECIAL_FUNCTION);
 	
 	// Button button = new JoystickButton(stick, buttonNumber);
-	Button[] driverButtons = new JoystickButton[] {
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_YBTN),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_XBTN),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_ABTN),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BBTN),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_LBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_LSTICK),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_RSTICK),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_START),
-			new JoystickButton(controller[RobotMap.XBOX_DRIVER], RobotMap.XBOX_BACK)
+	public static Button[] driverButtons = new JoystickButton[] {
+			new JoystickButton(driveController, RobotMap.XBOX_YBTN),
+			new JoystickButton(driveController, RobotMap.XBOX_XBTN),
+			new JoystickButton(driveController, RobotMap.XBOX_ABTN),
+			new JoystickButton(driveController, RobotMap.XBOX_BBTN),
+			new JoystickButton(driveController, RobotMap.XBOX_LBUMPER),
+			new JoystickButton(driveController, RobotMap.XBOX_RBUMPER),
+			new JoystickButton(driveController, RobotMap.XBOX_LSTICK),
+			new JoystickButton(driveController, RobotMap.XBOX_RSTICK),
+			new JoystickButton(driveController, RobotMap.XBOX_START),
+			new JoystickButton(driveController, RobotMap.XBOX_BACK)
 	};
 	
-	Button[] specialFunctionButtons = new JoystickButton[] {
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_YBTN),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_XBTN),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_ABTN),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BBTN),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_LBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RBUMPER),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_LSTICK),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_RSTICK),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_START),
-			new JoystickButton(controller[RobotMap.XBOX_SPECIAL_FUNCTION], RobotMap.XBOX_BACK)
+	public static Button[] specialFunctionButtons = new JoystickButton[] {
+			new JoystickButton(sfController, RobotMap.XBOX_YBTN),
+			new JoystickButton(sfController, RobotMap.XBOX_XBTN),
+			new JoystickButton(sfController, RobotMap.XBOX_ABTN),
+			new JoystickButton(sfController, RobotMap.XBOX_BBTN),
+			new JoystickButton(sfController, RobotMap.XBOX_LBUMPER),
+			new JoystickButton(sfController, RobotMap.XBOX_RBUMPER),
+			new JoystickButton(sfController, RobotMap.XBOX_LSTICK),
+			new JoystickButton(sfController, RobotMap.XBOX_RSTICK),
+			new JoystickButton(sfController, RobotMap.XBOX_START),
+			new JoystickButton(sfController, RobotMap.XBOX_BACK)
 	};
 
 	// There are a few additional built in buttons you can use. Additionally,
@@ -74,12 +85,12 @@ public class OI {
 	 * 	controllerIndex 0 is DRIVER controller
 	 *  controllerIndex 1 is SPECIAL FUNCTION controller
 	 */
-	public double getAxis(int controllerIndex, int axis) {
-		double rawAxis = 0;
-		rawAxis = controller[controllerIndex].getRawAxis(axis);
-		
-		return rawAxis;
-	}
+//	static public double getAxis(Joystick passedController, int axis) {
+//		double rawAxis = 0;
+//		rawAxis = passedController.getRawAxis(axis);
+//		
+//		return rawAxis;
+//	}
 	
 	/**
 	 * 	returns button boolean value from specified controller
@@ -87,8 +98,8 @@ public class OI {
 	 * 	controllerIndex 0 is DRIVER controller
 	 *  controllerIndex 1 is SPECIAL FUNCTION controller
 	 */
-	public boolean getButton(int controllerIndex, int button) {
-		boolean rawButton = controller[controllerIndex].getRawButton(button);
+	public static boolean getButton(Joystick passedController, int button) {
+		boolean rawButton = passedController.getRawButton(button);
 		
 		return rawButton;
 	}
@@ -102,14 +113,14 @@ public class OI {
 	 * @param type left or right rumble motor
 	 * @param value rumble motor strength (0 to 1)
 	 */
-	public void setRumble(int controllerIndex, Joystick.RumbleType type, float value) {
-		controller[controllerIndex].setRumble(type, value);
+	public void setRumble(Joystick passedController, Joystick.RumbleType type, float value) {
+		passedController.setRumble(type, value);
 	}
 	
 	/**
 	 * checks if a controller is an Xbox controller
 	 */
-	public boolean isXboxController(int controllerIndex){
-		return controller[controllerIndex].getIsXbox();
+	public boolean isXboxController(Joystick passedController){
+		return passedController.getIsXbox();
 	}
 }
