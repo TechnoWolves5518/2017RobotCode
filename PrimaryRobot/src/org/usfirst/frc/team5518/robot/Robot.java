@@ -28,13 +28,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class Robot extends IterativeRobot {
 
-<<<<<<< HEAD
 	public static OI oi;
 	Ultrasonic ultra = new Ultrasonic(1,0);
-=======
-	//public static OI oi;
-	
->>>>>>> branch 'master' of https://github.com/TechnoWolves5518/2017RobotCode.git
+
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final FuelShooter shooter = new FuelShooter();
 	
