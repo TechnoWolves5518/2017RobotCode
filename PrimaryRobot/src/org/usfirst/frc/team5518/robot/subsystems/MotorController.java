@@ -23,6 +23,8 @@ public class MotorController extends Subsystem { //for motors
 	Servo leftServo;
 	Servo rightServo;
 	
+	public boolean doorState;
+	
 	public MotorController() {
 		intakeMotor = new VictorSP(RobotMap.INTAKE_PORT_NUMBER);
 		shooterMotor = new VictorSP(RobotMap.SHOOTER_PORT_NUMBER);
@@ -60,18 +62,21 @@ public class MotorController extends Subsystem { //for motors
 			intakeMotor.set(speed * -1);
 		}
 	}
+	
 	public void toggleDoors(boolean open) {
     	if (open) {
     		leftServo.setAngle(0);
     		rightServo.setAngle(180);
     		System.out.println("doors open left: " + leftServo.getAngle());
     		System.out.println("doors open right: " + rightServo.getAngle());
+    		doorState = true;
     	}
     	else {
     		leftServo.set(90);
     		rightServo.set(0);
     		System.out.println("doors closed left: " + leftServo.getAngle());
     		System.out.println("doors closed right: " + rightServo.getAngle());
+    		doorState = false;
     	}
     }
 
@@ -88,7 +93,7 @@ public class MotorController extends Subsystem { //for motors
 		SmartDashboard.putNumber("Shooter motor speed", shooterMotor.get());
 		SmartDashboard.putNumber("Load motor speed", loadMotor.get());
 		SmartDashboard.putNumber("Winch motor speed", winchMotor.get());
-		//SmartDashboard.getData("Shooter motor speed");
+		SmartDashboard.putBoolean("Gear door state", doorState);
 	}
 }
 
