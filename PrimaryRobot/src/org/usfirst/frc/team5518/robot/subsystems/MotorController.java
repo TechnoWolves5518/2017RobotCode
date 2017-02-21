@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class MotorController extends Subsystem {
+public class MotorController extends Subsystem { //for motors
 	public VictorSP intakeMotor;
 	public VictorSP shooterMotor;
 	public VictorSP winchMotor;
