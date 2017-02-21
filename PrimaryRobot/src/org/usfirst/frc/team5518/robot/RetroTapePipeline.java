@@ -259,7 +259,7 @@ public class RetroTapePipeline implements VisionPipeline {
 				
 				continue;
 			}
-			System.out.println("area= "+area);
+			//System.out.println("area= "+area);
 			if (Imgproc.arcLength(new MatOfPoint2f(contour.toArray()), true) < minPerimeter) {
 				System.out.println("arcLen= "+Imgproc.arcLength(new MatOfPoint2f(contour.toArray()), true));
 				continue;

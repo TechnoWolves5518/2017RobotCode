@@ -57,10 +57,10 @@ public class Robot extends IterativeRobot {
 		System.out.println("CenterX =  " + centerX + "  dist =  " + dist);
 		
 		if (dist > 40) {
-			drive.arcadeDrive(0, -0.5);
+			drive.arcadeDrive(0, dist * -0.0025);
 		}
 		else if (dist < -40) {
-			drive.arcadeDrive(0, 0.5);
+			drive.arcadeDrive(0, dist * 0.0025);
 		}
 		else {
 			drive.arcadeDrive(0, 0);
