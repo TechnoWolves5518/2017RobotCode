@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5518.robot;
 
+import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
 	
 //	private Servo leftServo, rightServo;
 
-	Command autonomousCommand;
+	Command auto;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -48,7 +49,10 @@ public class Robot extends IterativeRobot {
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("robotInit()");
-		SmartDashboard.putData("Auto mode", chooser);
+		
+		chooser.addDefault("Default Auto: ", new DriveForwardAuto());
+		
+		SmartDashboard.putData("Auto mode: ", chooser);
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
 		motorController = new MotorController();
@@ -88,18 +92,21 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		auto = chooser.getSelected();
 
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
+		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 * switch(autoSelected) {
+		 * case "My Auto": auto = new MyAutoCommand();
+		 * break; 
+		 * case "Default Auto": default: auto = new ExampleCommand(); 
+		 * break; 
+		 * }
 		 */
 		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if (auto != null)
+			auto.start();
 	}
 
 	/**
@@ -117,12 +124,14 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		System.out.println("teleopInit()");
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
-		
-//		rightServo.set(1.0);
-//		leftServo.set(0);
+//		System.out.println("teleopInit()");
+//		if (autonomousCommand != null)
+//			autonomousCommand.cancel();
+//		
+////		rightServo.set(1.0);
+////		leftServo.set(0);
+//		if (auto != null)
+//			auto.cancel();
 	}
 
 	/**
