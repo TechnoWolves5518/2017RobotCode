@@ -3,11 +3,13 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 //import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,7 +30,10 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static FuelShooter shooter;
 	public static MotorController motorController;
+	public static GearTransfer gearTransfer;
 	public static AnalogInput ultraPort0;
+	
+//	private Servo leftServo, rightServo;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -47,7 +52,9 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
 		motorController = new MotorController();
+		gearTransfer = new GearTransfer();
 		ultraPort0 = new AnalogInput(2);
+		
 		
 	}
 
@@ -113,6 +120,9 @@ public class Robot extends IterativeRobot {
 		System.out.println("teleopInit()");
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+//		rightServo.set(1.0);
+//		leftServo.set(0);
 	}
 
 	/**

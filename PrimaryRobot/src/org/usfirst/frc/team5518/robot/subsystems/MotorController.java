@@ -3,6 +3,7 @@ package org.usfirst.frc.team5518.robot.subsystems;
 import org.usfirst.frc.team5518.robot.RobotMap;
 import org.usfirst.frc.team5518.robot.commands.RunMotor;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,9 @@ public class MotorController extends Subsystem {
 	public double shooterMotorSpeed;
 	public double loadMotorSpeed;
 	
+	Servo leftServo;
+	Servo rightServo;
+	
 	public MotorController() {
 		intakeMotor = new VictorSP(RobotMap.INTAKE_PORT_NUMBER);
 		shooterMotor = new VictorSP(RobotMap.SHOOTER_PORT_NUMBER);
@@ -26,8 +30,11 @@ public class MotorController extends Subsystem {
 		loadMotor = new VictorSP(RobotMap.LOAD_PORT_NUMBER);
 		
 		intakeMotorSpeed = 2/3;
-		shooterMotorSpeed = 2/3;
-		loadMotorSpeed = 1;
+		shooterMotorSpeed = 1/2;
+		loadMotorSpeed = -0.25;
+		
+		rightServo = new Servo(RobotMap.RIGHT_DOOR_SERVO);
+		leftServo = new Servo(RobotMap.LEFT_DOOR_SERVO);
 	}
 	
 	public void initDefaultCommand() {
@@ -53,6 +60,20 @@ public class MotorController extends Subsystem {
 			intakeMotor.set(speed * -1);
 		}
 	}
+	public void toggleDoors(boolean open) {
+    	if (open) {
+    		leftServo.setAngle(0);
+    		rightServo.setAngle(180);
+    		System.out.println("doors open left: " + leftServo.getAngle());
+    		System.out.println("doors open right: " + rightServo.getAngle());
+    	}
+    	else {
+    		leftServo.set(90);
+    		rightServo.set(0);
+    		System.out.println("doors closed left: " + leftServo.getAngle());
+    		System.out.println("doors closed right: " + rightServo.getAngle());
+    	}
+    }
 
 	public void runShooterMotor(double speed) { //SHOOTER
 		shooterMotor.set(speed * 0.8);

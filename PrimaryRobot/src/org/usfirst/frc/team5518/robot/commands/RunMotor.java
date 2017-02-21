@@ -14,6 +14,8 @@ public class RunMotor extends Command {
 	public boolean reverse;
 	public boolean load;
 	public boolean slow;
+	public boolean doors, ldoors;
+	public boolean toggle;
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
@@ -22,6 +24,7 @@ public class RunMotor extends Command {
 		intake = 0;
 		slow = false;
 		reverse = false;
+		doors = false; ldoors = false; toggle = false;
 	}
 	
 	// Called just before this Command runs the first time
@@ -39,6 +42,7 @@ public class RunMotor extends Command {
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
 		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
 		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
+		doors = OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
 		
 		Robot.motorController.getData();
 		
@@ -50,20 +54,6 @@ public class RunMotor extends Command {
 			Robot.motorController.runWinchMotor(0, slow);
 		}
 		//SHOOTER
-//		if (shooter > 0.1) {
-//			Robot.motorController.runShooterMotor(1);
-//		}
-//		else {
-//			Robot.motorController.runShooterMotor(0);
-//		}
-//		//INTAKE
-//		if (intake > 0.1) {
-//			Robot.motorController.runIntakeMotor(1);
-//		}
-//		else {
-//			Robot.motorController.runIntakeMotor(0);
-//		}
-		
 		Robot.motorController.runShooterMotor(shooter);
 		Robot.motorController.runIntakeMotor(intake, reverse);
 		
@@ -74,6 +64,17 @@ public class RunMotor extends Command {
 		else {
 			Robot.motorController.runLoadingMotor(0);
 		}
+		
+		if (doors != ldoors && doors == true) {
+			toggle = !toggle;
+			
+		}
+		else if (doors != ldoors && doors == false){
+			
+		}
+		ldoors = doors;
+		
+		Robot.motorController.toggleDoors(toggle);
 		
 	}
 
