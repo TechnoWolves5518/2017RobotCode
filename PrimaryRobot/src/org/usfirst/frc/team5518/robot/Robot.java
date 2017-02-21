@@ -16,6 +16,7 @@ public class Robot extends IterativeRobot {
 	private static final int IMG_HEIGHT = 240;
 	private VisionThread visionThread;
 	private double centerX = 0.0;
+	private double centerX2 = 0.0;
 	private RobotDrive drive;
 	private final Object imgLock = new Object();
 
@@ -26,10 +27,20 @@ public class Robot extends IterativeRobot {
 		visionThread = new VisionThread(camera, new RetroTapePipeline(), pipeline -> {
 			
 			if (!pipeline.filterContoursOutput().isEmpty()) { // if the output from the process has something in it
-				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0)); //get the first detected rect from the output
-				synchronized (imgLock) {
-					centerX = r.x + (r.width / 2); //find the center of that rect and calculate
-					System.out.print(centerX);
+				
+				for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
+					Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i)); //get the first detected rect from the output
+					synchronized (imgLock) {
+						if (i == 0) {
+							centerX = r.x + (r.width / 2); //find the center of first rect and calculate
+							System.out.print("Rect 1 Center:  " + centerX);
+						}
+						else if (i == 1) {
+							centerX2 = r.x + (r.width / 2); //find the center of second rect and calculate
+							System.out.print("Rect 2 Center:  " + centerX2);
+						}
+						
+					}
 				}
 			}
 			else {
