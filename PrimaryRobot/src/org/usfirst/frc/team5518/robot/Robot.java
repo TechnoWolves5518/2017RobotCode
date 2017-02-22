@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -48,6 +49,9 @@ public class Robot extends IterativeRobot {
 		//oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		
+		CameraServer.getInstance().startAutomaticCapture().setResolution(1280, 720);
+		
 		System.out.println("robotInit()");
 		
 		chooser.addDefault("Default Auto: ", new DriveForwardAuto());
@@ -92,7 +96,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		auto = chooser.getSelected();
+		//auto = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -115,7 +119,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		System.out.println("autoPeriodic()");
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
 	}
 
 	@Override
