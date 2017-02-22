@@ -48,11 +48,11 @@ public class Robot extends IterativeRobot {
 		//oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		System.out.println("robotInit()");
+		//System.out.println("robotInit()");
 		
-		chooser.addDefault("Default Auto: ", new DriveForwardAuto());
+		chooser.addDefault("Default Auto (drive forward): ", new DriveForwardAuto());
 		
-		SmartDashboard.putData("Auto mode: ", chooser);
+		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
 		motorController = new MotorController();
@@ -94,15 +94,13 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		auto = chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) {
-		 * case "My Auto": auto = new MyAutoCommand();
-		 * break; 
-		 * case "Default Auto": default: auto = new ExampleCommand(); 
-		 * break; 
-		 * }
-		 */
+		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		switch(autoSelected) {
+		case "Default Auto": default:
+			auto = new DriveForwardAuto(); 
+			break;
+		}
+		 
 		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
 		if (auto != null)
