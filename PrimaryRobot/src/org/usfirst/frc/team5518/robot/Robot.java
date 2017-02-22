@@ -58,9 +58,7 @@ public class Robot extends IterativeRobot {
 		shooter = new FuelShooter();
 		motorController = new MotorController();
 		gearTransfer = new GearTransfer();
-		ultraPort0 = new AnalogInput(2);
-		
-		
+		//ultraPort0 = new AnalogInput(2);
 	}
 
 	/**
@@ -113,8 +111,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		System.out.println("autoPeriodic()");
-		//Scheduler.getInstance().run();
+		//System.out.println("autoPeriodic()");
+		Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -126,11 +124,9 @@ public class Robot extends IterativeRobot {
 //		System.out.println("teleopInit()");
 //		if (autonomousCommand != null)
 //			autonomousCommand.cancel();
-//		
-////		rightServo.set(1.0);
-////		leftServo.set(0);
-//		if (auto != null)
-//			auto.cancel();
+		
+		if (auto != null)
+			auto.cancel();
 	}
 
 	/**
@@ -146,9 +142,9 @@ public class Robot extends IterativeRobot {
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
-		double avgVoltage = ultraPort0.getAverageVoltage();
-		SmartDashboard.putNumber("ultra", avgVoltage);
-				System.out.println("avgv= " + avgVoltage);
+//		double avgVoltage = ultraPort0.getAverageVoltage();
+//		SmartDashboard.putNumber("ultra", avgVoltage);
+//				System.out.println("avgv= " + avgVoltage);
 	}
 
 	/**
