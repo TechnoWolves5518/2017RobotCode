@@ -66,7 +66,7 @@ public class MotorController extends Subsystem { //for motors
 	public void toggleDoors(boolean open) {
     	if (open) {
     		// open
-    		leftServo.setAngle(180);
+    		leftServo.setAngle(0);
     		rightServo.setAngle(180);
     		System.out.println("doors open left: " + leftServo.getAngle());
     		System.out.println("doors open right: " + rightServo.getAngle());
@@ -74,7 +74,7 @@ public class MotorController extends Subsystem { //for motors
     	}
     	else {
     		// close
-    		leftServo.setAngle(130);
+    		leftServo.setAngle(90);
     		rightServo.setAngle(90);
     		System.out.println("doors closed left: " + leftServo.getAngle());
     		System.out.println("doors closed right: " + rightServo.getAngle());
