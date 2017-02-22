@@ -65,18 +65,18 @@ public class RunMotor extends Command {
 			Robot.motorController.runLoadingMotor(0);
 		}
 		
-//		if (doors != ldoors && doors == true) {
-//			toggle = !toggle;
-//			
-//		}
-//		ldoors = doors;
+		if (doors != ldoors && doors == true) {
+			toggle = !toggle;
+			
+		}
+		ldoors = doors;
 		
-		if (doors) {
-			toggle = true;
-		}
-		else if (!doors) {
-			toggle = false;
-		}
+//		if (doors) {
+//			toggle = true;
+//		}
+//		else if (!doors) {
+//			toggle = false;
+//		}
 		
 		Robot.motorController.toggleDoors(toggle);
 		
