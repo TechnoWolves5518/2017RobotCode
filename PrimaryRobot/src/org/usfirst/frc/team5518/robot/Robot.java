@@ -3,8 +3,8 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
-import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
+//import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+//import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 //import org.usfirst.frc.team5518.robot.OI;
 
@@ -30,9 +30,9 @@ public class Robot extends IterativeRobot {
 	//public static OI oi;
 	
 	public static DriveTrain driveTrain;
-	public static FuelShooter shooter;
+	//public static FuelShooter shooter;
 	public static MotorController motorController;
-	public static GearTransfer gearTransfer;
+	//public static GearTransfer gearTransfer;
 	public static AnalogInput ultraPort0;
 	
 //	private Servo leftServo, rightServo;
@@ -52,12 +52,13 @@ public class Robot extends IterativeRobot {
 		//System.out.println("robotInit()");
 		
 		chooser.addDefault("Default Auto", new DriveForwardAuto());
+		chooser.addObject("Test Blank", new DriveForwardAuto());
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		driveTrain = new DriveTrain();
-		shooter = new FuelShooter();
+		//shooter = new FuelShooter();
 		motorController = new MotorController();
-		gearTransfer = new GearTransfer();
+		//gearTransfer = new GearTransfer();
 		//ultraPort0 = new AnalogInput(2);
 	}
 
@@ -97,9 +98,10 @@ public class Robot extends IterativeRobot {
 		switch(autoSelected) {
 			case "Default Auto":
 				auto = new DriveForwardAuto();
+				System.out.println("START DEFAULT AUTO");
 				break;
 		}
-		 
+		
 		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
 		if (auto != null)
