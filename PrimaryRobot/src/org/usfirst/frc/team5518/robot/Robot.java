@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//System.out.println("robotInit()");
 		
-		chooser.addDefault("Default Auto (drive forward): ", new DriveForwardAuto());
+		chooser.addDefault("Default Auto", new DriveForwardAuto());
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		driveTrain = new DriveTrain();
@@ -93,11 +93,11 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		auto = chooser.getSelected();
 
-		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 		switch(autoSelected) {
-		case "Default Auto": default:
-			auto = new DriveForwardAuto(); 
-			break;
+			case "Default Auto":
+				auto = new DriveForwardAuto();
+				break;
 		}
 		 
 		System.out.println("autonomousInit()");
