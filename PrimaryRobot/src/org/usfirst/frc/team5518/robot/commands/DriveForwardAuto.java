@@ -70,9 +70,12 @@ public class DriveForwardAuto extends Command {
         		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
         		Robot.driveAuto.driveAuto(0.5, 0);
         	}
-        	else if (avg <= 48 && avg > 2.5) {
+        	else if (avg <= 48 && avg > 12) {
         		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
         		Robot.driveAuto.driveAuto(0.25, 0);
+        	}
+        	else if (avg <= 12 && avg > 2.5) {
+        		//implement vision code here
         	}
         	else if (avg <= 2.5) {
         		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
@@ -94,9 +97,6 @@ public class DriveForwardAuto extends Command {
         		Robot.driveAuto.driveAuto(0.0, 0);
         	}
     	}
-    	
-    	
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
