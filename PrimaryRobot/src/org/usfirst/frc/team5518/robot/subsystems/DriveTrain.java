@@ -50,8 +50,8 @@ public class DriveTrain extends Subsystem  {
 		backRightMotor.setInverted(false);
 		
 		//Initialize driveTrain
-    	//driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
-		driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor); //FOR TEST BASE
+    	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+		//driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor); //FOR TEST BASE
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
@@ -66,13 +66,13 @@ public class DriveTrain extends Subsystem  {
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl, boolean slowMove) {
 		//System.out.println("DriveTrain.drive()");
-//		if (moveValue < 0) { //fourth power curve
-//			moveValue *= moveValue;
-//			moveValue = -moveValue;
-//		}
-//		else if (moveValue > 0) { //hi
-//			moveValue *= moveValue;
-//		}
+		if (moveValue < 0) { //fourth power curve
+			moveValue *= moveValue;
+			moveValue = -moveValue;
+		}
+		else if (moveValue > 0) { //hi
+			moveValue *= moveValue;
+		}
 		
 		System.out.println("DriveTrain moveValue="+moveValue+" turnValue="+rotValue);
 		

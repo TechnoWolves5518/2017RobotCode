@@ -68,7 +68,7 @@ public class DriveForwardAuto extends Command {
     	}
     	else if (avg <= 48 && avg > 2.5) {
     		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
-    		Robot.driveAuto.driveAuto(0.125, 0);
+    		Robot.driveAuto.driveAuto(0.25, 0);
     	}
     	else if (avg <= 2.5) {
     		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
