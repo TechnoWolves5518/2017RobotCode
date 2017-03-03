@@ -21,7 +21,7 @@ public class DriveTrainAuto extends Subsystem {
 	RobotDrive driveTrain;
 	public VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 
-	private VisionThread visionThread;
+	public VisionThread visionThread;
 	private double centerX = 0.0;
 	private double centerX2 = 0.0;
 	private final Object imgLock = new Object();
@@ -88,7 +88,7 @@ public class DriveTrainAuto extends Subsystem {
     	});
     	visionThread.setName("T"+System.currentTimeMillis());
 
-    	visionThread.start();
+    	//visionThread.start();
     }
     
     public void visionImplement() {

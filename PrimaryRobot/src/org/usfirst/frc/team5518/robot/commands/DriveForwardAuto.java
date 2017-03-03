@@ -76,6 +76,7 @@ public class DriveForwardAuto extends Command {
         		Robot.driveAuto.driveAuto(0.25, 0);
         	}
         	else if (avg <= 12 && avg > 2.5) {
+        		Robot.driveAuto.visionThread.start();
         		Robot.driveAuto.visionImplement();
         	}
         	else if (avg <= 2.5) {
