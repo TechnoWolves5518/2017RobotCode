@@ -29,6 +29,7 @@ public class DriveForwardAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveAuto.visionProcessing();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -75,7 +76,7 @@ public class DriveForwardAuto extends Command {
         		Robot.driveAuto.driveAuto(0.25, 0);
         	}
         	else if (avg <= 12 && avg > 2.5) {
-        		//implement vision code here
+        		Robot.driveAuto.visionImplement();
         	}
         	else if (avg <= 2.5) {
         		System.out.println("DRIVE STOP count="+count+"  avg="+avg);

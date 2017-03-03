@@ -10,6 +10,7 @@ import org.usfirst.frc.team5518.robot.subsystems.DriveTrainAuto;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 //import org.usfirst.frc.team5518.robot.OI;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Servo;
@@ -29,15 +30,15 @@ import edu.wpi.first.wpilibj.CameraServer;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	//public static OI oi;
 	
 	public static DriveTrain driveTrain;
 	public static MotorController motorController;
 	public static DriveTrainAuto driveAuto;
 	
-//	private Servo leftServo, rightServo;
-
+	public static UsbCamera camera;
+	public static final int IMG_WIDTH = 320;
+	public static final int IMG_HEIGHT = 240;
+	
 	Command auto;
 	Command basicDrive;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -48,20 +49,15 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		//oi = new OI();
-		// chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		//System.out.println("robotInit()");
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		
 		chooser.addDefault("Default Auto", new DriveForwardAuto());
 		//chooser.addObject("Test Blank", new DriveForwardAuto());
-		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
+		
 		driveTrain = new DriveTrain();
-		//shooter = new FuelShooter();
 		motorController = new MotorController();
-		//gearTransfer = new GearTransfer();
-		//ultraPort0 = new AnalogInput(2);
 		basicDrive = new BasicDrive();
 	}
 
