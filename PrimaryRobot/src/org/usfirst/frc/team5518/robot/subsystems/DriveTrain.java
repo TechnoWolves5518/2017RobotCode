@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean toggle;
 	
 	public DriveTrain() {
-		System.out.println("DriveTrain()");
+		//System.out.println("DriveTrain()");
 		driveController = OI.driveController;
 		sfController = OI.sfController;
 		wingmanJoystick = OI.wingmanController;
@@ -50,7 +50,8 @@ public class DriveTrain extends Subsystem  {
 		backRightMotor.setInverted(false);
 		
 		//Initialize driveTrain
-    	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+    	//driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+		driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor); //FOR TEST BASE
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
@@ -58,20 +59,24 @@ public class DriveTrain extends Subsystem  {
 	}
 
 	public void initDefaultCommand() {
-		System.out.println("DriveTrain.setDefaultCommand()");
+		//System.out.println("DriveTrain.setDefaultCommand()");
         // Set the default command for a subsystem here.
-		setDefaultCommand(new BasicDrive());
+		//setDefaultCommand(new BasicDrive());
     }
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl, boolean slowMove) {
 		//System.out.println("DriveTrain.drive()");
-		if (moveValue < 0) { //fourth power curve
-			moveValue *= moveValue;
-			moveValue = -moveValue;
-		}
-		else if (moveValue > 0) { //hi
-			moveValue *= moveValue;
-		}
+//		if (moveValue < 0) { //fourth power curve
+//			moveValue *= moveValue;
+//			moveValue = -moveValue;
+//		}
+//		else if (moveValue > 0) { //hi
+//			moveValue *= moveValue;
+//		}
+		
+		System.out.println("DriveTrain moveValue="+moveValue+" turnValue="+rotValue);
+		
+		//driveTrain.arcadeDrive(0.5, 0, false);
 		
 		if (!slowMove) {
 			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
@@ -83,7 +88,6 @@ public class DriveTrain extends Subsystem  {
 			System.out.println("FINE TURN ERROR");
 			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
 		}
-		
 		
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
 	}

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5518.robot;
 
+import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
@@ -11,6 +12,7 @@ import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -33,11 +35,11 @@ public class Robot extends IterativeRobot {
 	//public static FuelShooter shooter;
 	public static MotorController motorController;
 	//public static GearTransfer gearTransfer;
-	public static AnalogInput ultraPort0;
 	
 //	private Servo leftServo, rightServo;
 
 	Command auto;
+	Command basicDrive;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -52,7 +54,7 @@ public class Robot extends IterativeRobot {
 		//System.out.println("robotInit()");
 		
 		chooser.addDefault("Default Auto", new DriveForwardAuto());
-		chooser.addObject("Test Blank", new DriveForwardAuto());
+		//chooser.addObject("Test Blank", new DriveForwardAuto());
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		driveTrain = new DriveTrain();
@@ -60,6 +62,7 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		//gearTransfer = new GearTransfer();
 		//ultraPort0 = new AnalogInput(2);
+		basicDrive = new BasicDrive();
 	}
 
 	/**
@@ -94,18 +97,21 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		auto = chooser.getSelected();
 
-		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
-		switch(autoSelected) {
-			case "Default Auto":
-				auto = new DriveForwardAuto();
-				System.out.println("START DEFAULT AUTO");
-				break;
-		}
+//		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
+//		switch(autoSelected) {
+//			case "Default Auto":
+//				auto = new DriveForwardAuto();
+//				System.out.println("START DEFAULT AUTO");
+//				break;
+//		}
 		
 		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
-		if (auto != null)
+		if (auto != null) {
 			auto.start();
+			basicDrive.cancel();
+		}
+		
 	}
 
 	/**
@@ -127,8 +133,11 @@ public class Robot extends IterativeRobot {
 //		if (autonomousCommand != null)
 //			autonomousCommand.cancel();
 		
-		if (auto != null)
+		if (auto != null) {
 			auto.cancel();
+			basicDrive.start();
+		}
+		
 	}
 
 	/**
