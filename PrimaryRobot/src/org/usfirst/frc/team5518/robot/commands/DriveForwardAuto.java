@@ -16,12 +16,15 @@ public class DriveForwardAuto extends Command {
 	public double min; public double max; public double prev;
 	public int count;
 	
+	public boolean direction;
+	
     public DriveForwardAuto() {
     	requires(Robot.driveAuto);
     	ultra = new Ultrasonic(3, 2);
 		ultra.setAutomaticMode(true);
 		count = 0; total = 0; avg = 0;
 		min = 1000; max = 0; prev = 0;
+		direction = true;
     }
 
     // Called just before this Command runs the first time
@@ -62,18 +65,37 @@ public class DriveForwardAuto extends Command {
     	SmartDashboard.putNumber("Raw Range: ", (range / 12));
     	SmartDashboard.putNumber("Average Range: ", (avg / 12));
     	
-    	if (avg > 48) {
-    		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
-    		Robot.driveAuto.driveAuto(0.5, 0);
+    	if (direction) { //going forwards; putting ON the gear
+    		if (avg > 48) {
+        		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(0.5, 0);
+        	}
+        	else if (avg <= 48 && avg > 2.5) {
+        		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(0.25, 0);
+        	}
+        	else if (avg <= 2.5) {
+        		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(0, 0);
+        		direction = false;
+        	}
     	}
-    	else if (avg <= 48 && avg > 2.5) {
-    		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
-    		Robot.driveAuto.driveAuto(0.25, 0);
+    	else { //going backwards; easing OFF the peg
+    		if (avg <= 5.5) {
+        		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(-0.1, 0);
+        	}
+    		else if (avg <= 36 && avg > 5.5) {
+        		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(-0.25, 0);
+        	}
+    		else if (avg > 36) {
+        		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
+        		Robot.driveAuto.driveAuto(0.0, 0);
+        	}
     	}
-    	else if (avg <= 2.5) {
-    		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
-    		Robot.driveAuto.driveAuto(0, 0);
-    	}
+    	
+    	
     	
     }
 
