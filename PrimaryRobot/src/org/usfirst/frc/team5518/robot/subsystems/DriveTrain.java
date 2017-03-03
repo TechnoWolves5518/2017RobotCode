@@ -61,7 +61,7 @@ public class DriveTrain extends Subsystem  {
 	public void initDefaultCommand() {
 		//System.out.println("DriveTrain.setDefaultCommand()");
         // Set the default command for a subsystem here.
-		//setDefaultCommand(new BasicDrive());
+		setDefaultCommand(new BasicDrive());
     }
 	
 	public void drive(double moveValue, double rotValue, boolean fineControl, boolean slowMove) {

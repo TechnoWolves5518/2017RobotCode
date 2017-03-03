@@ -17,7 +17,7 @@ public class DriveForwardAuto extends Command {
 	public int count;
 	
     public DriveForwardAuto() {
-    	//requires(Robot.driveTrain);
+    	requires(Robot.driveAuto);
     	ultra = new Ultrasonic(3, 2);
 		ultra.setAutomaticMode(true);
 		count = 0; total = 0; avg = 0;
@@ -64,15 +64,15 @@ public class DriveForwardAuto extends Command {
     	
     	if (avg > 48) {
     		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
-    		Robot.driveTrain.drive(0.5, 0, true, false);
+    		Robot.driveAuto.driveAuto(0.5, 0);
     	}
     	else if (avg <= 48 && avg > 2.5) {
     		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
-    		Robot.driveTrain.drive(0.125, 0, true, false);
+    		Robot.driveAuto.driveAuto(0.125, 0);
     	}
     	else if (avg <= 2.5) {
     		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
-    		Robot.driveTrain.drive(0, 0, true, false);
+    		Robot.driveAuto.driveAuto(0, 0);
     	}
     	
     }

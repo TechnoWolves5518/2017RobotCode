@@ -4,6 +4,7 @@ package org.usfirst.frc.team5518.robot;
 import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5518.robot.subsystems.DriveTrainAuto;
 //import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 //import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
@@ -32,9 +33,8 @@ public class Robot extends IterativeRobot {
 	//public static OI oi;
 	
 	public static DriveTrain driveTrain;
-	//public static FuelShooter shooter;
 	public static MotorController motorController;
-	//public static GearTransfer gearTransfer;
+	public static DriveTrainAuto driveAuto;
 	
 //	private Servo leftServo, rightServo;
 
