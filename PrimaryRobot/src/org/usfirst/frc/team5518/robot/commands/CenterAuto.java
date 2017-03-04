@@ -3,6 +3,7 @@ package org.usfirst.frc.team5518.robot.commands;
 import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveForwardAuto extends Command {
+public class CenterAuto extends Command {
 
 	public static Ultrasonic ultra;
 	public double range; public double total; public double avg;
@@ -19,12 +20,12 @@ public class DriveForwardAuto extends Command {
 	
 	public boolean movingForward;
 	
-    public DriveForwardAuto() {
+    public CenterAuto() {
     	System.out.println("Robot.driveAuto = "+Robot.driveTrain);
     	requires(Robot.driveTrain);
     	ultra = new Ultrasonic(3, 2);
 		ultra.setAutomaticMode(true);
-		count = 0; total = 0; avg = 0;
+		count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
 		movingForward = true;
     }
@@ -67,32 +68,35 @@ public class DriveForwardAuto extends Command {
 	    	max = 0;
 		}
     	
-    	SmartDashboard.putNumber("Raw Range: ", (range / 12));
-    	SmartDashboard.putNumber("Average Range: ", (avg / 12));
+    	SmartDashboard.putNumber("Raw Range (feet): ", (range / 12));
+    	SmartDashboard.putNumber("Average Range (feet): ", (avg / 12));
     	
-    	if (movingForward) { //going forwards; putting ON the gear
+    	if (movingForward && avg != -1) { //going forwards; putting ON the gear
     		if (avg >RobotMap.FAST_DISTANCE) {
         		System.out.println("DRIVE FAST count="+count+"  avg="+avg);
-        		Robot.driveTrain.driveAuto(RobotMap.MED_SPEED, 0);
+        		Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
         	}
         	else if (avg <= RobotMap.FAST_DISTANCE && avg > RobotMap.SLOW_DISTANCE) {
         		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
         		Robot.driveTrain.driveAuto(RobotMap.MED_SPEED, 0);
         	}
         	else if (avg <= RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE) {
-        		Robot.driveTrain.visionThread.start();
-        		Robot.driveTrain.visionImplement();
+        		//Robot.driveTrain.visionThread.start();
+        		//Robot.driveTrain.visionImplement();
+        		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
+        		Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
         	}
         	else if (avg <= RobotMap.STOP_DISTANCE) {
         		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
         		Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
+        		Timer.delay(1);
         		movingForward = false;
         	}
     	}
-    	else { //going backwards; easing OFF the peg
+    	else if (avg != -1){ //going backwards; easing OFF the peg
     		if (avg <= 5.5) {
         		System.out.println("Reverse Drive SLOW count="+count+"  avg="+avg);
-        		Robot.driveTrain.driveAuto(-RobotMap.SUPER_SLOW_SPEED, 0);
+        		Robot.driveTrain.driveAuto(-RobotMap.SLOW_SPEED, 0);
         	}
     		else if (avg <= 36 && avg > 5.5) {
         		System.out.println("Reverse Drive MED count="+count+"  avg="+avg);

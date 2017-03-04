@@ -33,7 +33,7 @@ public class RunMotor extends Command {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		System.out.println("Run Motor Execute");
+		//System.out.println("Run Motor Execute");
 		//Get all inputs
 
 		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);

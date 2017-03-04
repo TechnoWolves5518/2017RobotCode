@@ -65,4 +65,16 @@ public class RobotMap
 	public static int XBOX_RSTICK = 10;
 	public static int XBOX_START = 8;
 	public static int XBOX_BACK = 7;
+	
+	
+	// AUTONOMOUS CONSTS
+	public static double FAST_SPEED = 0.8;//0.75;
+	public static double MED_SPEED  = 0.65;//0.50;
+	public static double SLOW_SPEED = 0.5;//0.25;
+	public static double SUPER_SLOW_SPEED = 0.4;//0.1;
+	public static double FULLSTOP   = 0;
+	
+	public static double FAST_DISTANCE = 48;  // inches
+	public static double SLOW_DISTANCE = 12;  // inches
+	public static double STOP_DISTANCE = 2.5; // inches
 }

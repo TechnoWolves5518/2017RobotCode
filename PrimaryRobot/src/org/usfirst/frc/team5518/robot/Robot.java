@@ -2,9 +2,12 @@
 package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.commands.BasicDrive;
+import org.usfirst.frc.team5518.robot.commands.CenterAuto;
+import org.usfirst.frc.team5518.robot.commands.DoNothingAuto;
 import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
+import org.usfirst.frc.team5518.robot.commands.LeftAuto;
+import org.usfirst.frc.team5518.robot.commands.RightAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5518.robot.subsystems.DriveTrainAuto;
 //import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
 //import org.usfirst.frc.team5518.robot.subsystems.GearTransfer;
 import org.usfirst.frc.team5518.robot.subsystems.MotorController;
@@ -13,7 +16,6 @@ import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -33,7 +35,6 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveTrain driveTrain;
 	public static MotorController motorController;
-	public static DriveTrainAuto driveAuto;
 	
 	public static UsbCamera camera;
 	public static final int IMG_WIDTH = 320;
@@ -41,6 +42,8 @@ public class Robot extends IterativeRobot {
 	
 	Command auto;
 	Command basicDrive;
+	Command driveForwardAuto;
+	Command runMotor;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -49,16 +52,23 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		
+		driveTrain = new DriveTrain();
+		
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		
-		chooser.addDefault("Default Auto", new DriveForwardAuto());
-		//chooser.addObject("Test Blank", new DriveForwardAuto());
+		chooser.addDefault("Default Auto (Do Nothing)", new DoNothingAuto());
+		chooser.addObject("Center Auto", new CenterAuto());
+		chooser.addObject("Left Auto", new LeftAuto());
+		chooser.addObject("Right Auto", new RightAuto());
+		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		
-		driveTrain = new DriveTrain();
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
+		
 	}
 
 	/**
@@ -91,8 +101,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		System.out.println("-----------------------------AUTO INIT-----------------------------");
+		
 		auto = chooser.getSelected();
-
+		
 //		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 //		switch(autoSelected) {
 //			case "Default Auto":
@@ -105,7 +118,6 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (auto != null) {
 			auto.start();
-			basicDrive.cancel();
 		}
 		
 	}
@@ -131,7 +143,6 @@ public class Robot extends IterativeRobot {
 		
 		if (auto != null) {
 			auto.cancel();
-			basicDrive.start();
 		}
 		
 	}
@@ -141,17 +152,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		/*try{
-		Thread.sleep(500);
-		}catch(Exception ex){}
-		System.out.println("teleopPeriodic()");*/
-		
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
-//		double avgVoltage = ultraPort0.getAverageVoltage();
-//		SmartDashboard.putNumber("ultra", avgVoltage);
-//				System.out.println("avgv= " + avgVoltage);
+
 	}
 
 	/**
@@ -159,10 +163,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		/*try{
-		Thread.sleep(500);
-		}catch(Exception ex){}
-		System.out.println("testPeriodic()");*/
+
 		LiveWindow.run();
 	}
 }
