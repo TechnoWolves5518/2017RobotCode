@@ -68,6 +68,10 @@ public class RobotMap
 	
 	
 	// AUTONOMOUS CONSTS
+	public static double TIME = 3000;
+	
+	public static double TURN = 0.5;
+	
 	public static double FAST_SPEED = 0.8;//0.75;
 	public static double MED_SPEED  = 0.65;//0.50;
 	public static double SLOW_SPEED = 0.5;//0.25;

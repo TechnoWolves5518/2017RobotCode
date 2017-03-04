@@ -18,8 +18,8 @@ public class RightAuto extends Command {
 	public int count;
 	public Timer drivingTime;
 	private long startTime;
-	private final int forwardTimeMsec = 3000;
-	private final int turnTimeMsec    = forwardTimeMsec+1000;
+	private final double forwardTimeMsec = RobotMap.TIME;
+	private final double turnTimeMsec    = forwardTimeMsec+1000;
 
 	public boolean movingForward;
 
@@ -56,7 +56,7 @@ public class RightAuto extends Command {
 		} else if (System.currentTimeMillis()-startTime < turnTimeMsec) {
 			//Turn for some time
 			System.out.println("Turning RIGHT");
-			Robot.driveTrain.driveAuto(0, -0.5);
+			Robot.driveTrain.driveAuto(0, -RobotMap.TURN);
 		}
 		else
 		{
