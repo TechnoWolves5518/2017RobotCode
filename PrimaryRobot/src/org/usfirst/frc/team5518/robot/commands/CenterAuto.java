@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CenterAuto extends Command {
 
-	public static Ultrasonic ultra;
 	public double range; public double total; public double avg;
 	public double min; public double max; public double prev;
 	public int count;
@@ -23,8 +22,6 @@ public class CenterAuto extends Command {
     public CenterAuto() {
     	System.out.println("Robot.driveAuto = "+Robot.driveTrain);
     	requires(Robot.driveTrain);
-    	ultra = new Ultrasonic(3, 2);
-		ultra.setAutomaticMode(true);
 		count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
 		movingForward = true;
@@ -44,7 +41,7 @@ public class CenterAuto extends Command {
     	//at a speed of
     	//		1.59 ft/s
     	
-    	range = ultra.getRangeInches();
+    	range = Robot.ultra.getRangeInches();
     	
     	if (range > max) {
     		max = range;
@@ -89,6 +86,7 @@ public class CenterAuto extends Command {
         	else if (avg <= RobotMap.STOP_DISTANCE) {
         		System.out.println("DRIVE STOP count="+count+"  avg="+avg);
         		Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
+        		Robot.motorController.openDoors();
         		Timer.delay(1);
         		movingForward = false;
         	}
@@ -101,6 +99,7 @@ public class CenterAuto extends Command {
     		else if (avg <= 36 && avg > 5.5) {
         		System.out.println("Reverse Drive MED count="+count+"  avg="+avg);
         		Robot.driveTrain.driveAuto(-RobotMap.MED_SPEED, 0);
+        		Robot.motorController.closeDoors();
         	}
     		else if (avg > 36) {
         		System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);

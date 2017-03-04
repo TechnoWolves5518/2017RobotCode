@@ -37,6 +37,9 @@ public class Robot extends IterativeRobot {
 	public static MotorController motorController;
 	
 	public static UsbCamera camera;
+	
+	public static Ultrasonic ultra;
+	
 	public static final int IMG_WIDTH = 320;
 	public static final int IMG_HEIGHT = 240;
 	
@@ -69,6 +72,8 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
+    	ultra = new Ultrasonic(3, 2);
+		ultra.setAutomaticMode(true);
 	}
 
 	/**

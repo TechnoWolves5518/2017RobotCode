@@ -20,8 +20,8 @@ public class MotorController extends Subsystem { //for motors
 	public double shooterMotorSpeed;
 	public double loadMotorSpeed;
 	
-	Servo leftServo;
-	Servo rightServo;
+	public Servo leftServo;
+	public Servo rightServo;
 	
 	public boolean doorState;
 	
@@ -65,23 +65,24 @@ public class MotorController extends Subsystem { //for motors
 	
 	public void toggleDoors(boolean open) {
     	if (open) {
-    		// open doors
-    		leftServo.setAngle(30);
-    		rightServo.setAngle(180);
-    		//System.out.println("doors open left: " + leftServo.getAngle());
-    		//System.out.println("doors open right: " + rightServo.getAngle());
-    		doorState = true;
+    		openDoors();
     	}
     	else {
-    		// close
-    		leftServo.setAngle(130);
-    		rightServo.setAngle(90);
-    		//System.out.println("doors closed left: " + leftServo.getAngle());
-    		//System.out.println("doors closed right: " + rightServo.getAngle());
-    		doorState = false;
+    		closeDoors();
     	}
     }
-
+	
+	public void openDoors() {
+		leftServo.setAngle(30);
+		rightServo.setAngle(180);
+		doorState = true;
+	}
+	public void closeDoors() {
+		leftServo.setAngle(130);
+		rightServo.setAngle(90);
+		doorState = false;
+	}
+	
 	public void runShooterMotor(double speed) { //SHOOTER
 		shooterMotor.set(speed * shooterMotorSpeed);
 	}
