@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5518.robot;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5518.robot.subsystems.MotorController;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -19,9 +22,15 @@ public class Robot extends IterativeRobot {
 	private double centerX2 = 0.0;
 	private RobotDrive drive;
 	private final Object imgLock = new Object();
+	
+	public static MotorController motorController;
+	public static DriveTrain driveTrain;
 
 	@Override
 	public void robotInit() {
+		motorController = new MotorController();
+		driveTrain = new DriveTrain();
+		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		visionThread = new VisionThread(camera, new RetroTapePipeline(), pipeline -> {
