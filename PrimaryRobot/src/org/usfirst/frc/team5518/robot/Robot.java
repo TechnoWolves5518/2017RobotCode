@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5518.robot;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5518.robot.subsystems.MotorController;
+//import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
+//import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.cscore.UsbCamera;
@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.vision.VisionThread;
 
 public class Robot extends IterativeRobot {
 	private static final int IMG_WIDTH = 320;
+	private static final int ROBOT_CENTER = 260;
 	private static final int IMG_HEIGHT = 240;
 	private VisionThread visionThread;
 	private double centerX = 0.0;
@@ -23,13 +24,13 @@ public class Robot extends IterativeRobot {
 	private RobotDrive drive;
 	private final Object imgLock = new Object();
 	
-	public static MotorController motorController;
-	public static DriveTrain driveTrain;
+//	public static MotorController motorController;
+//	public static DriveTrain driveTrain;
 
 	@Override
 	public void robotInit() {
-		motorController = new MotorController();
-		driveTrain = new DriveTrain();
+//		motorController = new MotorController();
+//		driveTrain = new DriveTrain();
 		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
@@ -72,15 +73,16 @@ public class Robot extends IterativeRobot {
 			centerX = this.centerX;
 			System.out.println(centerX);
 		}
-		double dist = centerX - (IMG_WIDTH / 2);
+		//double dist = centerX - (IMG_WIDTH / 2);
+		double dist = centerX - ROBOT_CENTER;
 		
 		System.out.println("CenterX =  " + centerX + "  dist =  " + dist);
 		
-		if (dist > 40) {
-			drive.arcadeDrive(0, dist * -0.0025);
+		if (dist > 30) {
+			drive.arcadeDrive(0, dist -0.6);
 		}
-		else if (dist < -40) {
-			drive.arcadeDrive(0, dist * 0.0025);
+		else if (dist < -30) {
+			drive.arcadeDrive(0, 0.6);
 		}
 		else {
 			drive.arcadeDrive(0, 0);
@@ -89,6 +91,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledInit() {
 		System.out.println("Default IterativeRobot.disabledInit() method... Overload me!");
+		
 		//visionThread.interrupt();
 	}
 }
