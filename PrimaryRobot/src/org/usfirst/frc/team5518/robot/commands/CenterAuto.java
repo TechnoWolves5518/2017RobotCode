@@ -19,12 +19,15 @@ public class CenterAuto extends Command {
 	
 	public boolean movingForward;
 	
+	public boolean firstTime;
+	
     public CenterAuto() {
     	System.out.println("Robot.driveAuto = "+Robot.driveTrain);
     	requires(Robot.driveTrain);
 		count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
 		movingForward = true;
+		firstTime = true;
     }
 
     // Called just before this Command runs the first time
@@ -78,10 +81,15 @@ public class CenterAuto extends Command {
         		Robot.driveTrain.driveAuto(RobotMap.MED_SPEED, 0);
         	}
         	else if (avg <= RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE) {
-        		//Robot.driveTrain.visionThread.start();
+        		if (firstTime) {
+        			//Robot.driveTrain.visionThread.start();
+        			firstTime = false;
+        		}
+        		
         		//Robot.driveTrain.visionImplement();
+        		
         		System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
-        		Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
+        		//Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
         	}
         	else if (avg <= RobotMap.STOP_DISTANCE) {
         		System.out.println("DRIVE STOP count="+count+"  avg="+avg);

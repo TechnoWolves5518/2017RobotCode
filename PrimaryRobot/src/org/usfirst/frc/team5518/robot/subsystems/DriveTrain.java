@@ -136,14 +136,14 @@ public class DriveTrain extends Subsystem  {
     }
     
     public void visionImplement() {
-    	double centerX;
+    	double m_centerX;
 		synchronized (imgLock) {
-			centerX = this.centerX;
-			System.out.println(centerX);
+			m_centerX = centerX;
+			System.out.println(m_centerX);
 		}
-		double dist = centerX - (Robot.IMG_WIDTH / 2);
+		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
 		
-		System.out.println("CenterX =  " + centerX + "  dist =  " + dist);
+		System.out.println("CenterX =  " + m_centerX + "  dist =  " + dist);
 		
 		if (dist > 40) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
 			driveTrain.arcadeDrive(0, dist * -0.0025);
