@@ -56,12 +56,20 @@ public class BasicDrive extends Command {
     	
     	if (!toggle) //If the invert is off
     	{
+<<<<<<< HEAD
     		System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
+=======
+    		//System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode.git
     		Robot.driveTrain.drive(moveValue, turnValue, fineControl, slowMove); //Drive the robot with base move values
     	}
     	else if (toggle) //If the invert is on
     	{
+<<<<<<< HEAD
     		System.out.println("BasicDrive [inverted] moveValue="+moveValue+" turnValue="+turnValue);
+=======
+    		//System.out.println("BasicDrive [inverted] moveValue="+moveValue+" turnValue="+turnValue);
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode.git
     		Robot.driveTrain.drive(-moveValue, turnValue, fineControl, slowMove); //Drive the robot with negative move values
     	}
     	

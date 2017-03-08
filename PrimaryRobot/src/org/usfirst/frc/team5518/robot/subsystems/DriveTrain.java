@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean toggle;
 	
 	public DriveTrain() {
-		System.out.println("DriveTrain()");
+		//System.out.println("DriveTrain()");
 		driveController = OI.driveController;
 		sfController = OI.sfController;
 		wingmanJoystick = OI.wingmanController;
@@ -51,6 +51,10 @@ public class DriveTrain extends Subsystem  {
 		
 		//Initialize driveTrain
     	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+<<<<<<< HEAD
+=======
+		//driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor); //FOR TEST BASE
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode.git
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
@@ -58,7 +62,7 @@ public class DriveTrain extends Subsystem  {
 	}
 
 	public void initDefaultCommand() {
-		System.out.println("DriveTrain.setDefaultCommand()");
+		//System.out.println("DriveTrain.setDefaultCommand()");
         // Set the default command for a subsystem here.
 		setDefaultCommand(new BasicDrive());
     }
@@ -73,6 +77,7 @@ public class DriveTrain extends Subsystem  {
 			moveValue *= moveValue;
 		}
 		
+<<<<<<< HEAD
 		if (!slowMove) {
 			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
 		}
@@ -84,6 +89,22 @@ public class DriveTrain extends Subsystem  {
 			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
 		}
 		
+=======
+		System.out.println("DriveTrain moveValue="+moveValue+" turnValue="+rotValue);
+		
+		//driveTrain.arcadeDrive(0.5, 0, false);
+		
+		if (!slowMove) {
+			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
+		}
+		else if (slowMove) {
+			driveTrain.arcadeDrive(moveValue / 6, rotValue / 5, !fineControl); //slow drive and turn
+		}
+		else {
+			System.out.println("FINE TURN ERROR");
+			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
+		}
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode.git
 		
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
 	}

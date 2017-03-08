@@ -14,6 +14,7 @@ public class RunMotor extends Command {
 	public boolean reverse;
 	public boolean load;
 	public boolean slow;
+<<<<<<< HEAD
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
@@ -74,6 +75,73 @@ public class RunMotor extends Command {
 		else {
 			Robot.motorController.runLoadingMotor(0);
 		}
+=======
+	public boolean doors, ldoors;
+	public boolean toggle;
+	
+	public RunMotor() {
+	    requires(Robot.motorController);
+	    winchSpeed = 0;
+		shooter = 0;
+		intake = 0;
+		slow = false;
+		reverse = false;
+		doors = false; ldoors = false; toggle = false;
+	}
+	
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
+	
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		System.out.println("Run Motor Execute");
+		//Get all inputs
+
+		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
+		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
+		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
+		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
+		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
+		doors = OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
+		
+		Robot.motorController.getData();
+		
+		//WINCH
+		if (winchSpeed != 0) {
+			Robot.motorController.runWinchMotor(winchSpeed, slow);
+		}
+		else {
+			Robot.motorController.runWinchMotor(0, slow);
+		}
+		//SHOOTER
+		Robot.motorController.runShooterMotor(shooter);
+		Robot.motorController.runIntakeMotor(intake, reverse);
+		
+		//LOADING
+		if (load) {
+			Robot.motorController.runLoadingMotor(1);
+		}
+		else {
+			Robot.motorController.runLoadingMotor(0);
+		}
+		
+		if (doors != ldoors && doors == true) {
+			toggle = !toggle;
+			
+		}
+		ldoors = doors;
+		
+//		if (doors) {
+//			toggle = true;
+//		}
+//		else if (!doors) {
+//			toggle = false;
+//		}
+		
+		Robot.motorController.toggleDoors(toggle);
+>>>>>>> branch 'DriveTrain' of https://github.com/TechnoWolves5518/2017RobotCode.git
 		
 	}
 
