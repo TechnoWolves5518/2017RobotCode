@@ -16,13 +16,14 @@ public class RightAuto extends BaseAuto {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 
-		if (System.currentTimeMillis()-startTime < forwardTimeMsec) {
+		if (System.currentTimeMillis() - startTime < forwardTimeMsec) {
 			System.out.println("Drive Forward");
 			Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
-		} else if (System.currentTimeMillis()-startTime < turnTimeMsec) {
+		}
+		else if (System.currentTimeMillis() - (startTime + forwardTimeMsec) < turnTimeMsec) {
 			//Turn for some time
 			System.out.println("Turning RIGHT");
-			Robot.driveTrain.driveAuto(0, -RobotMap.TURN);
+			Robot.driveTrain.driveAuto(0, -RobotMap.TURN_SPEED);
 		}
 		else {
 			// Place gear

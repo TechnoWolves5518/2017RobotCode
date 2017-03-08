@@ -154,14 +154,14 @@ public class DriveTrain extends Subsystem  {
 		
 		if (dist > 40) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
 			//driveTrain.arcadeDrive(0, dist * -0.0025);
-			driveTrain.arcadeDrive(0, -0.6);
+			driveTrain.arcadeDrive(0, -RobotMap.TURN_SPEED);
 		}
 		else if (dist < -40) {
 			//driveTrain.arcadeDrive(0, dist * 0.0025);
-			driveTrain.arcadeDrive(0, 0.6);
+			driveTrain.arcadeDrive(0, RobotMap.TURN_SPEED);
 		}
 		else {
-			driveTrain.arcadeDrive(0.2, 0.0);
+			driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
 		}
     }
 	

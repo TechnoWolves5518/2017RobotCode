@@ -68,9 +68,18 @@ public class RobotMap
 	
 	
 	// AUTONOMOUS CONSTS
-	public static double FORWARD_TIME = 500;
+	public static double FORWARD_TIME = 1507;
+	/* We need to travel 94 inches to reach the pivot point (LEFT+RIGHT ONLY)
+	 * We will be moving at half speed (fast speed), half speed is 5.195 ft/s
+	 * We converted 94 inches to feet.
+	 * Then we divide this by the speed to calculate the time we want to travel at this speed
+	 */
 	
-	public static double TURN = 0.5;
+	// Turn time and speed values are based on trial and error
+	// Modify these values based on results
+	public static double TURN_TIME = 300;
+	//public static double TURN_SPEED = 0.3;
+	public static double TURN_SPEED = 0.6; //FOR TEST RIG
 	
 	//public static double FAST_SPEED = 0.8;
 	public static double FAST_SPEED = 0.5;
