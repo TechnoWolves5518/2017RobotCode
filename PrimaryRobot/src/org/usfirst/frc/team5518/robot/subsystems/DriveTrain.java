@@ -3,7 +3,7 @@ package org.usfirst.frc.team5518.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.VictorSP;
 
-import org.usfirst.frc.team5518.robot.Robot;
+//import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.OI;
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 public class DriveTrain extends Subsystem  {
 	
 	RobotDrive driveTrain;
-	public VictorSP frontLeftMotor, frontRightMotor/*, backLeftMotor, backRightMotor*/;
+	public VictorSP frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
 	Joystick driveController, sfController;
 	Joystick wingmanJoystick;
 	public static boolean isInverted;
@@ -35,17 +35,22 @@ public class DriveTrain extends Subsystem  {
 		//Initialize motors to port numbers from RobotMap
 		frontLeftMotor = new VictorSP(RobotMap.FRONT_LEFT_PORT_NUMBER);
 		frontRightMotor = new VictorSP(RobotMap.FRONT_RIGHT_PORT_NUMBER);
-		/*backLeftMotor = new VictorSP(RobotMap.BACK_LEFT_PORT_NUMBER);
-		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);*/
+		backLeftMotor = new VictorSP(RobotMap.BACK_LEFT_PORT_NUMBER);
+		backRightMotor = new VictorSP(RobotMap.BACK_RIGHT_PORT_NUMBER);
 		
     	//Enable the deadband elimination (the dead zone on the controller)
 		frontLeftMotor.enableDeadbandElimination(false);
 		frontRightMotor.enableDeadbandElimination(false);
-		/*backLeftMotor.enableDeadbandElimination(false);
-		backRightMotor.enableDeadbandElimination(false);*/
+		backLeftMotor.enableDeadbandElimination(false);
+		backRightMotor.enableDeadbandElimination(false);
+		
+		backLeftMotor.setInverted(false);
+		frontRightMotor.setInverted(false);
+		frontLeftMotor.setInverted(false);
+		backRightMotor.setInverted(false);
 		
 		//Initialize driveTrain
-    	driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor/*, backLeftMotor, backRightMotor*/);
+    	driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
     	
     	//Enable safety on driveTrain and set the time period before safety locks down the motors
     	driveTrain.setSafetyEnabled(true);
@@ -58,21 +63,29 @@ public class DriveTrain extends Subsystem  {
 		setDefaultCommand(new BasicDrive());
     }
 	
-	public void drive(double moveValue, double rotValue, boolean fineControl) {
-		System.out.println("DriveTrain.drive()");
-		driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
+	public void drive(double moveValue, double rotValue, boolean fineControl, boolean slowMove) {
+		//System.out.println("DriveTrain.drive()");
+		if (moveValue < 0) { //fourth power curve
+			moveValue *= moveValue;
+			moveValue = -moveValue;
+		}
+		else if (moveValue > 0) { //hi
+			moveValue *= moveValue;
+		}
+		
+		if (!slowMove) {
+			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
+		}
+		else if (slowMove) {
+			driveTrain.arcadeDrive(moveValue / 6, rotValue / 5, !fineControl); //slow drive and turn
+		}
+		else {
+			System.out.println("FINE TURN ERROR");
+			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
+		}
+		
+		
 		//driveTrain.arcadeDrive(wingmanJoystick, true);
-	}
-	
-	/*public void drive() {
-		System.out.println("DriveTrain.drive()");
-		//driveTrain.arcadeDrive(moveValue, rotValue, fineControl);
-		driveTrain.arcadeDrive(wingmanJoystick, true);
-	}*/
-	
-	public void invert(boolean isInverted, double moveValue) {
-		System.out.println("DriveTrain.invert()");
-		moveValue = -moveValue;
 	}
 	
 }

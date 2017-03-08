@@ -1,10 +1,13 @@
 
 package org.usfirst.frc.team5518.robot;
 
+import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
-import org.usfirst.frc.team5518.robot.OI;
+import org.usfirst.frc.team5518.robot.subsystems.MotorController;
+//import org.usfirst.frc.team5518.robot.OI;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,8 +28,10 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveTrain driveTrain;
 	public static FuelShooter shooter;
+	public static MotorController motorController;
+	public static AnalogInput ultraPort0;
 
-	Command autonomousCommand;
+	Command auto;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -39,10 +44,14 @@ public class Robot extends IterativeRobot {
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("robotInit()");
-		SmartDashboard.putData("Auto mode", chooser);
+		
+		chooser.addDefault("Default Auto: ", new DriveForwardAuto());
+		
+		SmartDashboard.putData("Auto mode: ", chooser);
 		driveTrain = new DriveTrain();
 		shooter = new FuelShooter();
-
+		motorController = new MotorController();
+		ultraPort0 = new AnalogInput(2);
 		
 	}
 
@@ -60,6 +69,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		//System.out.println("disablePeriodic()");
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**
@@ -75,18 +85,21 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		auto = chooser.getSelected();
 
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
+		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 * switch(autoSelected) {
+		 * case "My Auto": auto = new MyAutoCommand();
+		 * break; 
+		 * case "Default Auto": default: auto = new ExampleCommand(); 
+		 * break; 
+		 * }
 		 */
 		System.out.println("autonomousInit()");
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if (auto != null)
+			auto.start();
 	}
 
 	/**
@@ -105,8 +118,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		System.out.println("teleopInit()");
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		if (auto != null)
+			auto.cancel();
 	}
 
 	/**
@@ -114,14 +127,17 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		try{
+		/*try{
 		Thread.sleep(500);
 		}catch(Exception ex){}
-		System.out.println("teleopPeriodic()");
+		System.out.println("teleopPeriodic()");*/
 		
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
+		double avgVoltage = ultraPort0.getAverageVoltage();
+		SmartDashboard.putNumber("ultra", avgVoltage);
+				System.out.println("avgv= " + avgVoltage);
 	}
 
 	/**
@@ -132,7 +148,7 @@ public class Robot extends IterativeRobot {
 		/*try{
 		Thread.sleep(500);
 		}catch(Exception ex){}
-		System.out.println("testInit()");
+		System.out.println("testPeriodic()");*/
 		LiveWindow.run();*/
 	}
 }
