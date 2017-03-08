@@ -60,7 +60,8 @@ public class Robot extends IterativeRobot {
 		
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-		camera.setExposureManual(-100);
+//		camera.setExposureAuto();
+		camera.setExposureManual(60);
 		camera.setExposureHoldCurrent();
 		
 		chooser.addObject("DriveForward", new DoNothingAuto());
@@ -152,8 +153,8 @@ public class Robot extends IterativeRobot {
 			auto.cancel();
 		}
 		
-		camera.setExposureAuto();
-		camera.setExposureHoldCurrent();
+//		camera.setExposureAuto();
+//		camera.setExposureHoldCurrent();
 	}
 
 	/**

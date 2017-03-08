@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean toggle;
 	public VisionThread visionThread;
 	private double centerWhole = 0.0;
-	private double centerX = 0.0;
+	private double centerX = 160.0;
 	private double centerX2 = 0.0;
 	private final Object imgLock = new Object();
 	
@@ -131,7 +131,7 @@ public class DriveTrain extends Subsystem  {
     			}
     		}
     		else {
-    			System.out.println(visionThread.getName()+" The pipeline is empty");
+    			//System.out.println(visionThread.getName()+" The pipeline is empty");
     			centerX = 160;
     			centerX2 = 160;
     			centerWhole = 160;
@@ -145,23 +145,27 @@ public class DriveTrain extends Subsystem  {
     public void visionImplement() {
     	double m_centerX;
 		synchronized (imgLock) {
-			m_centerX = centerWhole;
+			m_centerX = centerX;
 			System.out.println(m_centerX);
 		}
-		double dist = centerWhole - (Robot.IMG_WIDTH / 2);
+		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
 		
 		System.out.println("CenterX =  " + m_centerX + "  dist =  " + dist);
 		
-		if (dist > 40) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
+		if (dist > 30) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
 			//driveTrain.arcadeDrive(0, dist * -0.0025);
 			driveTrain.arcadeDrive(0, -RobotMap.TURN_SPEED);
+			System.out.println("TURN LEFT");
 		}
-		else if (dist < -40) {
+		else if (dist < -30) {
 			//driveTrain.arcadeDrive(0, dist * 0.0025);
 			driveTrain.arcadeDrive(0, RobotMap.TURN_SPEED);
+			System.out.println("TURN RIGHT");
 		}
 		else {
-			driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
+			//driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
+			driveTrain.arcadeDrive(0.0, 0.0);
+			System.out.println("CENTER OR NULL");
 		}
     }
 	
