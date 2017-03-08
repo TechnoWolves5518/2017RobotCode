@@ -47,16 +47,16 @@ public class RetroTapePipeline implements VisionPipeline {
 	@Override	public void process(Mat source0) {
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = source0;
-		double[] hslThresholdHue = {78, 115}; //HSL HUE
-		double[] hslThresholdSaturation = {225, 255.0}; //HSL SATURATION
-		double[] hslThresholdLuminance = {225, 255}; //HSL LUMINANCE
+		double[] hslThresholdHue = {74, 120}; //HSL HUE
+		double[] hslThresholdSaturation = {213, 255.0}; //HSL SATURATION
+		double[] hslThresholdLuminance = {197, 255}; //HSL LUMINANCE
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step CV_erode0:
 		Mat cvErodeSrc = hslThresholdOutput;
 		Mat cvErodeKernel = new Mat();
 		Point cvErodeAnchor = new Point(-1, -1);
-		double cvErodeIterations = 1.0;
+		double cvErodeIterations = 7.0;
 		int cvErodeBordertype = Core.BORDER_CONSTANT;
 		Scalar cvErodeBordervalue = new Scalar(-1);
 		cvErode(cvErodeSrc, cvErodeKernel, cvErodeAnchor, cvErodeIterations, cvErodeBordertype, cvErodeBordervalue, cvErodeOutput);
@@ -77,17 +77,17 @@ public class RetroTapePipeline implements VisionPipeline {
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 25.0; //was 300; turned down to 30
+		double filterContoursMinArea = 10.0; //was 35; turned down to 10
 		double filterContoursMinPerimeter = 0;
 		double filterContoursMinWidth = 0;
-		double filterContoursMaxWidth = 2.147483647E9;
+		double filterContoursMaxWidth = 500; //was 2.147483647E9; turned down to 500
 		double filterContoursMinHeight = 0;
-		double filterContoursMaxHeight = 2.147483647E9;
+		double filterContoursMaxHeight = 1000; //was 2.147483647E9; turned down to 1000
 		double[] filterContoursSolidity = {0, 100};
 		double filterContoursMaxVertices = 1000.0; //increased from 200
 		double filterContoursMinVertices = 0.0;
 		double filterContoursMinRatio = 0;
-		double filterContoursMaxRatio = 2.147483647E9;
+		double filterContoursMaxRatio = 1000; //turned down from 2.147483647E9
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
 
 	}

@@ -4,7 +4,7 @@ package org.usfirst.frc.team5518.robot;
 import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.commands.CenterAuto;
 import org.usfirst.frc.team5518.robot.commands.DoNothingAuto;
-import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
+import org.usfirst.frc.team5518.robot.commands.BaseAuto;
 import org.usfirst.frc.team5518.robot.commands.LeftAuto;
 import org.usfirst.frc.team5518.robot.commands.RightAuto;
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
@@ -14,7 +14,6 @@ import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 //import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
@@ -61,9 +60,11 @@ public class Robot extends IterativeRobot {
 		
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		camera.setExposureManual(-100);
+		camera.setExposureHoldCurrent();
 		
-		chooser.addDefault("Default Auto (Do Nothing)", new DoNothingAuto());
-		chooser.addObject("Center Auto", new CenterAuto());
+		chooser.addObject("DriveForward", new DoNothingAuto());
+		chooser.addDefault("Center Auto", new CenterAuto());
 		chooser.addObject("Left Auto", new LeftAuto());
 		chooser.addObject("Right Auto", new RightAuto());
 		
@@ -73,7 +74,7 @@ public class Robot extends IterativeRobot {
 		basicDrive = new BasicDrive();
 		
     	ultra = new Ultrasonic(3, 2);
-		ultra.setAutomaticMode(true);
+    	ultra.setAutomaticMode(true);
 	}
 
 	/**
@@ -84,6 +85,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		System.out.println("disableInit()");
+		((BaseAuto)chooser.getSelected()).reset();
 	}
 
 	@Override
@@ -119,7 +121,7 @@ public class Robot extends IterativeRobot {
 //				break;
 //		}
 		
-		System.out.println("autonomousInit()");
+		System.out.println("autonomousInit()  " + auto.getName());
 		// schedule the autonomous command (example)
 		if (auto != null) {
 			auto.start();
@@ -132,7 +134,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		//System.out.println("autoPeriodic()");
+		System.out.println("autoPeriodic()");
 		Scheduler.getInstance().run();
 	}
 
@@ -150,6 +152,8 @@ public class Robot extends IterativeRobot {
 			auto.cancel();
 		}
 		
+		camera.setExposureAuto();
+		camera.setExposureHoldCurrent();
 	}
 
 	/**

@@ -29,6 +29,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean isInverted;
 	public static boolean toggle;
 	public VisionThread visionThread;
+	private double centerWhole = 0.0;
 	private double centerX = 0.0;
 	private double centerX2 = 0.0;
 	private final Object imgLock = new Object();
@@ -116,18 +117,24 @@ public class DriveTrain extends Subsystem  {
     					if (i == 0) {
     						centerX = r.x + (r.width / 2); //find the center of first rect and calculate
     						System.out.print("Rect 1 Center:  " + centerX);
+    						centerWhole = centerX;
     					}
     					else if (i == 1) {
     						centerX2 = r.x + (r.width / 2); //find the center of second rect and calculate
     						System.out.print("Rect 2 Center:  " + centerX2);
+    						centerWhole = ((centerX + centerX2) / 2);
     					}
-
+    					else {
+    						
+    					}
     				}
     			}
     		}
     		else {
     			System.out.println(visionThread.getName()+" The pipeline is empty");
     			centerX = 160;
+    			centerX2 = 160;
+    			centerWhole = 160;
     		}
     	});
     	visionThread.setName("T"+System.currentTimeMillis());
@@ -138,21 +145,23 @@ public class DriveTrain extends Subsystem  {
     public void visionImplement() {
     	double m_centerX;
 		synchronized (imgLock) {
-			m_centerX = centerX;
+			m_centerX = centerWhole;
 			System.out.println(m_centerX);
 		}
-		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
+		double dist = centerWhole - (Robot.IMG_WIDTH / 2);
 		
 		System.out.println("CenterX =  " + m_centerX + "  dist =  " + dist);
 		
 		if (dist > 40) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
-			driveTrain.arcadeDrive(0, dist * -0.0025);
+			//driveTrain.arcadeDrive(0, dist * -0.0025);
+			driveTrain.arcadeDrive(0, -0.6);
 		}
 		else if (dist < -40) {
-			driveTrain.arcadeDrive(0, dist * 0.0025);
+			//driveTrain.arcadeDrive(0, dist * 0.0025);
+			driveTrain.arcadeDrive(0, 0.6);
 		}
 		else {
-			driveTrain.arcadeDrive(0.25, 0);
+			driveTrain.arcadeDrive(0.2, 0.0);
 		}
     }
 	

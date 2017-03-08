@@ -68,17 +68,22 @@ public class RobotMap
 	
 	
 	// AUTONOMOUS CONSTS
-	public static double TIME = 3000;
+	public static double FORWARD_TIME = 500;
 	
 	public static double TURN = 0.5;
 	
-	public static double FAST_SPEED = 0.8;//0.75;
-	public static double MED_SPEED  = 0.65;//0.50;
-	public static double SLOW_SPEED = 0.5;//0.25;
-	public static double SUPER_SLOW_SPEED = 0.4;//0.1;
+	//public static double FAST_SPEED = 0.8;
+	public static double FAST_SPEED = 0.5;
+	//public static double MED_SPEED  = 0.65;
+	public static double MED_SPEED  = 0.35;
+	//public static double SLOW_SPEED = 0.5;
+	public static double SLOW_SPEED = 0.25;
+	//public static double SUPER_SLOW_SPEED = 0.4;
+	public static double SUPER_SLOW_SPEED = 0.1;
 	public static double FULLSTOP   = 0;
 	
 	public static double FAST_DISTANCE = 48;  // inches
-	public static double SLOW_DISTANCE = 12;  // inches
-	public static double STOP_DISTANCE = 2.5; // inches
+	public static double ULTRA_DISTANCE = 36;  // inches
+	public static double SLOW_DISTANCE = 34;  // inches
+	public static double STOP_DISTANCE = 5; // inches
 }
