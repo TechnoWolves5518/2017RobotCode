@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem  {
 	public static boolean toggle;
 	public VisionThread visionThread;
 	private double centerWhole = 0.0;
-	private double centerX = 160.0;
+	private double centerX = 0.0;
 	private double centerX2 = 0.0;
 	private final Object imgLock = new Object();
 	
@@ -107,8 +107,10 @@ public class DriveTrain extends Subsystem  {
     }
     
     public void visionProcessing() {
+    	
+    	
     	visionThread = new VisionThread(Robot.camera, new RetroTapePipeline(), pipeline -> {
-
+    		//System.out.println("VISION PROCESSING");
     		if (!pipeline.filterContoursOutput().isEmpty()) { // if the output from the process has something in it
 
     			for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
@@ -125,13 +127,13 @@ public class DriveTrain extends Subsystem  {
     						centerWhole = ((centerX + centerX2) / 2);
     					}
     					else {
-    						
+    						System.out.println("Getting some weird random output");
     					}
     				}
     			}
     		}
     		else {
-    			//System.out.println(visionThread.getName()+" The pipeline is empty");
+    			System.out.println(visionThread.getName()+" The pipeline is empty");
     			centerX = 160;
     			centerX2 = 160;
     			centerWhole = 160;
@@ -145,27 +147,27 @@ public class DriveTrain extends Subsystem  {
     public void visionImplement() {
     	double m_centerX;
 		synchronized (imgLock) {
-			m_centerX = centerX;
+			m_centerX = centerWhole;
 			System.out.println(m_centerX);
 		}
 		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
 		
-		System.out.println("CenterX =  " + m_centerX + "  dist =  " + dist);
+		System.out.println("CenterX =  " + centerX + "  CenterX2 =  " + centerX2 + "  centerWhole =  " + centerWhole + "  dist =  " + dist);
 		
-		if (dist > 30) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
+		if (dist > 20) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
 			//driveTrain.arcadeDrive(0, dist * -0.0025);
 			driveTrain.arcadeDrive(0, -RobotMap.TURN_SPEED);
-			System.out.println("TURN LEFT");
+			System.out.println("TURN LEFT, dist = " + dist);
 		}
-		else if (dist < -30) {
+		else if (dist < -20) {
 			//driveTrain.arcadeDrive(0, dist * 0.0025);
 			driveTrain.arcadeDrive(0, RobotMap.TURN_SPEED);
-			System.out.println("TURN RIGHT");
+			System.out.println("TURN RIGHT, dist = " + dist);
 		}
 		else {
 			//driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
-			driveTrain.arcadeDrive(0.0, 0.0);
-			System.out.println("CENTER OR NULL");
+			driveTrain.arcadeDrive(0.2, 0.0);
+			System.out.println("CENTER OR NULL, dist = " + dist);
 		}
     }
 	

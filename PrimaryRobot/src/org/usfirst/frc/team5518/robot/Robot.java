@@ -61,8 +61,8 @@ public class Robot extends IterativeRobot {
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 //		camera.setExposureAuto();
-		camera.setExposureManual(60);
-		camera.setExposureHoldCurrent();
+//		camera.setExposureManual(60);
+//		camera.setExposureHoldCurrent();
 		
 		chooser.addObject("DriveForward", new DoNothingAuto());
 		chooser.addDefault("Center Auto", new CenterAuto());
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
-    	ultra = new Ultrasonic(3, 2);
+    	ultra = new Ultrasonic(0, 1);
     	ultra.setAutomaticMode(true);
 	}
 

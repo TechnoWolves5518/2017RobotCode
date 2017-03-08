@@ -78,17 +78,17 @@ public class RobotMap
 	// Turn time and speed values are based on trial and error
 	// Modify these values based on results
 	public static double TURN_TIME = 300;
-	//public static double TURN_SPEED = 0.3;
-	public static double TURN_SPEED = 0.6; //FOR TEST RIG
+	public static double TURN_SPEED = 0.3;
+	//public static double TURN_SPEED = 0.6; //FOR TEST RIG
 	
-	//public static double FAST_SPEED = 0.8;
-	public static double FAST_SPEED = 0.5;
-	//public static double MED_SPEED  = 0.65;
-	public static double MED_SPEED  = 0.35;
-	//public static double SLOW_SPEED = 0.5;
-	public static double SLOW_SPEED = 0.25;
-	//public static double SUPER_SLOW_SPEED = 0.4;
-	public static double SUPER_SLOW_SPEED = 0.1;
+	public static double FAST_SPEED = 0.8;
+	//public static double FAST_SPEED = 0.5;
+	public static double MED_SPEED  = 0.5;
+	//public static double MED_SPEED  = 0.35;
+	public static double SLOW_SPEED = 0.3;
+	//public static double SLOW_SPEED = 0.25;
+	public static double SUPER_SLOW_SPEED = 0.2;
+	//public static double SUPER_SLOW_SPEED = 0.1;
 	public static double FULLSTOP   = 0;
 	
 	public static double FAST_DISTANCE = 48;  // inches

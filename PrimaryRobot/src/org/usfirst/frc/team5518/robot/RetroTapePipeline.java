@@ -256,7 +256,7 @@ public class RetroTapePipeline implements VisionPipeline {
 			}
 			final double area = Imgproc.contourArea(contour); //calculate the area of the contour given (not rectangle)
 			if (area < minArea) { //if the area is too small (set to 0 so this should not occur
-				
+				System.out.println("area= "+area);
 				continue;
 			}
 			//System.out.println("area= "+area);
