@@ -35,7 +35,7 @@ public abstract class BaseAuto extends Command {
     protected void initialize() {
     	Robot.driveTrain.visionProcessing();
 		startTime = System.currentTimeMillis();
-		Robot.driveTrain.visionThread.start();
+		Robot.driveTrain.visionThread.start(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -53,7 +53,7 @@ public abstract class BaseAuto extends Command {
     }
     
     public void placeGear() {
-    	Robot.driveTrain.visionImplement();
+    	Robot.driveTrain.visionImplement(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     	
 //    	range = Robot.ultra.getRangeInches();
 //
