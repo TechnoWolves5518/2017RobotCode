@@ -64,17 +64,17 @@ public class Robot extends IterativeRobot {
 //		camera.setExposureManual(60);
 //		camera.setExposureHoldCurrent();
 		
-		chooser.addObject("DriveForward", new DoNothingAuto());
-		chooser.addDefault("Center Auto", new CenterAuto());
-		chooser.addObject("Left Auto", new LeftAuto());
-		chooser.addObject("Right Auto", new RightAuto());
-		
-		SmartDashboard.putData("Choose an auto mode: ", chooser);
+//		chooser.addObject("DriveForward", new DoNothingAuto());
+//		chooser.addObject("Center Auto", new CenterAuto());
+//		chooser.addDefault("Left Auto", new LeftAuto());
+//		chooser.addObject("Right Auto", new RightAuto());
+//		
+//		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
-    	ultra = new Ultrasonic(0, 1);
+    	ultra = new Ultrasonic(1, 0);
     	ultra.setAutomaticMode(true);
 	}
 
@@ -86,7 +86,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		System.out.println("disableInit()");
-		((BaseAuto)chooser.getSelected()).reset();
+		if (auto != null) {
+			((BaseAuto)chooser.getSelected()).reset();
+		}
+		
+		//BaseAuto.reset();
 	}
 
 	@Override
@@ -112,7 +116,8 @@ public class Robot extends IterativeRobot {
 		
 		System.out.println("-----------------------------AUTO INIT-----------------------------");
 		
-		auto = chooser.getSelected();
+		//auto = chooser.getSelected();
+		auto = new LeftAuto();
 		
 //		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 //		switch(autoSelected) {
@@ -136,6 +141,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		System.out.println("autoPeriodic()");
+		System.out.println("THIS IS OUR CODE");
 		Scheduler.getInstance().run();
 	}
 

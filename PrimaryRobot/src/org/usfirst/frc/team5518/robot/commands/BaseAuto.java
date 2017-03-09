@@ -21,13 +21,13 @@ public abstract class BaseAuto extends Command {
 	public final double turnTimeMsec = RobotMap.TURN_TIME;
 	
 	public boolean movingForward;
-	public boolean firstTime = true;
+	public boolean firstTime = true; public boolean firstTimeOpen = true; public boolean firstTimeClose = true;
 	
     public BaseAuto() {
     	movingForward = true;
     	System.out.println("BaseAuto constructor");
 		requires(Robot.driveTrain);
-		count = 0; total = 0; avg = -1;
+		count = 0; total = 0; avg = 1000;
 		min = 1000; max = 0; prev = 0;
     }
 
@@ -83,7 +83,7 @@ public abstract class BaseAuto extends Command {
 		SmartDashboard.putNumber("Raw Range (inches): ", (range));
 		SmartDashboard.putNumber("Average Range (inches): ", (avg));
 
-		if (movingForward && avg != -1) { //going forwards; putting ON the gear
+		if (movingForward && avg != 1000) { //going forwards; putting ON the gear
 			if (avg >RobotMap.FAST_DISTANCE) {
 				System.out.println("DRIVE FAST count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
@@ -104,15 +104,18 @@ public abstract class BaseAuto extends Command {
 				System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
 			}
-			else if (avg <= RobotMap.STOP_DISTANCE) {
+			else if (avg <= RobotMap.STOP_DISTANCE && avg > 0) {
 				System.out.println("DRIVE STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
-				Robot.motorController.openDoors();
+				if (firstTimeOpen) {
+					Robot.motorController.openDoors();
+					firstTimeOpen = false;
+				}
 				Timer.delay(1);
 				movingForward = false;
 			}
 		}
-		else if (!movingForward && avg != -1){ //going backwards; easing OFF the peg
+		else if (!movingForward && avg != 1000){ //going backwards; easing OFF the peg
 			if (avg <= 5.5) {
 				System.out.println("Reverse Drive SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.SLOW_SPEED, 0);
@@ -120,11 +123,14 @@ public abstract class BaseAuto extends Command {
 			else if (avg <= 36 && avg > 5.5) {
 				System.out.println("Reverse Drive MED count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.MED_SPEED, 0);
-				Robot.motorController.closeDoors();
 			}
 			else if (avg > 36) {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
+				if (firstTimeClose) {
+					Robot.motorController.closeDoors();
+					firstTimeClose = false;
+				}
 			}
 		}
 	}
@@ -133,6 +139,6 @@ public abstract class BaseAuto extends Command {
     	movingForward = true;
     	count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
-		firstTime = true;
+		firstTime = true; firstTimeOpen = true; firstTimeClose = true;
     }
 }

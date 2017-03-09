@@ -92,7 +92,7 @@ public class DriveTrain extends Subsystem  {
 			driveTrain.arcadeDrive(moveValue, rotValue, fineControl); //normal drive
 		}
 		else if (slowMove) {
-			driveTrain.arcadeDrive(moveValue / 6, rotValue / 5, !fineControl); //slow drive and turn
+			driveTrain.arcadeDrive(moveValue / 3, rotValue / 3, !fineControl); //slow drive and turn
 		}
 		else {
 			System.out.println("FINE TURN ERROR");

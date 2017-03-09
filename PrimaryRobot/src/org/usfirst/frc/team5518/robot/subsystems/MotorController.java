@@ -50,7 +50,7 @@ public class MotorController extends Subsystem { //for motors
 			winchMotor.set(speed);
 		}
 		else if (slow) {
-			winchMotor.set(speed / 5);
+			winchMotor.set(speed / 2);
 		}
 	}
 	
