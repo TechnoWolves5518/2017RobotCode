@@ -34,7 +34,7 @@ public abstract class BaseAuto extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("CALL VISION PROCESSING");
-    	Robot.driveTrain.visionProcessing();
+    	//Robot.driveTrain.visionProcessing();
 		startTime = System.currentTimeMillis();
 		//Robot.driveTrain.visionThread.start(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     }
@@ -94,13 +94,14 @@ public abstract class BaseAuto extends Command {
 			}
 			else if (avg <= RobotMap.ULTRA_DISTANCE && avg > RobotMap.SLOW_DISTANCE) {
 				if (firstTime) { //RUN VISION
-        			Robot.driveTrain.visionThread.start();
+        			//Robot.driveTrain.visionThread.start();
         			firstTime = false;
         		}
-				Robot.driveTrain.visionImplement(); //VISION IMPLEMENTATION
+				//Robot.driveTrain.visionImplement(); //VISION IMPLEMENTATION
+				Robot.driveTrain.driveAuto(RobotMap.MED_SPEED, 0);
 			}
 			else if (avg < RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE) {
-				Robot.driveTrain.visionThread.stop();
+				//Robot.driveTrain.visionThread.stop();
 				System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
 			}
@@ -116,15 +117,15 @@ public abstract class BaseAuto extends Command {
 			}
 		}
 		else if (!movingForward && avg != 1000){ //going backwards; easing OFF the peg
-			if (avg <= 5.5) {
+			if (avg <= RobotMap.STOP_DISTANCE + 1 && avg > 0) {
 				System.out.println("Reverse Drive SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.SLOW_SPEED, 0);
 			}
-			else if (avg <= 36 && avg > 5.5) {
+			else if (avg <= RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE + 1) {
 				System.out.println("Reverse Drive MED count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.MED_SPEED, 0);
 			}
-			else if (avg > 36) {
+			else if (avg > RobotMap.SLOW_DISTANCE) {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
 				if (firstTimeClose) {
