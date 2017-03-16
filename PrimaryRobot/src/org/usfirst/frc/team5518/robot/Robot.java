@@ -46,15 +46,15 @@ public class Robot extends IterativeRobot {
 	Command basicDrive;
 	Command driveForwardAuto;
 	Command runMotor;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
+	SendableChooser<Command> chooser;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		
 		
 		driveTrain = new DriveTrain();
 		
@@ -63,6 +63,8 @@ public class Robot extends IterativeRobot {
 //		camera.setExposureAuto();
 //		camera.setExposureManual(60);
 //		camera.setExposureHoldCurrent();
+		
+		chooser = new SendableChooser<>();
 		
 		chooser.addObject("DriveForward", new DoNothingAuto());
 		chooser.addObject("Center Auto", new CenterAuto());
@@ -86,22 +88,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		System.out.println("disableInit()");
-		if (auto != null) {
-			((BaseAuto)chooser.getSelected()).reset();
-		}
-		
-		//BaseAuto.reset();
-		//Robot.motorController.runWinchMotor(0.15, false);
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		//System.out.println("disablePeriodic()");
 		Scheduler.getInstance().run();
-		//Robot.motorController.runWinchMotor(0.15, false);
-		
 	}
-
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -133,8 +126,8 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (auto != null) {
 			auto.start();
+			((BaseAuto)chooser.getSelected()).reset();
 		}
-		
 	}
 
 	/**
@@ -163,6 +156,10 @@ public class Robot extends IterativeRobot {
 		
 //		camera.setExposureAuto();
 //		camera.setExposureHoldCurrent();
+		Robot.motorController.closeDoors();
+		ultra.free();
+		
+		System.out.println("-----------------------------TELEOP INIT-----------------------------");
 	}
 
 	/**

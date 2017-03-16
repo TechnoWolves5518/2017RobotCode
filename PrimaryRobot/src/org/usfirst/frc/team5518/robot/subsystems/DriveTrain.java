@@ -106,69 +106,69 @@ public class DriveTrain extends Subsystem  {
     	driveTrain.arcadeDrive(moveValue, rotValue);
     }
     
-    public void visionProcessing() {
-    	
-    	
-    	visionThread = new VisionThread(Robot.camera, new RetroTapePipeline(), pipeline -> {
-    		//System.out.println("VISION PROCESSING");
-    		if (!pipeline.filterContoursOutput().isEmpty()) { // if the output from the process has something in it
-
-    			for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
-    				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i)); //get the first detected rect from the output
-    				synchronized (imgLock) {
-    					if (i == 0) {
-    						centerX = r.x + (r.width / 2); //find the center of first rect and calculate
-    						System.out.print("Rect 1 Center:  " + centerX);
-    						centerWhole = centerX;
-    					}
-    					else if (i == 1) {
-    						centerX2 = r.x + (r.width / 2); //find the center of second rect and calculate
-    						System.out.print("Rect 2 Center:  " + centerX2);
-    						centerWhole = ((centerX + centerX2) / 2);
-    					}
-    					else {
-    						System.out.println("Getting some weird random output");
-    					}
-    				}
-    			}
-    		}
-    		else {
-    			System.out.println(visionThread.getName()+" The pipeline is empty");
-    			centerX = 160;
-    			centerX2 = 160;
-    			centerWhole = 160;
-    		}
-    	});
-    	visionThread.setName("T"+System.currentTimeMillis());
-
-    	//visionThread.start();
-    }
-    
-    public void visionImplement() {
-    	double m_centerX;
-		synchronized (imgLock) {
-			m_centerX = centerWhole;
-			System.out.println(m_centerX);
-		}
-		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
-		
-		System.out.println("CenterX =  " + centerX + "  CenterX2 =  " + centerX2 + "  centerWhole =  " + centerWhole + "  dist =  " + dist);
-		
-		if (dist > 20) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
-			//driveTrain.arcadeDrive(0, dist * -0.0025);
-			driveTrain.arcadeDrive(0, -RobotMap.TURN_SPEED);
-			System.out.println("TURN LEFT, dist = " + dist);
-		}
-		else if (dist < -20) {
-			//driveTrain.arcadeDrive(0, dist * 0.0025);
-			driveTrain.arcadeDrive(0, RobotMap.TURN_SPEED);
-			System.out.println("TURN RIGHT, dist = " + dist);
-		}
-		else {
-			//driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
-			driveTrain.arcadeDrive(0.2, 0.0);
-			System.out.println("CENTER OR NULL, dist = " + dist);
-		}
-    }
+//    public void visionProcessing() {
+//    	
+//    	
+//    	visionThread = new VisionThread(Robot.camera, new RetroTapePipeline(), pipeline -> {
+//    		//System.out.println("VISION PROCESSING");
+//    		if (!pipeline.filterContoursOutput().isEmpty()) { // if the output from the process has something in it
+//
+//    			for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
+//    				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i)); //get the first detected rect from the output
+//    				synchronized (imgLock) {
+//    					if (i == 0) {
+//    						centerX = r.x + (r.width / 2); //find the center of first rect and calculate
+//    						System.out.print("Rect 1 Center:  " + centerX);
+//    						centerWhole = centerX;
+//    					}
+//    					else if (i == 1) {
+//    						centerX2 = r.x + (r.width / 2); //find the center of second rect and calculate
+//    						System.out.print("Rect 2 Center:  " + centerX2);
+//    						centerWhole = ((centerX + centerX2) / 2);
+//    					}
+//    					else {
+//    						System.out.println("Getting some weird random output");
+//    					}
+//    				}
+//    			}
+//    		}
+//    		else {
+//    			System.out.println(visionThread.getName()+" The pipeline is empty");
+//    			centerX = 160;
+//    			centerX2 = 160;
+//    			centerWhole = 160;
+//    		}
+//    	});
+//    	visionThread.setName("T"+System.currentTimeMillis());
+//
+//    	//visionThread.start();
+//    }
+//    
+//    public void visionImplement() {
+//    	double m_centerX;
+//		synchronized (imgLock) {
+//			m_centerX = centerWhole;
+//			System.out.println(m_centerX);
+//		}
+//		double dist = m_centerX - (Robot.IMG_WIDTH / 2);
+//		
+//		System.out.println("CenterX =  " + centerX + "  CenterX2 =  " + centerX2 + "  centerWhole =  " + centerWhole + "  dist =  " + dist);
+//		
+//		if (dist > 20) { //MODIFY THESE DEADZONE VALUES FOR THE POSITION OF THE ACTUAL CAMERA
+//			//driveTrain.arcadeDrive(0, dist * -0.0025);
+//			driveTrain.arcadeDrive(0, -RobotMap.TURN_SPEED);
+//			System.out.println("TURN LEFT, dist = " + dist);
+//		}
+//		else if (dist < -20) {
+//			//driveTrain.arcadeDrive(0, dist * 0.0025);
+//			driveTrain.arcadeDrive(0, RobotMap.TURN_SPEED);
+//			System.out.println("TURN RIGHT, dist = " + dist);
+//		}
+//		else {
+//			//driveTrain.arcadeDrive(RobotMap.MED_SPEED, 0.0);
+//			driveTrain.arcadeDrive(0.2, 0.0);
+//			System.out.println("CENTER OR NULL, dist = " + dist);
+//		}
+//    }
 	
 }

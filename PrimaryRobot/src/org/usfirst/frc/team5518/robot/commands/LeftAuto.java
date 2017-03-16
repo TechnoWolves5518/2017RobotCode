@@ -28,7 +28,7 @@ public class LeftAuto extends BaseAuto {
 		}
 		else {
 			// Place gear
-			System.out.println("Timer Expired");
+			//System.out.println("Timer Expired");
 			//Timer.delay(0.25);
 			placeGear();
 		}

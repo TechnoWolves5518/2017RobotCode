@@ -21,7 +21,7 @@ public abstract class BaseAuto extends Command {
 	public final double turnTimeMsec = RobotMap.TURN_TIME;
 	
 	public boolean movingForward;
-	public boolean firstTime = true; public boolean firstTimeOpen = true; public boolean firstTimeClose = true;
+	public boolean firstTime = true; public boolean doorsOpen = false; public boolean firstTimeClose = true;
 	
     public BaseAuto() {
     	movingForward = true;
@@ -37,6 +37,7 @@ public abstract class BaseAuto extends Command {
     	//Robot.driveTrain.visionProcessing();
 		startTime = System.currentTimeMillis();
 		//Robot.driveTrain.visionThread.start(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
+		firstTime = true; doorsOpen = false; firstTimeClose = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -84,6 +85,7 @@ public abstract class BaseAuto extends Command {
 		SmartDashboard.putNumber("Average Range (inches): ", (avg));
 
 		if (movingForward && avg != 1000) { //going forwards; putting ON the gear
+			firstTimeClose = true;
 			if (avg >RobotMap.FAST_DISTANCE) {
 				System.out.println("DRIVE FAST count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
@@ -108,11 +110,12 @@ public abstract class BaseAuto extends Command {
 			else if (avg <= RobotMap.STOP_DISTANCE && avg > 0) {
 				System.out.println("DRIVE STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
-				if (firstTimeOpen) {
+				if (!doorsOpen) {
 					Robot.motorController.openDoors();
-					firstTimeOpen = false;
+					doorsOpen = true;
 				}
-				Timer.delay(1);
+				
+				//Timer.delay(1);
 				movingForward = false;
 			}
 		}
@@ -128,9 +131,9 @@ public abstract class BaseAuto extends Command {
 			else if (avg > RobotMap.SLOW_DISTANCE) {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
-				if (firstTimeClose) {
+				if (doorsOpen) {
 					Robot.motorController.closeDoors();
-					firstTimeClose = false;
+					doorsOpen = false;
 				}
 			}
 		}
@@ -140,6 +143,6 @@ public abstract class BaseAuto extends Command {
     	movingForward = true;
     	count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
-		firstTime = true; firstTimeOpen = true; firstTimeClose = true;
+		firstTime = true; doorsOpen = true; firstTimeClose = true;
     }
 }
