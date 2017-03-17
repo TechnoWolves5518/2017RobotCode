@@ -92,9 +92,6 @@ public class RobotMap
 	//public static double SUPER_SLOW_SPEED = 0.1;
 	public static double FULLSTOP   = 0;
 	
-	public static double SET_FAST_SPEED = 0.75; //changed from 0.5
-	public static double SET_FORWARD_TIME = 2160;
-	
 	public static double FAST_DISTANCE = 56;  // inches
 	public static double ULTRA_DISTANCE = 36;  // inches
 	public static double SLOW_DISTANCE = 30;  // inches
