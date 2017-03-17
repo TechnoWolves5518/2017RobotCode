@@ -90,20 +90,10 @@ public class Robot extends IterativeRobot {
 		System.out.println("disableInit()");
 	}
 
-<<<<<<< HEAD
-//	@Override
-//	public void disabledPeriodic() {
-//		//System.out.println("disablePeriodic()");
-//		
-//	}
-
-=======
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-	
->>>>>>> branch 'autonomouscreation' of https://github.com/TechnoWolves5518/2017RobotCode.git
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
