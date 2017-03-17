@@ -68,7 +68,8 @@ public class RobotMap
 	
 	
 	// AUTONOMOUS CONSTS
-	public static double FORWARD_TIME = 1507;
+	//public static double FORWARD_TIME = 1507;
+	public static double FORWARD_TIME = 3250;
 	/* We need to travel 94 inches to reach the pivot point (LEFT+RIGHT ONLY)
 	 * We will be moving at half speed (fast speed), half speed is 5.195 ft/s
 	 * We converted 94 inches to feet.
@@ -77,13 +78,13 @@ public class RobotMap
 	
 	// Turn time and speed values are based on trial and error
 	// Modify these values based on results
-	public static double TURN_TIME = 300;
-	public static double TURN_SPEED = 0.3;
+	public static double TURN_TIME = 760;
+	public static double TURN_SPEED = 0.5;
 	//public static double TURN_SPEED = 0.6; //FOR TEST RIG
 	
-	public static double FAST_SPEED = 0.8;
+	public static double FAST_SPEED = 0.5;
 	//public static double FAST_SPEED = 0.5;
-	public static double MED_SPEED  = 0.5;
+	public static double MED_SPEED  = 0.43;
 	//public static double MED_SPEED  = 0.35;
 	public static double SLOW_SPEED = 0.3;
 	//public static double SLOW_SPEED = 0.25;
@@ -91,8 +92,8 @@ public class RobotMap
 	//public static double SUPER_SLOW_SPEED = 0.1;
 	public static double FULLSTOP   = 0;
 	
-	public static double FAST_DISTANCE = 48;  // inches
+	public static double FAST_DISTANCE = 56;  // inches
 	public static double ULTRA_DISTANCE = 36;  // inches
-	public static double SLOW_DISTANCE = 34;  // inches
-	public static double STOP_DISTANCE = 5; // inches
+	public static double SLOW_DISTANCE = 30;  // inches
+	public static double STOP_DISTANCE = 6.5; // inches
 }

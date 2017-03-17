@@ -45,12 +45,14 @@ public class MotorController extends Subsystem { //for motors
 	}
 	
 	public void runWinchMotor(double speed, boolean slow) { //WINCH
-		System.out.println("Run winch motor");
+		if (speed != 0) {
+			System.out.println("Run winch motor");
+		}
 		if (!slow) {
 			winchMotor.set(speed);
 		}
 		else if (slow) {
-			winchMotor.set(speed / 5);
+			winchMotor.set(speed / 2);
 		}
 	}
 	

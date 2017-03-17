@@ -21,20 +21,21 @@ public abstract class BaseAuto extends Command {
 	public final double turnTimeMsec = RobotMap.TURN_TIME;
 	
 	public boolean movingForward;
-	public boolean firstTime = true;
+	public boolean firstTime = true; public boolean doorsOpen = false;
 	
     public BaseAuto() {
     	movingForward = true;
     	System.out.println("BaseAuto constructor");
 		requires(Robot.driveTrain);
-		count = 0; total = 0; avg = -1;
+		count = 0; total = 0; avg = 1000;
 		min = 1000; max = 0; prev = 0;
+		firstTime = true; doorsOpen = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("CALL VISION PROCESSING");
-    	Robot.driveTrain.visionProcessing();
+    	//Robot.driveTrain.visionProcessing();
 		startTime = System.currentTimeMillis();
 		//Robot.driveTrain.visionThread.start(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     }
@@ -83,7 +84,7 @@ public abstract class BaseAuto extends Command {
 		SmartDashboard.putNumber("Raw Range (inches): ", (range));
 		SmartDashboard.putNumber("Average Range (inches): ", (avg));
 
-		if (movingForward && avg != -1) { //going forwards; putting ON the gear
+		if (movingForward && avg != 1000) { //going forwards; putting ON the gear
 			if (avg >RobotMap.FAST_DISTANCE) {
 				System.out.println("DRIVE FAST count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
@@ -94,37 +95,45 @@ public abstract class BaseAuto extends Command {
 			}
 			else if (avg <= RobotMap.ULTRA_DISTANCE && avg > RobotMap.SLOW_DISTANCE) {
 				if (firstTime) { //RUN VISION
-        			Robot.driveTrain.visionThread.start();
+        			//Robot.driveTrain.visionThread.start();
         			firstTime = false;
         		}
-				Robot.driveTrain.visionImplement(); //VISION IMPLEMENTATION
+				//Robot.driveTrain.visionImplement(); //VISION IMPLEMENTATION
+				Robot.driveTrain.driveAuto(RobotMap.MED_SPEED, 0);
 			}
 			else if (avg < RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE) {
-				Robot.driveTrain.visionThread.stop();
+				//Robot.driveTrain.visionThread.stop();
 				System.out.println("DRIVE SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.SLOW_SPEED, 0);
 			}
-			else if (avg <= RobotMap.STOP_DISTANCE) {
+			else if (avg <= RobotMap.STOP_DISTANCE && avg > 0) {
 				System.out.println("DRIVE STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
-				Robot.motorController.openDoors();
-				Timer.delay(1);
+				if (!doorsOpen) {
+					Robot.motorController.openDoors();
+					doorsOpen = true;
+				}
+				
+				//Timer.delay(1);
 				movingForward = false;
 			}
 		}
-		else if (!movingForward && avg != -1){ //going backwards; easing OFF the peg
-			if (avg <= 5.5) {
+		else if (!movingForward && avg != 1000){ //going backwards; easing OFF the peg
+			if (avg <= RobotMap.STOP_DISTANCE + 1 && avg > 0) {
 				System.out.println("Reverse Drive SLOW count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.SLOW_SPEED, 0);
 			}
-			else if (avg <= 36 && avg > 5.5) {
+			else if (avg <= RobotMap.SLOW_DISTANCE && avg > RobotMap.STOP_DISTANCE + 1) {
 				System.out.println("Reverse Drive MED count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(-RobotMap.MED_SPEED, 0);
-				Robot.motorController.closeDoors();
 			}
-			else if (avg > 36) {
+			else if (avg > RobotMap.SLOW_DISTANCE) {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
+				if (doorsOpen) {
+					Robot.motorController.closeDoors();
+					doorsOpen = false;
+				}
 			}
 		}
 	}
@@ -133,6 +142,6 @@ public abstract class BaseAuto extends Command {
     	movingForward = true;
     	count = 0; total = 0; avg = -1;
 		min = 1000; max = 0; prev = 0;
-		firstTime = true;
+		firstTime = true; doorsOpen = false;
     }
 }

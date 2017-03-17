@@ -18,16 +18,16 @@ public class RightAuto extends BaseAuto {
 
 		if (System.currentTimeMillis() - startTime < forwardTimeMsec) {
 			System.out.println("Drive Forward");
-			Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
+			Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, -0.1);
 		}
 		else if (System.currentTimeMillis() - (startTime + forwardTimeMsec) < turnTimeMsec) {
 			//Turn for some time
 			System.out.println("Turning RIGHT");
-			Robot.driveTrain.driveAuto(0, -RobotMap.TURN_SPEED);
+			Robot.driveTrain.driveAuto(0, RobotMap.TURN_SPEED);
 		}
 		else {
 			// Place gear
-			System.out.println("Timer Expired");
+			//System.out.println("Timer Expired");
 			//Timer.delay(0.25);
 			placeGear();
 		}

@@ -46,15 +46,15 @@ public class Robot extends IterativeRobot {
 	Command basicDrive;
 	Command driveForwardAuto;
 	Command runMotor;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
+	SendableChooser<Command> chooser;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		
 		
 		driveTrain = new DriveTrain();
 		
@@ -64,9 +64,11 @@ public class Robot extends IterativeRobot {
 //		camera.setExposureManual(60);
 //		camera.setExposureHoldCurrent();
 		
+		chooser = new SendableChooser<>();
+		
 		chooser.addObject("DriveForward", new DoNothingAuto());
-		chooser.addDefault("Center Auto", new CenterAuto());
-		chooser.addObject("Left Auto", new LeftAuto());
+		chooser.addObject("Center Auto", new CenterAuto());
+		chooser.addDefault("Left Auto", new LeftAuto());
 		chooser.addObject("Right Auto", new RightAuto());
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
@@ -74,7 +76,7 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
-    	ultra = new Ultrasonic(0, 1);
+    	ultra = new Ultrasonic(1, 0);
     	ultra.setAutomaticMode(true);
 	}
 
@@ -86,15 +88,22 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		System.out.println("disableInit()");
-		((BaseAuto)chooser.getSelected()).reset();
 	}
 
+<<<<<<< HEAD
 //	@Override
 //	public void disabledPeriodic() {
 //		//System.out.println("disablePeriodic()");
 //		
 //	}
 
+=======
+	@Override
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
+	
+>>>>>>> branch 'autonomouscreation' of https://github.com/TechnoWolves5518/2017RobotCode.git
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -112,6 +121,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("-----------------------------AUTO INIT-----------------------------");
 		
 		auto = chooser.getSelected();
+		//auto = new LeftAuto();
 		
 //		String autoSelected = SmartDashboard.getString("Auto Selector", "Default Auto");
 //		switch(autoSelected) {
@@ -125,8 +135,8 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		if (auto != null) {
 			auto.start();
+			((BaseAuto)chooser.getSelected()).reset();
 		}
-		
 	}
 
 	/**
@@ -134,7 +144,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		System.out.println("autoPeriodic()");
+//		System.out.println("autoPeriodic()");
+//		System.out.println("THIS IS OUR CODE");
 		Scheduler.getInstance().run();
 	}
 
@@ -154,6 +165,10 @@ public class Robot extends IterativeRobot {
 		
 //		camera.setExposureAuto();
 //		camera.setExposureHoldCurrent();
+		Robot.motorController.closeDoors();
+		ultra.free();
+		
+		System.out.println("-----------------------------TELEOP INIT-----------------------------");
 	}
 
 	/**
