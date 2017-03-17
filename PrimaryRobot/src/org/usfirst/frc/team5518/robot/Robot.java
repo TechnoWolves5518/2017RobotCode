@@ -89,12 +89,11 @@ public class Robot extends IterativeRobot {
 		((BaseAuto)chooser.getSelected()).reset();
 	}
 
-	@Override
-	public void disabledPeriodic() {
-		//System.out.println("disablePeriodic()");
-		Scheduler.getInstance().run();
-		
-	}
+//	@Override
+//	public void disabledPeriodic() {
+//		//System.out.println("disablePeriodic()");
+//		
+//	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
