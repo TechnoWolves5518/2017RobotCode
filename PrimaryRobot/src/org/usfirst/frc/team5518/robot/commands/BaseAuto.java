@@ -4,6 +4,7 @@ import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,11 +18,11 @@ public abstract class BaseAuto extends Command {
 	public int count;
 	public Timer drivingTime;
 	public long startTime;
-	public final double forwardTimeMsec = RobotMap.FORWARD_TIME;
-	public final double turnTimeMsec = RobotMap.TURN_TIME;
 	
 	public boolean movingForward;
 	public boolean firstTime = true; public boolean doorsOpen = false;
+	
+	public static Ultrasonic ultra;
 	
     public BaseAuto() {
     	movingForward = true;
@@ -30,6 +31,9 @@ public abstract class BaseAuto extends Command {
 		count = 0; total = 0; avg = 1000;
 		min = 1000; max = 0; prev = 0;
 		firstTime = true; doorsOpen = false;
+		
+		ultra = new Ultrasonic(1, 0);
+    	ultra.setAutomaticMode(true);
     }
 
     // Called just before this Command runs the first time
@@ -57,7 +61,7 @@ public abstract class BaseAuto extends Command {
     public void placeGear() {
     	//Robot.driveTrain.visionImplement(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     	
-    	range = Robot.ultra.getRangeInches();
+    	range = ultra.getRangeInches();
 
 		if (range > max) {
 			max = range;
@@ -110,7 +114,7 @@ public abstract class BaseAuto extends Command {
 				System.out.println("DRIVE STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
 				if (!doorsOpen) {
-					Robot.motorController.openDoors();
+					//Robot.motorController.openDoors();
 					doorsOpen = true;
 				}
 				
@@ -131,7 +135,7 @@ public abstract class BaseAuto extends Command {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
 				if (doorsOpen) {
-					Robot.motorController.closeDoors();
+					//Robot.motorController.closeDoors();
 					doorsOpen = false;
 				}
 			}

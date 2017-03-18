@@ -15,7 +15,6 @@ import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -36,8 +35,6 @@ public class Robot extends IterativeRobot {
 	public static MotorController motorController;
 	
 	public static UsbCamera camera;
-	
-	public static Ultrasonic ultra;
 	
 	public static final int IMG_WIDTH = 320;
 	public static final int IMG_HEIGHT = 240;
@@ -76,8 +73,7 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
-    	ultra = new Ultrasonic(1, 0);
-    	ultra.setAutomaticMode(true);
+		
 	}
 
 	/**
@@ -110,6 +106,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		
 		System.out.println("-----------------------------AUTO INIT-----------------------------");
+		
+		
 		
 		auto = chooser.getSelected();
 		//auto = new LeftAuto();
@@ -150,6 +148,8 @@ public class Robot extends IterativeRobot {
 //		if (autonomousCommand != null)
 //			autonomousCommand.cancel();
 		
+		
+		
 		if (auto != null) {
 			auto.cancel();
 		}
@@ -157,7 +157,7 @@ public class Robot extends IterativeRobot {
 //		camera.setExposureAuto();
 //		camera.setExposureHoldCurrent();
 		Robot.motorController.closeDoors();
-		ultra.free();
+		//ultra.free();
 		
 		System.out.println("-----------------------------TELEOP INIT-----------------------------");
 	}
@@ -170,7 +170,7 @@ public class Robot extends IterativeRobot {
 		// If you don't call this the commands won't run. The commands are registered
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
-
+		
 	}
 
 	/**
