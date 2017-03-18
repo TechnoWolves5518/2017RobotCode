@@ -68,9 +68,10 @@ public class RobotMap
 	
 	
 	// AUTONOMOUS CONSTS
+	// left constants
 	public static double LEFT_FORWARD_TIME = 3250;
 	public static double LEFT_TURN_TIME = 630;
-	
+	// right constants
 	public static double RIGHT_FORWARD_TIME = 3250;
 	public static double RIGHT_TURN_TIME = 630;
 	
