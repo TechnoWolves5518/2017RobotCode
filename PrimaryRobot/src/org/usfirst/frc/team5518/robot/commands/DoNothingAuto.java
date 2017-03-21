@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DoNothingAuto extends BaseAuto {
 
+	public final double forwardTimeMsec = RobotMap.LEFT_FORWARD_TIME;
+	
     public DoNothingAuto() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
