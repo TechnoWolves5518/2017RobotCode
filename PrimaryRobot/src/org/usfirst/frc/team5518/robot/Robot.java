@@ -115,11 +115,6 @@ public class Robot extends IterativeRobot {
 		System.out.println("-----------------OPEN DOORS-----------------");
 		
 		Robot.motorController.openDoors();
-		Robot.motorController.openDoors();
-		Robot.motorController.openDoors();
-		Robot.motorController.openDoors();
-		Robot.motorController.openDoors();
-		Robot.motorController.openDoors();
 		
 //		for (int i = 0; i < 10; i++) {
 //			Robot.motorController.openDoors();
