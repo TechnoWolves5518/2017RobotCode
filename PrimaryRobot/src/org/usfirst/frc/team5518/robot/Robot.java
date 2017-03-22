@@ -3,7 +3,7 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.commands.BasicDrive;
 import org.usfirst.frc.team5518.robot.commands.CenterAuto;
-import org.usfirst.frc.team5518.robot.commands.DoNothingAuto;
+import org.usfirst.frc.team5518.robot.commands.DriveForwardAuto;
 import org.usfirst.frc.team5518.robot.commands.BaseAuto;
 import org.usfirst.frc.team5518.robot.commands.LeftAuto;
 import org.usfirst.frc.team5518.robot.commands.RightAuto;
@@ -15,6 +15,7 @@ import org.usfirst.frc.team5518.robot.subsystems.MotorController;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -46,6 +47,8 @@ public class Robot extends IterativeRobot {
 	
 	SendableChooser<Command> chooser;
 	
+	public static Ultrasonic ultra;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -63,9 +66,10 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<>();
 		
-		chooser.addObject("DriveForward", new DoNothingAuto());
+		chooser.addObject("DriveForward", new DriveForwardAuto());
 		chooser.addObject("Center Auto", new CenterAuto());
 		chooser.addDefault("Left Auto", new LeftAuto());
+		chooser.addObject("Right Auto", new RightAuto());
 		chooser.addObject("Right Auto", new RightAuto());
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
@@ -73,7 +77,8 @@ public class Robot extends IterativeRobot {
 		motorController = new MotorController();
 		basicDrive = new BasicDrive();
 		
-		
+		ultra = new Ultrasonic(1, 0);
+    	ultra.setAutomaticMode(true);
 	}
 
 	/**
@@ -107,7 +112,18 @@ public class Robot extends IterativeRobot {
 		
 		System.out.println("-----------------------------AUTO INIT-----------------------------");
 		
+		System.out.println("-----------------OPEN DOORS-----------------");
 		
+		Robot.motorController.openDoors();
+		Robot.motorController.openDoors();
+		Robot.motorController.openDoors();
+		Robot.motorController.openDoors();
+		Robot.motorController.openDoors();
+		Robot.motorController.openDoors();
+		
+//		for (int i = 0; i < 10; i++) {
+//			Robot.motorController.openDoors();
+//		}
 		
 		auto = chooser.getSelected();
 		//auto = new LeftAuto();
@@ -125,6 +141,7 @@ public class Robot extends IterativeRobot {
 		if (auto != null) {
 			auto.start();
 			((BaseAuto)chooser.getSelected()).reset();
+			System.out.println("Base Auto reset called");
 		}
 	}
 

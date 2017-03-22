@@ -22,7 +22,7 @@ public abstract class BaseAuto extends Command {
 	public boolean movingForward;
 	public boolean firstTime = true; public boolean doorsOpen = false;
 	
-	public static Ultrasonic ultra;
+	
 	
     public BaseAuto() {
     	movingForward = true;
@@ -32,8 +32,7 @@ public abstract class BaseAuto extends Command {
 		min = 1000; max = 0; prev = 0;
 		firstTime = true; doorsOpen = false;
 		
-		ultra = new Ultrasonic(1, 0);
-    	ultra.setAutomaticMode(true);
+		
     }
 
     // Called just before this Command runs the first time
@@ -61,7 +60,7 @@ public abstract class BaseAuto extends Command {
     public void placeGear() {
     	//Robot.driveTrain.visionImplement(); //MOVE THIS BACK DOWN WHEN WE ARE DONE TESTING THE VISION
     	
-    	range = ultra.getRangeInches();
+    	range = Robot.ultra.getRangeInches();
 
 		if (range > max) {
 			max = range;
@@ -114,8 +113,12 @@ public abstract class BaseAuto extends Command {
 				System.out.println("DRIVE STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
 				if (!doorsOpen) {
-					//Robot.motorController.openDoors();
+					Robot.motorController.openDoors();
+					System.out.println("-----------------OPEN DOORS-----------------");
 					doorsOpen = true;
+				}
+				else {
+					System.out.println("!!!!!!!!!!!!!!!!!DOORS ALREADY OPEN!!!!!!!!!!!!!!!!!");
 				}
 				
 				//Timer.delay(1);
@@ -135,8 +138,12 @@ public abstract class BaseAuto extends Command {
 				System.out.println("Reverse Drive STOP count="+count+"  avg="+avg);
 				Robot.driveTrain.driveAuto(0.0, 0);
 				if (doorsOpen) {
-					//Robot.motorController.closeDoors();
+					Robot.motorController.closeDoors();
+					System.out.println("-----------------CLOSE DOORS-----------------");
 					doorsOpen = false;
+				}
+				else {
+					System.out.println("!!!!!!!!!!!!!!!!!DOORS ALREADY CLOSED!!!!!!!!!!!!!!!!!");
 				}
 			}
 		}

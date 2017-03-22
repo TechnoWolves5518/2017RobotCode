@@ -6,9 +6,9 @@ import org.usfirst.frc.team5518.robot.RobotMap;
 /**
  *
  */
-public class DoNothingAuto extends BaseAuto {
+public class DriveForwardAuto extends BaseAuto {
 	
-    public DoNothingAuto() {
+    public DriveForwardAuto() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

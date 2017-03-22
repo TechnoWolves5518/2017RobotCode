@@ -42,7 +42,8 @@ public class RunMotor extends Command {
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
 		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
 		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
-		doors = OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
+		System.out.println("Getting door states from controller");
+		doors = !OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
 		
 		Robot.motorController.getData();
 		
