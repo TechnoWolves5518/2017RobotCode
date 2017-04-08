@@ -15,7 +15,7 @@ public class DriveForwardAuto extends BaseAuto {
     
     protected void execute() {
     	if (System.currentTimeMillis() - startTime < 3500) {
-			System.out.println("Drive Forward");
+//			System.out.println("Drive Forward");
 			Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, 0);
 		}
     }

@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BasicDrive extends Command {
 	
 	public double moveValue, turnValue;
+	public double oldMoveValue = 0.0;
+	public double maxMoveValue = 0.5;
 	public boolean fineControl, slowMove;
 	public boolean isInverted, wasInverted, toggle;
 	
@@ -37,11 +39,23 @@ public class BasicDrive extends Command {
 
     // This method runs repeatedly while the robot
     protected void execute() {
-    	System.out.println("BasicDrive Command execute()");
+//    	System.out.println("BasicDrive Command execute()");
     	moveValue = -OI.driveController.getRawAxis(RobotMap.XBOX_LSTICKY);
     	turnValue = -OI.driveController.getRawAxis(RobotMap.XBOX_RSTICKX);
     	slowMove = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
-    	
+    	double diff = moveValue - oldMoveValue;
+    	double abs_diff = Math.abs(diff);
+    	if (abs_diff >= maxMoveValue){
+    		if (diff < 0){
+    			moveValue = moveValue - maxMoveValue;
+    		}
+    		else{
+    			
+    			moveValue = moveValue + maxMoveValue;
+    		}
+//    		System.out.println("Max delta reached" + oldMoveValue + ":" + moveValue + ":" + diff);
+    	}
+    	//System.out.println("drive stats: " + oldMoveValue + ":" + moveValue + ":" + diff);
     	isInverted = OI.getButton(OI.driveController, RobotMap.XBOX_LBUMPER);
     	if (isInverted != wasInverted && isInverted == true)
     	{
@@ -57,14 +71,15 @@ public class BasicDrive extends Command {
     	if (!toggle) //If the invert is off
     	{
     		//System.out.println("BasicDrive moveValue="+moveValue+" turnValue="+turnValue);
-    		Robot.driveTrain.drive(moveValue, turnValue, fineControl, slowMove); //Drive the robot with base move values
+    		Robot.driveTrain.drive(moveValue, turnValue, fineControl, true/*slowMove*/); //Drive the robot with base move values
+//    		System.out.println("MoveValue:  "  + moveValue);
     	}
     	else if (toggle) //If the invert is on
     	{
     		//System.out.println("BasicDrive [inverted] moveValue="+moveValue+" turnValue="+turnValue);
-    		Robot.driveTrain.drive(-moveValue, turnValue, fineControl, slowMove); //Drive the robot with negative move values
+    		Robot.driveTrain.drive(-moveValue, turnValue, fineControl, true/*slowMove*/); //Drive the robot with negative move values
     	}
-    	
+    	oldMoveValue = moveValue;
     }
 
     // Make this return true when this Command no longer needs to run execute()

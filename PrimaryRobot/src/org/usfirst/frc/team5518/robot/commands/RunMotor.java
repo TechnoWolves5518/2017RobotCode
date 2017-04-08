@@ -16,6 +16,7 @@ public class RunMotor extends Command {
 	public boolean slow;
 	public boolean doors, ldoors;
 	public boolean toggle;
+	public boolean lock; public boolean llock; public boolean isLocked;
 	
 	public RunMotor() {
 	    requires(Robot.motorController);
@@ -25,6 +26,7 @@ public class RunMotor extends Command {
 		slow = false;
 		reverse = false;
 		doors = false; ldoors = false; toggle = false;
+		lock = false; llock = false; isLocked = false;
 	}
 	
 	// Called just before this Command runs the first time
@@ -36,26 +38,49 @@ public class RunMotor extends Command {
 		//System.out.println("Run Motor Execute");
 		//Get all inputs
 
-		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICKY);
-		shooter = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER);
-		intake = OI.sfController.getRawAxis(RobotMap.XBOX_LTRIGGER);
-		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
-		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
-		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
-		System.out.println("Getting door states from controller");
-		doors = !OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
+		// CHANGE HERE
+		winchSpeed = OI.driveController.getRawAxis(RobotMap.XBOX_LTRIGGER);
 		
-		Robot.motorController.getData();
+		//  CHANGE HERE
+		intake = OI.driveController.getRawAxis(RobotMap.XBOX_RTRIGGER) * 2 / 3;
+		
+		// CHANGE HERE
+		load = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
+		
+		slow = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
+		
+		// CHANGE HERE
+		reverse = OI.driveController.getRawButton(RobotMap.XBOX_BBTN);
+		
+		// CHANGE HERE
+		doors = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
+		
+		// CHANGE HERE
+		lock = OI.driveController.getRawButton(RobotMap.XBOX_LSTICK);
+		
+		Robot.motorController.getData(isLocked);
+		
+//		if (lock != llock && lock == true) {
+//			isLocked = true;
+//		}
+//		else if (lock != llock && lock == false) {
+//			isLocked = false;
+//		}
+//		llock = lock;
 		
 		//WINCH
-		if (winchSpeed != 0) {
-			Robot.motorController.runWinchMotor(winchSpeed, slow);
-		}
-		else {
-			Robot.motorController.runWinchMotor(0, slow);
-		}
-		//SHOOTER
-		Robot.motorController.runShooterMotor(shooter);
+//		if (!isLocked) {
+			if (winchSpeed != 0) {
+				Robot.motorController.runWinchMotor(winchSpeed, slow);
+			}
+			else {
+				Robot.motorController.runWinchMotor(0, slow);
+			}
+//		}
+//		else {
+//			Robot.motorController.runWinchMotor(0.2, slow);
+//		}
+		
 		Robot.motorController.runIntakeMotor(intake, reverse);
 		
 		//LOADING
@@ -68,9 +93,11 @@ public class RunMotor extends Command {
 		
 		if (doors != ldoors && doors == true) {
 			toggle = !toggle;
-			
+			Robot.motorController.toggleDoors(toggle);
 		}
 		ldoors = doors;
+		
+		
 		
 //		if (doors) {
 //			toggle = true;
@@ -79,7 +106,7 @@ public class RunMotor extends Command {
 //			toggle = false;
 //		}
 		
-		Robot.motorController.toggleDoors(toggle);
+		
 		
 	}
 

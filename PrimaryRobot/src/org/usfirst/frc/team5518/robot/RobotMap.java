@@ -66,7 +66,6 @@ public class RobotMap
 	public static int XBOX_START = 8;
 	public static int XBOX_BACK = 7;
 	
-	
 	// AUTONOMOUS CONSTS
 	// left constants
 	public static double LEFT_FORWARD_TIME = 3250;
@@ -79,11 +78,16 @@ public class RobotMap
 	//public static double TURN_SPEED = 0.6; //FOR TEST RIG
 	
 	public static double FAST_SPEED = 0.5;
-	
 	public static double MED_SPEED  = 0.43;
 	public static double SLOW_SPEED = 0.3;
 	public static double SUPER_SLOW_SPEED = 0.2;
 	public static double FULLSTOP   = 0;
+	
+	public static double CENTER_FAST_SPEED = 0.6;
+	public static double CENTER_MED_SPEED  = 0.5;
+	public static double CENTER_SLOW_SPEED = 0.3;
+	public static double CENTER_SUPER_SLOW_SPEED = 0.18;
+	public static double CENTER_FULLSTOP   = 0;
 	
 	// Test Rig Speeds
 	//public static double FAST_SPEED = 0.5;
@@ -93,6 +97,6 @@ public class RobotMap
 	
 	public static double FAST_DISTANCE = 56;  // inches
 	public static double ULTRA_DISTANCE = 36;  // inches
-	public static double SLOW_DISTANCE = 30;  // inches
-	public static double STOP_DISTANCE = 6.5; // inches
+	public static double SLOW_DISTANCE = 20;  // inches
+	public static double STOP_DISTANCE = 7; // inches
 }

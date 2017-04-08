@@ -35,10 +35,10 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static MotorController motorController;
 	
-	public static UsbCamera camera;
+//	public static UsbCamera camera;
 	
-	public static final int IMG_WIDTH = 320;
-	public static final int IMG_HEIGHT = 240;
+	public static final int IMG_WIDTH = 1280;
+	public static final int IMG_HEIGHT = 720;
 	
 	Command auto;
 	Command basicDrive;
@@ -58,8 +58,8 @@ public class Robot extends IterativeRobot {
 		
 		driveTrain = new DriveTrain();
 		
-		camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+//		camera = CameraServer.getInstance().startAutomaticCapture();
+//		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 //		camera.setExposureAuto();
 //		camera.setExposureManual(60);
 //		camera.setExposureHoldCurrent();
@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		System.out.println("disableInit()");
+//		System.out.println("disableInit()");
 	}
 
 	@Override
@@ -112,9 +112,9 @@ public class Robot extends IterativeRobot {
 		
 		System.out.println("-----------------------------AUTO INIT-----------------------------");
 		
-		System.out.println("-----------------OPEN DOORS-----------------");
+//		System.out.println("-----------------CLOSE DOORS-----------------");
 		
-		Robot.motorController.openDoors();
+		Robot.motorController.closeDoors();
 		
 //		for (int i = 0; i < 10; i++) {
 //			Robot.motorController.openDoors();
@@ -131,12 +131,13 @@ public class Robot extends IterativeRobot {
 //				break;
 //		}
 		
-		System.out.println("autonomousInit()  " + auto.getName());
+//		System.out.println("autonomousInit()  " + auto.getName());
 		// schedule the autonomous command (example)
 		if (auto != null) {
 			auto.start();
 			((BaseAuto)chooser.getSelected()).reset();
-			System.out.println("Base Auto reset called");
+//			System.out.println("Base Auto reset called");
+//			basicDrive.cancel();
 		}
 	}
 
@@ -164,6 +165,7 @@ public class Robot extends IterativeRobot {
 		
 		if (auto != null) {
 			auto.cancel();
+//			basicDrive.start();
 		}
 		
 //		camera.setExposureAuto();

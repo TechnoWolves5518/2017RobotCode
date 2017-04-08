@@ -18,12 +18,12 @@ public class RightAuto extends BaseAuto {
 	protected void execute() {
 		
 		if (System.currentTimeMillis() - startTime < forwardTimeMsec) {
-			System.out.println("Drive Forward");
+//			System.out.println("Drive Forward");
 			Robot.driveTrain.driveAuto(RobotMap.FAST_SPEED, -0.1);
 		}
 		else if (System.currentTimeMillis() - (startTime) < (turnTimeMsec + forwardTimeMsec)) {
 			//Turn for some time
-			System.out.println("Turning RIGHT");
+//			System.out.println("Turning RIGHT");
 			Robot.driveTrain.driveAuto(0, RobotMap.TURN_SPEED);
 		}
 		else {

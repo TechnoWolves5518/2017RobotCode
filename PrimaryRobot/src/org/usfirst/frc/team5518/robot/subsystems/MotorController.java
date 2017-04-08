@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class MotorController extends Subsystem { //for motors
 	public VictorSP intakeMotor;
-	public VictorSP shooterMotor;
+//	public VictorSP shooterMotor;
 	public VictorSP winchMotor;
 	public VictorSP loadMotor;
 	
 	
 	public double intakeMotorSpeed;
-	public double shooterMotorSpeed;
+//	public double shooterMotorSpeed;
 	public double loadMotorSpeed;
 	
 	public Servo leftServo;
@@ -28,12 +28,12 @@ public class MotorController extends Subsystem { //for motors
 	
 	public MotorController() {
 		intakeMotor = new VictorSP(RobotMap.INTAKE_PORT_NUMBER);
-		shooterMotor = new VictorSP(RobotMap.SHOOTER_PORT_NUMBER);
+//		shooterMotor = new VictorSP(RobotMap.SHOOTER_PORT_NUMBER);
 		winchMotor = new VictorSP(RobotMap.WINCH_PORT_NUMBER);
 		loadMotor = new VictorSP(RobotMap.LOAD_PORT_NUMBER);
 		
 		intakeMotorSpeed = 2/3;
-		shooterMotorSpeed = .65;
+//		shooterMotorSpeed = .65;
 		loadMotorSpeed = -0.25;
 		
 		rightServo = new Servo(RobotMap.RIGHT_DOOR_SERVO);
@@ -48,12 +48,12 @@ public class MotorController extends Subsystem { //for motors
 	public void runWinchMotor(double speed, boolean slow) { //WINCH
 		if (speed != 0) {
 			System.out.println("Run winch motor");
-		}
-		if (!slow) {
-			winchMotor.set(speed);
-		}
-		else if (slow) {
-			winchMotor.set(speed / 2);
+			if (!slow) {
+				winchMotor.set(speed);
+			}
+			else if (slow) {
+				winchMotor.set(speed / 2);
+			}
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class MotorController extends Subsystem { //for motors
 	
 	public void openDoors() {
 		leftServo.setAngle(35); //Decrease to open more
-		rightServo.setAngle(175); //Increase to open more
+		rightServo.setAngle(165); //Increase to open more
 		doorState = true;
 		System.out.println("-----------------OPEN DOORS-----------------");
 	}
@@ -88,26 +88,33 @@ public class MotorController extends Subsystem { //for motors
 		System.out.println("-----------------CLOSE DOORS-----------------");
 	}
 	
-	public void runShooterMotor(double speed) { //SHOOTER
-		shooterMotor.set(speed * shooterMotorSpeed);
-	}
+//	public void runShooterMotor(double speed) { //SHOOTER
+//		shooterMotor.set(speed * shooterMotorSpeed);
+//	}
 	
 	public void runLoadingMotor(int go) { //LOAD
 		loadMotor.set(loadMotorSpeed * go);
 	}
 	
-	public void getData() {
-		SmartDashboard.putNumber("Intake motor speed", intakeMotor.get());
-		SmartDashboard.putNumber("Shooter motor speed", shooterMotor.get());
-		SmartDashboard.putNumber("Load motor speed", loadMotor.get());
-		SmartDashboard.putNumber("Winch motor speed", winchMotor.get());
+	public void getData(boolean isLocked) {
+//		SmartDashboard.putNumber("Intake motor speed", intakeMotor.get());
+//		SmartDashboard.putNumber("Shooter motor speed", shooterMotor.get());
+//		SmartDashboard.putNumber("Load motor speed", loadMotor.get());
+//		SmartDashboard.putNumber("Winch motor speed", winchMotor.get());
+//		SmartDashboard.putNumber("Left Servo Value", leftServo.getAngle());
+//		SmartDashboard.putNumber("Right Servo Value", rightServo.getAngle());
 		if (doorState) {
 			SmartDashboard.putString("Gear door state", "open");
 		}
 		else if (!doorState) {
 			SmartDashboard.putString("Gear door state", "closed");
 		}
-		
+		if (isLocked) {
+			SmartDashboard.putString("Winch Lock state", "locked");
+		}
+		else {
+			SmartDashboard.putString("Winch Lock state", "not locked");
+		}
 	}
 }
 

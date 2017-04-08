@@ -28,11 +28,11 @@ public class DriveTrain extends Subsystem  {
 	Joystick wingmanJoystick;
 	public static boolean isInverted;
 	public static boolean toggle;
-	public VisionThread visionThread;
-	private double centerWhole = 0.0;
-	private double centerX = 0.0;
-	private double centerX2 = 0.0;
-	private final Object imgLock = new Object();
+//	public VisionThread visionThread;
+//	private double centerWhole = 0.0;
+//	private double centerX = 0.0;
+//	private double centerX2 = 0.0;
+//	private final Object imgLock = new Object();
 	
 	public DriveTrain() {
 		//System.out.println("DriveTrain()");
@@ -84,7 +84,7 @@ public class DriveTrain extends Subsystem  {
 			moveValue *= moveValue;
 		}
 		
-		System.out.println("DriveTrain moveValue="+moveValue+" turnValue="+rotValue);
+//		System.out.println("DriveTrain moveValue="+moveValue+" turnValue="+rotValue);
 		
 		//driveTrain.arcadeDrive(0.5, 0, false);
 		
@@ -95,7 +95,7 @@ public class DriveTrain extends Subsystem  {
 			driveTrain.arcadeDrive(moveValue / 3, rotValue / 3, !fineControl); //slow drive and turn
 		}
 		else {
-			System.out.println("FINE TURN ERROR");
+//			System.out.println("FINE TURN ERROR");
 			driveTrain.arcadeDrive(0, 0, !fineControl); //Don't move; this should never be called
 		}
 		
