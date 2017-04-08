@@ -66,10 +66,10 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<>();
 		
-		chooser.addObject("DriveForward", new DoNothingAuto());
+		/*chooser.addObject("DriveForward", new DoNothingAuto());
 		chooser.addObject("Center Auto", new CenterAuto());
 		chooser.addDefault("Left Auto", new LeftAuto());
-		chooser.addObject("Right Auto", new RightAuto());
+		chooser.addObject("Right Auto", new RightAuto());*/
 		
 		SmartDashboard.putData("Choose an auto mode: ", chooser);
 		
