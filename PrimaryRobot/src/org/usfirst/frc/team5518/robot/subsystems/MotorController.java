@@ -16,6 +16,7 @@ public class MotorController extends Subsystem { //for motors
 	public VictorSP winchMotor;
 	public VictorSP loadMotor;
 	
+	
 	public double intakeMotorSpeed;
 	public double shooterMotorSpeed;
 	public double loadMotorSpeed;
@@ -75,14 +76,16 @@ public class MotorController extends Subsystem { //for motors
     }
 	
 	public void openDoors() {
-		leftServo.setAngle(30);
-		rightServo.setAngle(180);
+		leftServo.setAngle(35); //Decrease to open more
+		rightServo.setAngle(175); //Increase to open more
 		doorState = true;
+		System.out.println("-----------------OPEN DOORS-----------------");
 	}
 	public void closeDoors() {
-		leftServo.setAngle(130);
-		rightServo.setAngle(90);
+		leftServo.setAngle(115); //Increase to close more
+		rightServo.setAngle(85); //Decrease to closes more
 		doorState = false;
+		System.out.println("-----------------CLOSE DOORS-----------------");
 	}
 	
 	public void runShooterMotor(double speed) { //SHOOTER

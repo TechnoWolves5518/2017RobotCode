@@ -4,6 +4,7 @@ import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,11 +18,11 @@ public abstract class BaseAuto extends Command {
 	public int count;
 	public Timer drivingTime;
 	public long startTime;
-	public final double forwardTimeMsec = RobotMap.FORWARD_TIME;
-	public final double turnTimeMsec = RobotMap.TURN_TIME;
 	
 	public boolean movingForward;
 	public boolean firstTime = true; public boolean doorsOpen = false;
+	
+	
 	
     public BaseAuto() {
     	movingForward = true;
@@ -30,6 +31,8 @@ public abstract class BaseAuto extends Command {
 		count = 0; total = 0; avg = 1000;
 		min = 1000; max = 0; prev = 0;
 		firstTime = true; doorsOpen = false;
+		
+		
     }
 
     // Called just before this Command runs the first time
@@ -111,7 +114,11 @@ public abstract class BaseAuto extends Command {
 				Robot.driveTrain.driveAuto(RobotMap.FULLSTOP, 0);
 				if (!doorsOpen) {
 					Robot.motorController.openDoors();
+					System.out.println("-----------------OPEN DOORS-----------------");
 					doorsOpen = true;
+				}
+				else {
+					System.out.println("!!!!!!!!!!!!!!!!!DOORS ALREADY OPEN!!!!!!!!!!!!!!!!!");
 				}
 				
 				//Timer.delay(1);
@@ -132,7 +139,11 @@ public abstract class BaseAuto extends Command {
 				Robot.driveTrain.driveAuto(0.0, 0);
 				if (doorsOpen) {
 					Robot.motorController.closeDoors();
+					System.out.println("-----------------CLOSE DOORS-----------------");
 					doorsOpen = false;
+				}
+				else {
+					System.out.println("!!!!!!!!!!!!!!!!!DOORS ALREADY CLOSED!!!!!!!!!!!!!!!!!");
 				}
 			}
 		}

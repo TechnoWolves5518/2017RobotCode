@@ -42,6 +42,7 @@ public class RunMotor extends Command {
 		load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
 		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
 		reverse = OI.sfController.getRawButton(RobotMap.XBOX_BBTN);
+		System.out.println("Getting door states from controller");
 		doors = OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
 		
 		Robot.motorController.getData();
@@ -67,7 +68,7 @@ public class RunMotor extends Command {
 		
 		if (doors != ldoors && doors == true) {
 			toggle = !toggle;
-			
+			Robot.motorController.toggleDoors(toggle);
 		}
 		ldoors = doors;
 		
@@ -77,9 +78,6 @@ public class RunMotor extends Command {
 //		else if (!doors) {
 //			toggle = false;
 //		}
-		
-		Robot.motorController.toggleDoors(toggle);
-		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

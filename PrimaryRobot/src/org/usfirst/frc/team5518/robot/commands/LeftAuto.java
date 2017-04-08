@@ -3,16 +3,16 @@ package org.usfirst.frc.team5518.robot.commands;
 import org.usfirst.frc.team5518.robot.Robot;
 import org.usfirst.frc.team5518.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  *
  */
 public class LeftAuto extends BaseAuto {
 	
+	public final double forwardTimeMsec = RobotMap.LEFT_FORWARD_TIME;
+	public final double turnTimeMsec = RobotMap.LEFT_TURN_TIME;
+	
 	public LeftAuto() {
 	}
-	
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
