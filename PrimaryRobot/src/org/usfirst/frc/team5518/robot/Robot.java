@@ -114,7 +114,11 @@ public class Robot extends IterativeRobot {
 		
 //		System.out.println("-----------------CLOSE DOORS-----------------");
 		
+<<<<<<< HEAD
 		Robot.motorController.closeDoors();
+=======
+		//Robot.motorController.openDoors();
+>>>>>>> branch 'autonomouscreation' of https://github.com/TechnoWolves5518/2017RobotCode.git
 		
 //		for (int i = 0; i < 10; i++) {
 //			Robot.motorController.openDoors();

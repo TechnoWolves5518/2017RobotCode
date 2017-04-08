@@ -96,18 +96,6 @@ public class RunMotor extends Command {
 			Robot.motorController.toggleDoors(toggle);
 		}
 		ldoors = doors;
-		
-		
-		
-//		if (doors) {
-//			toggle = true;
-//		}
-//		else if (!doors) {
-//			toggle = false;
-//		}
-		
-		
-		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
