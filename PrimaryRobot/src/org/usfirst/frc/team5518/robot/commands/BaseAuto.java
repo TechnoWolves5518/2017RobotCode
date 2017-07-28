@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public abstract class BaseAuto extends Command {
 
 	public double range; public double total; public double avg;
+	public double speed;
 	public double min; public double max; public double prev;
 	public int count;
 	public Timer drivingTime;
@@ -32,7 +33,7 @@ public abstract class BaseAuto extends Command {
 		min = 1000; max = 0; prev = 0;
 		firstTime = true; doorsOpen = false;
 		
-		
+		speed = 0;
     }
 
     // Called just before this Command runs the first time
@@ -89,6 +90,7 @@ public abstract class BaseAuto extends Command {
 //		SmartDashboard.putNumber("Raw Range (inches): ", (range));
 //		SmartDashboard.putNumber("Average Range (inches): ", (avg));
 
+		/*
 		if (movingForward && avg != 1000) { //going forwards; putting ON the gear
 			if (avg >RobotMap.FAST_DISTANCE) {
 //				System.out.println("DRIVE FAST count="+count+"  avg="+avg);
@@ -152,6 +154,12 @@ public abstract class BaseAuto extends Command {
 				}
 			}
 		}
+		*/
+		
+		if (movingForward && avg != 1000) {
+			speed = (Math.pow((avg-7), 0.5)) / 11;
+		}
+		
 	}
     
     public void reset() {
