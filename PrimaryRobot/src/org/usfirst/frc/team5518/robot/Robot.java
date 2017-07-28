@@ -3,13 +3,21 @@ package org.usfirst.frc.team5518.robot;
 
 import org.usfirst.frc.team5518.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5518.robot.subsystems.FuelShooter;
+import org.usfirst.frc.team5518.robot.OI;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,9 +29,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	
+	Ultrasonic ultra = new Ultrasonic(1,0);
+
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final FuelShooter shooter = new FuelShooter();
+	
+	public static AnalogInput ultrasonicPort0;
+	private ADXRS450_Gyro gyro;
+	public NetworkTable table;
+	public UsbCamera camera;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -34,10 +48,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		//oi = new OI();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		ultrasonicPort0 = new AnalogInput(0);
+		gyro = new ADXRS450_Gyro();
+		table = NetworkTable.getTable("datatable");
+		
+		camera = CameraServer.getInstance().startAutomaticCapture("TestRigCamera",0);
+		camera.setResolution(1280, 720);
+		ultra.setAutomaticMode(true);
 	}
 
 	/**
@@ -88,6 +110,18 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+
+		
+//		double[] defaultValue = new double[0];
+//		while (true) {
+//			double[] areas = table.getNumberArray("area", defaultValue);
+//			System.out.print("areas: ");
+//			for (double area : areas) {
+//				System.out.print(area + " ");
+//			}
+//			System.out.println();
+//		}
 	}
 
 	@Override
@@ -98,6 +132,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		gyro.calibrate();
+		
 	}
 
 	/**
@@ -105,7 +142,19 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
+		double avgVoltage = ultrasonicPort0.getAverageVoltage();
+		//System.out.println(avgVoltage);
+		SmartDashboard.putNumber("Ultrasonic", avgVoltage);
+		
+		double angle = gyro.getAngle();
+		//System.out.println(angle);
+		SmartDashboard.putNumber("Gyro Angle", angle);
+		
+		double srDistance = ultra.getRangeInches();
+		SmartDashboard.putNumber("SR04 Range", srDistance);
 		Scheduler.getInstance().run();
+	
 	}
 
 	/**
