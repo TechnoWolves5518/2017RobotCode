@@ -49,6 +49,9 @@ public class Robot extends IterativeRobot {
 	
 	public static Ultrasonic ultra;
 	
+	public int logMultiplier = 0;
+	public int logCount = 1;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -184,8 +187,26 @@ public class Robot extends IterativeRobot {
 		// when the subsystems are created.
 		Scheduler.getInstance().run();
 		
+		logTest();
+		
 	}
-
+	
+	/*
+	 * This is a test to increase the number of logs printed out to see if we can recreate
+	 * the RIO shutdown.
+	 */
+	public void logTest() {
+		int val = (10*logMultiplier);
+		
+		for (int i = 0; i < val; i++) {
+			System.out.println(logCount+" - Multiplier is: " + logMultiplier + " Val is: " + val);
+			logCount++;
+		}
+		
+		logMultiplier++;
+		
+	}
+	
 	/**
 	 * This function is called periodically during test mode
 	 */
