@@ -159,6 +159,15 @@ public abstract class BaseAuto extends Command {
 		if (movingForward && avg != 1000) {
 			speed = (Math.pow((avg-7), 0.5)) / 11;
 			Robot.driveTrain.driveAuto(speed, 0.1);
+			if (speed == 0) {
+				movingForward = false;
+			}
+		}
+		else if (!movingForward && avg != 1000) {
+			speed = avg/35;
+			if (speed > 0.5) {
+				speed = 0.5;
+			}
 		}
 		
 	}
