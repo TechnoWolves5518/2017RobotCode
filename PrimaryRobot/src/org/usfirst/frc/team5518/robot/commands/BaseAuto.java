@@ -164,7 +164,7 @@ public abstract class BaseAuto extends Command {
 			}
 		}
 		else if (!movingForward && avg != 1000) {
-			speed = avg/35;
+			speed = avg/70;
 			if (speed > 0.5) {
 				speed = 0.5;
 			}
