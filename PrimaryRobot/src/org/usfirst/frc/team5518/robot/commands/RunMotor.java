@@ -39,24 +39,24 @@ public class RunMotor extends Command {
 		//Get all inputs
 
 		// CHANGE HERE
-		winchSpeed = OI.driveController.getRawAxis(RobotMap.XBOX_LTRIGGER);
+		winchSpeed = OI.sfController.getRawAxis(RobotMap.XBOX_LSTICK);
 		
 		//  CHANGE HERE
-		intake = OI.driveController.getRawAxis(RobotMap.XBOX_RTRIGGER) * 2 / 3;
+		// intake = OI.sfController.getRawAxis(RobotMap.XBOX_RTRIGGER) * 2 / 3;
 		
 		// CHANGE HERE
-		load = OI.driveController.getRawButton(RobotMap.XBOX_ABTN);
+		// load = OI.sfController.getRawButton(RobotMap.XBOX_ABTN);
 		
-		slow = OI.driveController.getRawButton(RobotMap.XBOX_RBUMPER);
-		
-		// CHANGE HERE
-		reverse = OI.driveController.getRawButton(RobotMap.XBOX_BBTN);
+		slow = OI.sfController.getRawButton(RobotMap.XBOX_RBUMPER);
 		
 		// CHANGE HERE
-		doors = OI.driveController.getRawButton(RobotMap.XBOX_XBTN);
+		reverse = OI.sfController.getRawButton(RobotMap.XBOX_LBUMPER);
 		
 		// CHANGE HERE
-		lock = OI.driveController.getRawButton(RobotMap.XBOX_LSTICK);
+		doors = OI.sfController.getRawButton(RobotMap.XBOX_XBTN);
+		
+		// CHANGE HERE
+		lock = OI.sfController.getRawButton(RobotMap.XBOX_LSTICK);
 		
 		Robot.motorController.getData(isLocked);
 		
@@ -70,7 +70,7 @@ public class RunMotor extends Command {
 		
 		//WINCH
 //		if (!isLocked) {
-			if (winchSpeed != 0) {
+			if (winchSpeed > 0.1 || winchSpeed < -0.1) {
 				Robot.motorController.runWinchMotor(winchSpeed, slow);
 			}
 			else {
@@ -81,15 +81,15 @@ public class RunMotor extends Command {
 //			Robot.motorController.runWinchMotor(0.2, slow);
 //		}
 		
-		Robot.motorController.runIntakeMotor(intake, reverse);
+		// Robot.motorController.runIntakeMotor(intake, reverse);
 		
 		//LOADING
-		if (load) {
-			Robot.motorController.runLoadingMotor(1);
-		}
-		else {
-			Robot.motorController.runLoadingMotor(0);
-		}
+//		if (load) {
+//			Robot.motorController.runLoadingMotor(1);
+//		}
+//		else {
+//			Robot.motorController.runLoadingMotor(0);
+//		}
 		
 		if (doors != ldoors && doors == true) {
 			toggle = !toggle;
