@@ -71,6 +71,8 @@ public class RunMotor extends Command {
 		//WINCH
 //		if (!isLocked) {
 			if (winchSpeed != 0) {
+				if (winchSpeed > 0.4) { winchSpeed = 0.4; }
+				else if (winchSpeed < -0.4) { winchSpeed = -0.4; }
 				Robot.motorController.runWinchMotor(winchSpeed, slow);
 			}
 			else {
