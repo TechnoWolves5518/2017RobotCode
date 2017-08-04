@@ -35,7 +35,6 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static MotorController motorController;
 	
-	// Enable camera for THOR?
 //	public static UsbCamera camera;
 	
 	public static final int IMG_WIDTH = 1280;
